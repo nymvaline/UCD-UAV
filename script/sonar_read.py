@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+# TX_PIN: J17-7
+# RX_PIN: J17-8
+# GND PIN: J19-3
 
 import mraa
 from datetime import datetime
@@ -43,10 +46,10 @@ def isr_rx_callback(args):
 
 
 def main():
-	tx_pin = mraa.Gpio(7)
+	tx_pin = mraa.Gpio(6)
 	
 
-	rx_pin = mraa.Gpio(9)
+	rx_pin = mraa.Gpio(7)
 
 	tx_pin.dir(mraa.DIR_OUT)
 	rx_pin.dir(mraa.DIR_IN)
@@ -64,8 +67,9 @@ def main():
 		duration = timer.get_duration()
 		if (duration==-1):
 			continue
+			print "Out of range!"
 		else:
-			print "The distance is: %f".format(duration*165.7/S_TO_US)
+			print "The distance is: {0}".format(duration*165.7/S_TO_US)
 			timer.reset()
 		time.sleep(50/S_TO_MS)
 
