@@ -12,23 +12,41 @@
 #include <mavros_msgs/State.h>
 
 mavros_msgs::State current_state;
+geometry_msgs::PoseStamped current_pose;
 ros::Time _fake_timer;
 
 
-bool is_reached(){
+bool is_reached(geometry_msgs::PoseStamped& pose,
+                geometry_msgs::PoseStamped& setpoint){
 	// Fake reached check. Count 5s (5s*20Hz)
-	if (ros::Time::now() - _fake_timer > ros::Duration(5.0)){
-		_fake_timer = ros::Time::now();
-		return 1;
-	}else{
-		return 0;
-	}
-	return 0;
+	// if (ros::Time::now() - _fake_timer > ros::Duration(5.0)){
+		// _fake_timer = ros::Time::now();
+		// return 1;
+	// }else{
+		// return 0;
+	// }
+    // When approach to within 0.5 m
+    if (abs(pose.pose.position.x - setpoint.pose.position.x)<0.5 &&
+        abs(pose.pose.position.y - setpoint.pose.position.y)<0.5 &&
+        abs(pose.pose.position.z - setpoint.pose.position.z)<0.5){
+        ROS_INFO("Reached point!");
+        return true;
+    }else{
+        return false;
+    }
+
+	return false;
 }
 
 
 void state_cb(const mavros_msgs::State::ConstPtr& msg){
     current_state = *msg;
+}
+
+void current_pose_cb(const geometry_msgs::PoseStamped::ConstPtr& msg){
+    current_pose.pose.position.x = msg->pose.position.x;
+    current_pose.pose.position.y = msg->pose.position.y;
+    current_pose.pose.position.z = msg->pose.position.z;
 }
 
 void _set_pose(geometry_msgs::PoseStamped& pose, double x, double y, double z){
@@ -38,19 +56,28 @@ void _set_pose(geometry_msgs::PoseStamped& pose, double x, double y, double z){
 
 }
 
+
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "offb_node");
     ros::NodeHandle nh;
 
+    // Initialize for current_pose
+    current_pose.pose.position.x = 0.0;
+    current_pose.pose.position.y = 0.0;
+    current_pose.pose.position.z = 0.0;
+
     ros::Subscriber state_sub = nh.subscribe<mavros_msgs::State>
             ("mavros/state", 10, state_cb);
+    ros::Subscriber pose_sub = nh.subscribe<geometry_msgs::PoseStamped>
+            ("mavros/local_position/pose", 10, current_pose_cb);
     ros::Publisher local_pos_pub = nh.advertise<geometry_msgs::PoseStamped>
             ("mavros/setpoint_position/local", 10);
     ros::ServiceClient arming_client = nh.serviceClient<mavros_msgs::CommandBool>
             ("mavros/cmd/arming");
     ros::ServiceClient set_mode_client = nh.serviceClient<mavros_msgs::SetMode>
             ("mavros/set_mode");
+
 
     //the setpoint publishing rate MUST be faster than 2Hz
     ros::Rate rate(20.0);
@@ -104,31 +131,34 @@ int main(int argc, char **argv)
             }
         }
 
-        if (is_reached() && current_state.armed){
+        if (is_reached(current_pose, pose) && current_state.armed){
 
         	switch(step){
         		case 1:
         			_set_pose(pose, 0,0,5);
 			        break;
 			    case 2:
-			    	_set_pose(pose, 0, 10,5);
+			    	_set_pose(pose, 0, 50,10);
 			    	break;
 			    case 3:
-			    	_set_pose(pose, 10, 10, 5);
+			    	_set_pose(pose, 50, 50, 10);
 			    	break;
 			    case 4:
-			    	_set_pose(pose, 10,0,5);
+			    	_set_pose(pose, 50,0,10);
 			    	break;
 			    case 5:
-			    	_set_pose(pose, 0,0,5);
+			    	_set_pose(pose, 0,0,10);
 			    	break;
 			    case 6:
-			    	_set_pose(pose, 0,0,5);
+			    	_set_pose(pose, 0,0,2);
 
 			    	break;
 			    default:
+                        if (current_state.mode != "AUTO.LAND"){
 					    offb_set_mode.request.custom_mode= "AUTO.LAND";
 				    	set_mode_client.call(offb_set_mode);
+                        }
+                        return 0;
 			    	// Exit program
 
 			    
