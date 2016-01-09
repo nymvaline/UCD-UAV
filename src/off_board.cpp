@@ -80,7 +80,7 @@ int main(int argc, char **argv)
 
 
     //the setpoint publishing rate MUST be faster than 2Hz
-    ros::Rate rate(20.0);
+    ros::Rate rate(10.0);
 
     // wait for FCU connection
     while(ros::ok() && current_state.connected){
@@ -138,16 +138,16 @@ int main(int argc, char **argv)
         			_set_pose(pose, 0,0,5);
 			        break;
 			    case 2:
-			    	_set_pose(pose, 0, 5,5);
+			    	_set_pose(pose, 0, 50,5);
 			    	break;
 			    case 3:
-			    	_set_pose(pose, 5, 5, 5);
+			    	_set_pose(pose, 20, 20, 5);
 			    	break;
 			    case 4:
-			    	_set_pose(pose, 5,0,5);
+			    	_set_pose(pose, 20,0,10);
 			    	break;
 			    case 5:
-			    	_set_pose(pose, 0,0,5);
+			    	_set_pose(pose, 0,0,10);
 			    	break;
 			    default:
                         while (current_state.mode != "AUTO.LAND"){
