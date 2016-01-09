@@ -138,26 +138,25 @@ int main(int argc, char **argv)
         			_set_pose(pose, 0,0,5);
 			        break;
 			    case 2:
-			    	_set_pose(pose, 0, 50,10);
+			    	_set_pose(pose, 0, 5,5);
 			    	break;
 			    case 3:
-			    	_set_pose(pose, 50, 50, 10);
+			    	_set_pose(pose, 5, 5, 5);
 			    	break;
 			    case 4:
-			    	_set_pose(pose, 50,0,10);
+			    	_set_pose(pose, 5,0,5);
 			    	break;
 			    case 5:
-			    	_set_pose(pose, 0,0,10);
-			    	break;
-			    case 6:
-			    	_set_pose(pose, 0,0,2);
-
+			    	_set_pose(pose, 0,0,5);
 			    	break;
 			    default:
-                        if (current_state.mode != "AUTO.LAND"){
+                        while (current_state.mode != "AUTO.LAND"){
 					    offb_set_mode.request.custom_mode= "AUTO.LAND";
 				    	set_mode_client.call(offb_set_mode);
+                        ros::spinOnce();
+                        rate.sleep();
                         }
+
                         return 0;
 			    	// Exit program
 
