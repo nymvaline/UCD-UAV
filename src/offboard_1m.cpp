@@ -95,7 +95,7 @@ int main(int argc, char **argv)
     geometry_msgs::PoseStamped pose;
     pose.pose.position.x = 0;
     pose.pose.position.y = 0;
-    pose.pose.position.z = 2;
+    pose.pose.position.z = 1.5;
 
     //send a few setpoints before starting
     for(int i = 100; ros::ok() && i > 0; --i){
@@ -139,7 +139,19 @@ int main(int argc, char **argv)
 
             switch(step){
                 case 1:
-                    _set_pose(pose, 0,0,3.0);
+                    _set_pose(pose, 0,0,4.1);
+                    break;
+                case 2:
+                    _set_pose(pose, 0,5,4.1);
+                    break;
+                case 3:
+                    _set_pose(pose, 5,5,4.1);
+                    break;
+                case 4:
+                    _set_pose(pose, 5,0,4.1);
+                    break;
+                case 5:
+                    _set_pose(pose, 0,0,2.1);
                     break;
                 default:
                         while (current_state.mode != "AUTO.LAND"){
