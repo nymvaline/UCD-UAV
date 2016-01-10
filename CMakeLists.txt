@@ -155,6 +155,10 @@ add_executable(sonar_node src/sonar_avoidance.cpp)
 target_link_libraries(sonar_node ${catkin_LIBRARIES})
 add_dependencies(sonar_node dart)
 
+add_executable(offboard_1m_node src/offboard_1m.cpp)
+target_link_libraries(offboard_1m_node ${catkin_LIBRARIES})
+add_dependencies(offboard_1m_node dart)
+
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(beginner_tutorials_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
