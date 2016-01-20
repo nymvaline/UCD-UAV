@@ -140,6 +140,13 @@ class Task_Stay(Task_GOTO_Local):
         print "x = {} y = {} z = {}".format(self.current.x, self.current.y, self.current.z)
 
 
+class Task_GOTO_GPS(object):
+    '''
+    This is task that guide the UAV to GPS position
+    '''
+    pass
+
+
 class API_XBee(object):
     '''
     This is the interface to the XBee via simple transparency grammer
