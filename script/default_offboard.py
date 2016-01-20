@@ -139,7 +139,6 @@ def main():
             # print "Now we are in step {0}".format(step)
             if (step == 1):
                 task_goto.goto(5,5,8.1)
-                task_stay.print_current()
                 task_done = task_goto.check_task()
 
             elif (step == 2):
