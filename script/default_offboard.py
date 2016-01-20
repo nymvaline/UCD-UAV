@@ -160,6 +160,7 @@ def main():
                      # Exit program
             if (task_done):
                 step+=1
+                task_stay.reset_stay()
             
         #setpoint_local_pub.publish(setpoint_msg)
 

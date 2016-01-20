@@ -98,10 +98,10 @@ class Task_Stay(Task_GOTO_Local):
 
     def stay_at_time(self, duration):
         # if timer is not being reset, reset the timer
-        if (self.timer_ready==False):
+        if (self.init_ready==False):
             print "First enter stay stay_at_time"
             self.timer = rospy.Time.now()
-            self.timer_ready = True
+            self.init_ready = True
             self.stay_pose.x = self.current.x
             self.stay_pose.y = self.current.y
             self.stay_pose.z = self.current.z
@@ -113,10 +113,21 @@ class Task_Stay(Task_GOTO_Local):
         self.duration = duration
 
     def stay(self):
-        self.goto(xyz=self.get_current())
+        if(self.init_ready==False):
+            self.init_ready = True
+            # need hard copy here because simple self.stay_pose = self.current will give reference to 
+            # self.stay_pose and then self.stay_pose will change following the self.current
+            self.stay_pose.x = self.current.x
+            self.stay_pose.y = self.current.y
+            self.stay_pose.z = self.current.z
 
-    def reset_timer(self):
-        self.timer_ready = False
+        self.goto(self.stay_pose.x,
+            self.stay_pose.y,
+            self.stay_pose.z)
+
+    def reset_stay(self):
+        # need to reset say flag after use
+        self.init_ready = False
 
     def check_task(self):
         if (rospy.Time.now() - self.timer > rospy.Duration(self.duration)):
@@ -127,3 +138,31 @@ class Task_Stay(Task_GOTO_Local):
     def print_current(self):
         print "x = {} y = {} z = {}".format(self.current.x, self.current.y, self.current.z)
 
+
+class API_XBee(object):
+    '''
+    This is the interface to the XBee via simple transparency grammer
+    '''
+    pass
+
+class API_AirTemp(API_XBee):
+    '''
+    This is the interface to air temperature in ground data logger
+    '''
+    pass
+
+class API_SoilTemp(API_XBee):
+    '''
+    This is the interface to Soil moisture sensor from ground data logger
+    '''
+
+    pass
+
+class API_Moisture(API_XBee):
+    '''
+    This is interface to soil moisture sensor from  ground data logger
+    '''
+    pass
+
+class Task_GetData(API_AirTemp, API_Moisture, API_SoilTemp):
+    pass
