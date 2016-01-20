@@ -11,21 +11,20 @@ import mavros_msgs.msg
 import mavros_msgs.srv
 import time
 from datetime import datetime
-
+from UAV_Task import *
 # import utilities
 import thread
 import math
+import sys
+import signal
 
-
-class vector3:
-    def __init__(self):
-        self.x = 0
-        self.y = 0
-        self.z = 0
+def signal_handler(signal, frame):
+        print('You pressed Ctrl+C!')
+        sys.exit(0)
+signal.signal(signal.SIGINT, signal_handler)
 
 
 current_pose = vector3()
-setpoint_pose = vector3()
 UAV_state = mavros_msgs.msg.State()
 
 
@@ -36,10 +35,7 @@ def _state_callback(topic):
     UAV_state.mode = topic.mode
     UAV_state.guided = topic.guided
 
-def _local_position_callback(topic):
-    current_pose.x = topic.pose.position.x
-    current_pose.y = topic.pose.position.y
-    current_pose.z = topic.pose.position.z
+
 
 def _setpoint_position_callback(topic):
     pass
@@ -48,24 +44,20 @@ def _set_pose(pose, x, y, z):
     pose.pose.position.x = x
     pose.pose.position.y = y
     pose.pose.position.z = z
+    pose.header=mavros.setpoint.Header(
+                frame_id="att_pose",
+                stamp=rospy.Time.now())
+
 
 
 def is_reached(current, setpoint):
-    if (abs(current.x-setpoint.pose.position.x) < 0.3 and
-        abs(current.y-setpoint.pose.position.y) < 0.3 and
-        abs(current.z-setpoint.pose.position.z) < 0.3):
+    if (abs(current.x-setpoint.pose.position.x) < 0.5 and
+        abs(current.y-setpoint.pose.position.y) < 0.5 and
+        abs(current.z-setpoint.pose.position.z) < 0.5):
         print "Point reached!"
         return True
     else:
         return False
-
-
-
-
-
-
-
-
 
 
 
@@ -80,8 +72,8 @@ def main():
     state_sub = rospy.Subscriber(mavros.get_topic('state'),
         mavros_msgs.msg.State, _state_callback)
     # /mavros/local_position/pose
-    local_position_sub = rospy.Subscriber(mavros.get_topic('local_position', 'pose'),
-        SP.PoseStamped, _local_position_callback)
+    # local_position_sub = rospy.Subscriber(mavros.get_topic('local_position', 'pose'),
+    #     SP.PoseStamped, _local_position_callback)
     # /mavros/setpoint_raw/target_local
     setpoint_local_sub = rospy.Subscriber(mavros.get_topic('setpoint_raw', 'target_local'),
         mavros_msgs.msg.PositionTarget, _setpoint_position_callback)
@@ -107,15 +99,18 @@ def main():
     while(not UAV_state.connected):
         rate.sleep()
 
+    # create task instance
+    task_goto = Task_GOTO_Local(setpoint_local_pub)
+    task_stay = Task_Stay(setpoint_local_pub)
     # initialize the setpoint
     setpoint_msg.pose.position.x = 0
     setpoint_msg.pose.position.y = 0
-    setpoint_msg.pose.position.z = 1
-	
+    setpoint_msg.pose.position.z = 3
+    	
     mavros.command.arming(True)
 
     # send 100 setpoints before starting
-    for i in range(0,100):
+    for i in range(0,50):
         setpoint_local_pub.publish(setpoint_msg)
         rate.sleep()
 
@@ -123,45 +118,50 @@ def main():
 
     last_request = rospy.Time.now()
 
-    step = 0
+    step = 1
+    task_done = False
 
     while(True):
+        # print "Entered whiled loop"
         if( UAV_state.mode != "OFFBOARD" and
             (rospy.Time.now() - last_request > rospy.Duration(5.0))):
             if( set_mode(0,'OFFBOARD').success):
-                rospy.INFO("Offboard enabled")
+                print "Offboard enabled"
             last_request = rospy.Time.now()
         else:
             if(not UAV_state.armed and
                 (rospy.Time.now() - last_request > rospy.Duration(5.0))):
-                if( set_arming(True).success):
-                    rospy.INFO("Vehicle armed")
+                if( mavros.command.arming(True)):
+                    print "Vehicle armed"
                 last_request = rospy.Time.now()
-
-        if (is_reached(current_pose, setpoint_msg) and UAV_state.armed):
-            print "Now we are in step"
-            print step
+        # print "Before Task loop"
+        if (UAV_state.armed):
+            # print "Now we are in step {0}".format(step)
             if (step == 1):
-                    _set_pose(setpoint_msg, 0,0,4.1)
-                    break
+                task_goto.goto(5,5,8.1)
+                task_stay.print_current()
+                task_done = task_goto.check_task()
+
             elif (step == 2):
-                    _set_pose(setpoint_msg, 10,10,4.1)
-                    break
+                # stay at current position for 10 seconds
+                task_stay.stay_at_time(10.0)
+                task_done = task_stay.check_task()
             elif (step == 3):
-                    _set_pose(setpoint_msg, 20,20,10.1)
-                    break
+                task_goto.goto(-10,0,5.1)
+                task_done = task_goto.check_task()
             elif (step == 4):
-                    _set_pose(setpoint_msg, 0,0,4.1)
-                    break
+                task_goto.goto(0,0,5.1)
+                task_done = task_goto.check_task()
             else:
                 while (UAV_state.mode != "AUTO.LAND"):
                     set_mode(0,'AUTO.LAND')
                     rate.sleep()
                 return 0
                      # Exit program
-            step+=1
+            if (task_done):
+                step+=1
             
-        setpoint_local_pub.publish(setpoint_msg)
+        #setpoint_local_pub.publish(setpoint_msg)
 
         rate.sleep()
     return 0
@@ -170,7 +170,4 @@ def main():
 
 
 if __name__ == '__main__':
-    try:
-        main()
-    finally:
-        pass
+    main()
