@@ -1,8 +1,10 @@
 #!/bin/bash
 
+FIRMWARE_DIR="~/src/Firmware"
+
 wget -O /tmp/gazebo6_install.sh http://osrf-distributions.s3.amazonaws.com/gazebo/gazebo6_install.sh; sudo sh /tmp/gazebo6_install.sh
-git clone https://github.com/PX4/Firmware.git
-cd Firmware
+git clone https://github.com/PX4/Firmware.git "$FIRMWARE_DIR"
+cd "$FIRMWARE_DIR"
 
 export CXX=/usr/bin/g++
 export CC=/usr/bin/gcc
