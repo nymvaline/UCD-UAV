@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FIRMWARE_DIR="~/src/Firmware"
+FIRMWARE_DIR="$HOME/src/Firmware"
 
 wget -O /tmp/gazebo6_install.sh http://osrf-distributions.s3.amazonaws.com/gazebo/gazebo6_install.sh; sudo sh /tmp/gazebo6_install.sh
 git clone https://github.com/PX4/Firmware.git "$FIRMWARE_DIR"
