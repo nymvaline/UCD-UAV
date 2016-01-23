@@ -1,0 +1,62 @@
+#!/usr/bin/env python
+
+# import ROS libraries
+import rospy
+import mavros
+import mavros.setpoint
+import mavros.command
+import mavros_msgs.msg
+import mavros_msgs.srv
+import time
+import datetime
+
+# import utilities
+import thread
+import math
+import sys
+import signal
+
+# DART Functions
+import ipcs
+import tasks
+import state
+from setpoint import setXYZ
+
+def signal_handler(signal, frame):
+    print('You pressed Ctrl+C!')
+    sys.exit(0)
+    signal.signal(signal.SIGINT, signal_handler)
+
+
+def main():
+    rospy.init_node('default_offboard', anonymous=True)
+    rate = rospy.Rate(10)
+    mavros.set_namespace('/mavros')
+
+    subscribe()
+    from ipcs import STATE_SUB
+    from ipcs import SETPOINT_LOCAL_SUB
+    from ipcs import SETPOINT_LOCAL_PUB
+    state_setup()
+
+    # create task instance
+    taskMgr = TaskManager();
+    taskMgr.add(InitTask());
+    taskMgr.add(ChangeMode("OFFBOARD"))
+    taskMgr.add(Arm())
+    taskMgr.add(GoToLocal(setZ(5)))
+    taskMgr.add(Stay(10))
+    taskMgr.add(GoToLocal(setXYZ(3,3,5)))
+    taskMgr.add(Stay(10))
+    taskMgr.add(GoToLocal(setXYZ(0,0,0)))
+    taskMgr.add(ChangeMode("AUTO.LAND"))
+
+    taskMgr.run();
+
+    return 0
+
+
+
+
+if __name__ == '__main__':
+    main()

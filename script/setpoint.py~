@@ -1,0 +1,44 @@
+def setX(x)
+def setY(y)
+def setZ(z)
+def setXYZ(x,y,z)
+def _current_position_callback(topic)
+
+import state
+
+class vector3(object):
+    def __init__(self, x=0, y=0, z=0):
+        self.x = x
+        self.y = y
+        self.z = z
+
+setpoint = vector3()
+curpoint = vector3()
+
+def setX(x):
+	global setpoint
+	setpoint.x = x
+	return setpoint
+
+def setY(y):
+	global setpoint
+	setpoint.y = y
+	return setpoint
+
+def setZ(z):
+	global setpoint
+	setpoint.z = z
+	return setpoint
+
+def setXYZ(x,y,z):
+	global setpoint
+	setpoint.x = x
+	setpoint.y = y
+	setpoint.z = z
+	return setpoint
+
+def _current_position_callback(topic):
+	global curpoint
+	curpoint.x = topic.position.x
+	curpoint.y = topic.position.y
+	curpoint.z = topic.position.z
