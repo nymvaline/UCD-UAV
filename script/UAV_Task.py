@@ -13,6 +13,12 @@ import time
 import pyserial
 from datetime import datetime
 
+# import mraa
+import sys
+sys.path.append('/usr/local/lib/i386-linux-gnu/python2.7/site-packages/')
+import mraa
+
+
 class vector3(object):
     def __init__(self):
         self.x = 0
@@ -202,9 +208,124 @@ class API_Moisture(API_XBee):
         pass
     pass
 
-class Task_GetData(object):
-    def __init__(self):
-        pass
 
+
+class Task_FakeDate(object):
+    '''
+        If data logger and data collect program cannot be finished in time
+        which is very possible
+    '''
+    def __init__(self):
+        from sensor_msgs.msg import Temperature
+        rospy.init_node('fake_read_data', anonymous=True)
+        self.pub = rospy.Publisher('/read_data', std_msgs.msg.Float32, queue_size=10)
+        rospy.Subscriber("/mavros/imu/temperature", Temperature, self._callback)
+
+    def run(self):
+        if not rospy.is_shutdown():
+            self.pub.publish(float(self.temp))
+
+    def _callback(self, topic):
+        self.temp = topic.temperature
+
+class Task_GetData(object):
+    '''
+    This task is used to remotely get data from UAV.
+    Please please make sure that all the opearations
+    are not blocking. Blocking codes will kick UAV out
+    of OFFBOARD mode
+    '''
+    def __init__(self):
+        self.target = 0x00
+        self.state = 'PREOPERATION'
+        self.data = 0
+        self.rxbuf = ""
+
+        # delay related
+        self.delay_state = 'clear'
+        self.delay_duration = 0
+        self.timestamp = 0
+
+        self.spi = mraa.Spi(0)
+        self.spi.mode(0)
+        self.spi.frequency(1000000)    # 1MHz
+
+    def run(self, ID, item):
+        '''
+        1. set target ID
+        2. listen to feedback
+        3. send data collecting command
+        4. collect date
+        '''
+        if (self.state is 'PREOPERATION'):
+            self._setTarget(ID)
+            self.rxbuf = ""
+            self.state = 'SETTARGETWAIT'
+        elif (self.state is 'SETTARGETWAIT'):
+            if (self._delay(5) == True):
+                self.state = 'SETTARGETFB'
+        elif(self.state is 'SETTARGETFB'):
+            if ('Y' in self._read(10)):
+                self.state = 'SENDCMD'
+        elif(self.state is 'SENDCMD'):
+            self._serialize("COLLECT")
+            self.state = 'CMDWAIT'
+        elif(self.state is 'CMDWAIT')
+            if(self._delay(5) == True):
+                self.state = 'DATACOLLECT'
+        elif(self.state is 'DATACOLLECT'):
+            temp = self.spi.write_word(0x00)
+            if (temp == '\n'):
+                self.state = 'END'
+                self.data = float(self.rxbuf)
+            else:
+                self.rxbuf.append(temp)
+                if (len(self.rxbuf)>50):
+                    self.data = 0
+                    self.state = 'END'
+        elif (self.state is 'END'):
+            self.state = 'PREOPERATION'
+            return self.data
+        else:
+            self.data = 0
+            self.state = 'END'
+        return False
+
+        
+
+    def get_date(self):
+        self.state = 'PREOPERATION'
+        return self.data
+
+    def _delay(self, duration):
+        if (self.delay_state is 'clear'):
+            self.delay_time = rospy.Time.now()
+            self.delay_state = 'pending'
+            return False
+        elif (self.delay_state is 'pending'):
+            if (rospy.Time.now() - self.delay_time >= rospy.Duration(self.delay_duration))
+                return True
+            else:
+                return False
+
+    def _clear_delay(self):
+        self.delay_state = 'clear'
+
+
+    def _read(self, len):
+        temp = ""
+        for i in range(0,len):
+            temp.append(self.spi.write_word(0x00))
+
+        return temp 
+
+    def _setTarget(self, ID):
+        self.target = ID
+        self._serialize("ATDL "+str(ID))
+
+    def _serialize(self, msg):
+        txbuf = 'H'+ str(msg) + "\n"
+        txbuf = bytearray(msg.encode('ascii'))
+        self.spi.write(txbuf)
 
     pass
