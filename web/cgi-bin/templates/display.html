@@ -1,0 +1,44 @@
+$def with (data)
+<html>
+<head>
+    <style>
+        .odd{
+            background: #81F7F3;
+            color: #DF01A5;
+        }
+        .even{
+            background: #04B4AE;
+            color: #CEF6F5;
+        }
+        table{
+            border-spacing: 0.5em 0.5em;
+        }
+        td{
+            width: 15em;
+            padding: 0.1em 0.5em 0.1em 0.5em;
+        }
+        .tdodd{
+            text-align: left;
+        }
+        .tdeven{
+            text-align: right;
+        }
+    </style>
+</head>
+    <body>
+        <h1>Team: UCD-UAV</h1>
+        <table>
+            $for key,val in data.iteritems():
+                <tr class="$loop.parity">
+                    $for i in range(2):
+                        <td class="td$loop.parity">
+                            $if i==1:
+                                $val
+                            $else:
+                                $key
+                        </td>
+                </tr>
+        </table>
+    </body>
+
+</html>
