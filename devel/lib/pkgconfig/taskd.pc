@@ -1,0 +1,8 @@
+prefix=/home/dart/src/UCD-UAV/devel
+
+Name: taskd
+Description: Description of taskd
+Version: 0.0.0
+Cflags: -I/home/dart/src/UCD-UAV/devel/include
+Libs: -L/home/dart/src/UCD-UAV/devel/lib 
+Requires: 

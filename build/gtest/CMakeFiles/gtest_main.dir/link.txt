@@ -1,0 +1,1 @@
+/usr/bin/g++  -fPIC   -shared -Wl,-soname,libgtest_main.so -o libgtest_main.so CMakeFiles/gtest_main.dir/src/gtest_main.cc.o  -L/home/dart/src/UCD-UAV/build/gtest/src -lpthread libgtest.so -lpthread -Wl,-rpath,/home/dart/src/UCD-UAV/build/gtest/src:/home/dart/src/UCD-UAV/build/gtest 

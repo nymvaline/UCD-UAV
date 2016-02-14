@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "taskd")
+set(taskd_MAINTAINER "dart <dart@todo.todo>")
+set(taskd_DEPRECATED "")
+set(taskd_VERSION "0.0.0")
+set(taskd_BUILD_DEPENDS "geometry_msgs" "mavros" "message_generation" "rospy" "sensor_msgs" "std_msgs")
+set(taskd_RUN_DEPENDS "geometry_msgs" "mavros" "rospy" "sensor_msgs" "std_msgs" "message_runtime")
+set(taskd_BUILDTOOL_DEPENDS "catkin")

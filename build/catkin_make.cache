@@ -1,0 +1,2 @@
+taskd
+-DCATKIN_DEVEL_PREFIX=/home/dart/src/UCD-UAV/devel -DCMAKE_INSTALL_PREFIX=/home/dart/src/UCD-UAV/install -G Unix Makefiles

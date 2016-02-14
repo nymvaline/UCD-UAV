@@ -1,3 +1,1 @@
-# Project UAV at UCDavis.
-This is repo for custom applications in ROS.
-We are using PX4 flight stack with ROS, MAVROS and Edison as companion computer.
+Please update ${_CATKIN_SETUP_DIR:=/home/dart/src/UCD-UAV/devel} to the desired catkin directory before proceeding with any modifications.
