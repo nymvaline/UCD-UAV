@@ -31,10 +31,9 @@ class update_setpoint(object):
         self.update_flag='LOCAL'
 
         #setup local position 
-        self.local_pub = setpoint_publish
-        # This sub should subscribe the setpoint not local_position
-        # self.local_sub = rospy.Subscriber(mavros.get_topic('local_position', 'pose'),
-        #     SP.PoseStamped, self._local_position_callback)
+        self.local_pub = mavros.setpoint.get_pub_position_local(queue_size=10)
+        self.local_sub = rospy.Subscriber(mavros.get_topic('setpoint_raw', 'target_local'),
+        mavros_msgs.msg.PositionTarget, self._local_cb)
         self.local_last_pos=vector3()
         self.local_msg=mavros.setpoint.PoseStamped(
             header=mavros.setpoint.Header(
@@ -43,16 +42,27 @@ class update_setpoint(object):
             )
 
         #setup GPS position
-        self.GPS_pub = setpoint_publish
+        self.GPS_pub =  mavros.setpoint.get_pub_position_global(queue_size=10)
         self.GPS_last_pos=vector3()
+        self.GPS_sub = rospy.Subscriber(mavros.get_topic('setpoint_raw', 'target_global'),
+        mavros_msgs.msg.PositionTarget, self._GPS_cb)
         self.GPS_msg=mavros.setpoint.PoseStamped(
             header=mavros.setpoint.Header(
                 frame_id="att_pose",
                 stamp=rospy.Time.now()),
             )
+
     def _local_cb(self, topic):
         self.update_flag='LOCAL'
-        self.
+        self.local_last_pos.x=topic.pose.position.x;
+        self.local_last_pos.y=topic.pose.position.y;
+        self.local_last_pos.z=topic.pose.position.z;
+
+    def _GPS_cb(self, topic):
+        self.update_flag='GPS'
+        self.GPS_last_pos.x=topic.pose.position.x;
+        self.GPS_last_pos.y=topic.pose.position.y;
+        self.GPS_last_pos.z=topic.pose.position.z;
 
     def _set_pose(self, pose, pos):
         pose.pose.position.x = pos.x
