@@ -1,7 +1,7 @@
 prefix=/home/khjtony/catkin_ws/install
 
-Name: dart
-Description: Description of dart
+Name: DART
+Description: Description of DART
 Version: 0.0.0
 Cflags: 
 Libs: -L/home/khjtony/catkin_ws/install/lib 
