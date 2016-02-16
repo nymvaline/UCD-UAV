@@ -12,12 +12,13 @@ import mavros_msgs.srv
 import time
 from datetime import datetime
 from UAV_Task import *
-import UAV_util
+import TCS_util
 # import utilities
 import thread
 import math
 import sys
 import signal
+import subprocess
 
 
 def signal_handler(signal, frame):
@@ -67,7 +68,7 @@ def update_setpoint():
 
 def main():
     rospy.init_node('default_offboard', anonymous=True)
-    rate = rospy.Rate(10)
+    rate = rospy.Rate(20)
     mavros.set_namespace('/mavros')
 
 
@@ -101,10 +102,18 @@ def main():
     #read task list
     tasklog = open('task_list.log', 'r')
     tasklist=[]
+    tasklist_amount=0
+    tasklist_counter=0
+    tasklist_finish_flag=False
 
     for eachline in tasklog:
-        line = eachline.strip('\n').split(' ', 1)
-        tasklist.append(['python', str(line[0])+'.py', line[1]])
+        line = eachline.strip('\n').split(' ')
+        # python TASK.py [args] [timeout in second]
+        tasklist.append(['python', str(line[0])+'.py', line[1:-1], line[-1]])
+        tasklist_amount+=1
+    tasklog.close()
+    # start setpoint_update instance
+    setpoint_keeper = TCS_util.update_setpoint(rospy)
 
     # wait for FCU connection
     while(not UAV_state.connected):
@@ -132,7 +141,10 @@ def main():
     step = 1
     task_done = False
 
+
+    # enter the main loop
     while(True):
+        rospy.loginfo("Entered while loop")
         # print "Entered whiled loop"
         if( UAV_state.mode != "OFFBOARD" and
             (rospy.Time.now() - last_request > rospy.Duration(5.0))):
@@ -145,34 +157,54 @@ def main():
                 if( mavros.command.arming(True)):
                     print "Vehicle armed"
                 last_request = rospy.Time.now()
-        # print "Before Task loop"
-        if (UAV_state.armed):
-            # print "Now we are in step {0}".format(step)
-            if (step == 1):
-                task_goto.goto(5,5,8.1)
-                task_done = task_goto.check_task()
 
-            elif (step == 2):
-                # stay at current position for 10 seconds
-                task_stay.stay_at_time(10.0)
-                task_done = task_stay.check_task()
-            elif (step == 3):
-                task_goto.goto(-10,0,5.1)
-                task_done = task_goto.check_task()
-            elif (step == 4):
-                task_goto.goto(0,0,5.1)
-                task_done = task_goto.check_task()
+        # update setpoint to stay in offboard mode
+        setpoint_keeper.update()
+
+        # # print "Before Task loop"
+        # if (UAV_state.armed):
+        #     # print "Now we are in step {0}".format(step)
+        #     if (step == 1):
+        #         task_goto.goto(5,5,8.1)
+        #         task_done = task_goto.check_task()
+
+        #     elif (step == 2):
+        #         # stay at current position for 10 seconds
+        #         task_stay.stay_at_time(10.0)
+        #         task_done = task_stay.check_task()
+        #     elif (step == 3):
+        #         task_goto.goto(-10,0,5.1)
+        #         task_done = task_goto.check_task()
+        #     elif (step == 4):
+        #         task_goto.goto(0,0,5.1)
+        #         task_done = task_goto.check_task()
+        #     else:
+        #         while (UAV_state.mode != "AUTO.LAND"):
+        #             set_mode(0,'AUTO.LAND')
+        #             rate.sleep()
+        #         return 0
+        #              # Exit program
+        #     if (task_done):
+        #         step+=1
+        #         task_stay.reset_stay()
+        
+        
+        if(tasklist_finish_flag):
+            # If the current task has been done
+            if (tasklist_counter<tasklist_amount):
+                # If there are tasks left
+                subprocess.call(tasklist[tasklist_counter])
+                tasklist_finish_flag = False
+                tasklist_counter+=1
             else:
-                while (UAV_state.mode != "AUTO.LAND"):
-                    set_mode(0,'AUTO.LAND')
-                    rate.sleep()
-                return 0
-                     # Exit program
-            if (task_done):
-                step+=1
-                task_stay.reset_stay()
-            
-        #setpoint_local_pub.publish(setpoint_msg)
+                # Current task has been done and no task left
+                 while (UAV_state.mode != "AUTO.LAND"):
+                     set_mode(0,'AUTO.LAND')
+                     rate.sleep()
+                 return 0
+        else:
+            # If current task has not been done
+            pass
 
         rate.sleep()
     return 0
