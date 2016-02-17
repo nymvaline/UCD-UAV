@@ -1,3 +1,4 @@
+Header header
 string task_name
 string task_status
-int32 task_elapse
+uint32 task_elapsed

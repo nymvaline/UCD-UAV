@@ -26,9 +26,9 @@ sys.path.append('/usr/local/lib/i386-linux-gnu/python2.7/site-packages/')
 
 class vector3(object):
     def __init__(self):
-        self.x = 0
-        self.y = 0
-        self.z = 0
+        self.x = 0.0
+        self.y = 0.0
+        self.z = 0.0
 
 
 class update_setpoint(object):
@@ -122,6 +122,7 @@ class Task_manager(object):
     def nexttask(self):
         if (self.alldone()):
             pass
+        rospy.loginfo("New task will execute: {}".format(self.tasklist[self.task_index]))
         subprocess.call(self.tasklist[self.task_index], env=self.task_env)
         self.task_index+=1
         self.task_finish = False
