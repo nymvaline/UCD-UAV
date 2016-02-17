@@ -13,6 +13,7 @@ import geometry_msgs
 import time
 import serial
 from datetime import datetime
+from dart.msg import task as Task_msg
 
 # import mraa
 import sys
@@ -141,3 +142,37 @@ class Task_manager(object):
 
     def task_elapse(self):
         return rospy.Duration(rospy.Time.now()-self.timestamp)
+
+
+class Task_watchdog(object):
+    def __init__(self, task_name):
+        self.task_name = task_name
+        self.client_pub = rospy.Publisher('task_monitor', task, queue_size=10)
+        # setup task msg
+        self.task_msg = Task_msg()
+        self.task_msg.task_name = task_name
+        self.task_msg.task_status='PRE-START'
+        self.task_msg.task_init_time = rospy.Time.now()
+
+    def _update(self):
+        """standardized routine to update the task
+        monitor msgs content"""
+        self.task_msg.header.frame_id=self.task_name
+        self.task_msg.header.stamp = rospy.Time.now()
+        self.task_msg.task_elapsed = rospy.Duration(rospy.Time.now()-task_msg.task_init_time)
+
+
+    def report_running(self):
+        self.task_status = 'RUNNING'
+        self.client_pub.publish(self.task_msg)
+
+    def report_finish(self):
+        self.task_status = 'FINISH'
+        self.client_pub.publish(self.task_msg)
+
+
+
+
+
+
+
