@@ -1,0 +1,3 @@
+[submodule "UAV_Commander"]
+	path = UAV_Commander
+	url = https://github.com/ucdart/UAV_Commander
