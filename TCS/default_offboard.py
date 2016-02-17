@@ -100,18 +100,8 @@ def main():
             )
 
     #read task list
-    tasklog = open('task_list.log', 'r')
-    tasklist=[]
-    tasklist_amount=0
-    tasklist_counter=0
-    tasklist_finish_flag=False
+    Task_mgr = TCS_util.Task_manager('task_list.log')
 
-    for eachline in tasklog:
-        line = eachline.strip('\n').split(' ')
-        # python TASK.py [args] [timeout in second]
-        tasklist.append(['python', str(line[0])+'.py', line[1:-1], line[-1]])
-        tasklist_amount+=1
-    tasklog.close()
     # start setpoint_update instance
     setpoint_keeper = TCS_util.update_setpoint(rospy)
 
@@ -119,9 +109,6 @@ def main():
     while(not UAV_state.connected):
         rate.sleep()
 
-    # create task instance
-    task_goto = Task_GOTO_Local(setpoint_local_pub)
-    task_stay = Task_Stay(setpoint_local_pub)
     # initialize the setpoint
     setpoint_msg.pose.position.x = 0
     setpoint_msg.pose.position.y = 0
@@ -138,13 +125,10 @@ def main():
 
     last_request = rospy.Time.now()
 
-    step = 1
-    task_done = False
-
 
     # enter the main loop
     while(True):
-        rospy.loginfo("Entered while loop")
+        # rospy.loginfo("Entered while loop")
         # print "Entered whiled loop"
         if( UAV_state.mode != "OFFBOARD" and
             (rospy.Time.now() - last_request > rospy.Duration(5.0))):
@@ -189,13 +173,12 @@ def main():
         #         task_stay.reset_stay()
         
         
-        if(tasklist_finish_flag):
+        if(Task_mgr.task_finished()):
             # If the current task has been done
-            if (tasklist_counter<tasklist_amount):
+            if (not Task_mgr.alldone()):
                 # If there are tasks left
-                subprocess.call(tasklist[tasklist_counter])
-                tasklist_finish_flag = False
-                tasklist_counter+=1
+                Task_mgr.nexttask()
+
             else:
                 # Current task has been done and no task left
                  while (UAV_state.mode != "AUTO.LAND"):
