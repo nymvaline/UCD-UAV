@@ -91,7 +91,7 @@ def main():
     	setpoint_local_pub.publish(setpoint_msg)
 
 
-    pass
+    return
 
 
 if __name__ == '__main__':

@@ -115,6 +115,7 @@ class Task_manager(object):
 
     def alldone(self):
         if (self.task_index>=self.task_amount):
+            rospy.loginfo("All tasks have been done")
             return True
         else:
             return False
