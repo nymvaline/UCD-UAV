@@ -138,19 +138,48 @@ def main():
         if (UAV_state.armed):
             # print "Now we are in step {0}".format(step)
             if (step == 1):
-                task_goto.goto(5,5,8.1)
+                task_goto.goto(0,0,4)
                 task_done = task_goto.check_task()
-
             elif (step == 2):
                 # stay at current position for 10 seconds
-                task_stay.stay_at_time(10.0)
+                task_stay.stay_at_time(3.0)
                 task_done = task_stay.check_task()
             elif (step == 3):
-                task_goto.goto(-10,0,5.1)
+                task_goto.goto(0,0,8)
                 task_done = task_goto.check_task()
             elif (step == 4):
-                task_goto.goto(0,0,5.1)
+                task_stay.stay_at_time(1.0)
+                task_done = task_stay.check_task()
+            elif (step==5):
+                task_goto.goto(10,10,8)
                 task_done = task_goto.check_task()
+            elif (step == 6):
+                task_stay.stay_at_time(2.0)
+                task_done = task_stay.check_task()
+            elif (step == 7):
+                task_goto.goto(10,10,4)
+                task_done = task_stay.check_task()
+            elif (step == 8):
+                task_stay.stay_at_time(5.0)
+                task_done = task_stay.check_task()
+            elif (step == 9):
+                task_goto.goto(10,10,8)
+                task_done = task_goto.check_task()
+            elif (step == 10):
+                task_stay.stay_at_time(1.0)
+                task_done = task_stay.check_task()
+            elif (step==11):
+                task_goto.goto(0,0,8)
+                task_done = task_goto.check_task()
+            elif (step == 12):
+                task_stay.stay_at_time(2.0)
+                task_done = task_stay.check_task()
+            elif (step == 13):
+                task_goto.goto(0,0,4)
+                task_done = task_stay.check_task()
+            elif (step == 14):
+                task_stay.stay_at_time(3.0)
+                task_done = task_stay.check_task()
             else:
                 while (UAV_state.mode != "AUTO.LAND"):
                     set_mode(0,'AUTO.LAND')
