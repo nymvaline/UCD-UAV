@@ -34,6 +34,7 @@ volatile int8_t process_it=0;
 volatile SPI_command_t SPI_command=NO;
 volatile SPI_status_t SPI_status=SPI_RECEIVING;
 volatile int8_t tx_length=0;
+volatile unsigned long last_time;
 
 void mystrcpy(char* tx, volatile char* rx, int count){
   int i=0;
@@ -181,10 +182,12 @@ void setup() {
 
   Serial.begin(9600);
   mySerial.begin(9600);
+  last_time = = millis();
 }
 
 ISR(SPI_STC_vect){
   byte rx = SPDR;
+
 
   if (SPI_status == SPI_RECEIVING){
     //Serial.print((char)rx);
@@ -206,6 +209,11 @@ ISR(SPI_STC_vect){
 }
 
 void loop() {
+  if ((millis-last_time)>1000){
+    // clear rx_buffer
+    memset(rx_buffer, 0, sizeof(rx_buffer)/sizeof(rx_buffer[0]));
+    rx_index=0;
+  }
   Serial.println("Reading: ");
   // put your main code here, to run repeatedly:
   //every 5s it pull data

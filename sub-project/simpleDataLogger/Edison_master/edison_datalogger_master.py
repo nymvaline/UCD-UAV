@@ -11,38 +11,39 @@ import time
 import mraa as m
 
 # Setup and init
-dev = m.Spi(1)
+dev = m.Spi(0)
 print "SPI mode is: {}".format(dev.mode(0))
-dev.frequency(1000000)
+dev.frequency(100000)
 
 def transferAndWait(c):
     r = dev.writeByte(c)
-    time.sleep(0.00005)
-    print "Now I read {}".format(c)
+    time.sleep(0.0005)
+    # print "Now I read {}".format(c)
     return r
 
 loop_counter=0
 
 while(True):
+    print "Now counter is: {}".format(loop_counter)
      # send test string
     if (loop_counter == 0):
         txbuf=bytearray("STATUS\0".encode('ascii'))
         dev.write(txbuf)
         loop_counter+=1
-    if (loop_counter == 1):
+    elif (loop_counter == 1):
         txbuf=bytearray("TEMPERATURE\0".encode('ascii'))
         dev.write(txbuf)
         loop_counter+=1
-    if (loop_counter == 2):
+    elif (loop_counter == 2):
         txbuf=bytearray("MOISTURE\0".encode('ascii'))
         dev.write(txbuf)
         loop_counter+=1
-    if (loop_counter == 3):
+    elif (loop_counter == 3):
         txbuf=bytearray("SOIL\0".encode('ascii'))
         dev.write(txbuf)
-        loop_counter+=1
+        loop_counter=0
 
-    time.sleep(0.1)
+    time.sleep(0.5)
 
     # Read 0x7f
     c=transferAndWait(0xff)
@@ -53,8 +54,8 @@ while(True):
     raw_read=0
     for i in range(0,msg_len):
         c=transferAndWait(0xff);
-        print "0x%x" % int(c)
-        print " "
+        # print "0x%x"%int(c)
+        # print " "
         raw_read=(raw_read<<8)&0xff00 | int(c)&0xff;
 
     if (loop_counter == 2):
