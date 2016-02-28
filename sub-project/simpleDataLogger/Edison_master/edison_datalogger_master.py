@@ -11,13 +11,14 @@ import time
 import mraa as m
 
 # Setup and init
-dev = m.Spi(0)
+dev = m.Spi(1)
 print "SPI mode is: {}".format(dev.mode(0))
-dev.frequency(100000)
+dev.frequency(50000)
+
 
 def transferAndWait(c):
     r = dev.writeByte(c)
-    time.sleep(0.0005)
+    time.sleep(0.000005)
     # print "Now I read {}".format(c)
     return r
 
@@ -28,29 +29,42 @@ while(True):
      # send test string
     if (loop_counter == 0):
         txbuf=bytearray("STATUS\0".encode('ascii'))
+        dev.writeByte(0x7f);
         dev.write(txbuf)
+        dev.writeByte(0x17);
         loop_counter+=1
     elif (loop_counter == 1):
         txbuf=bytearray("TEMPERATURE\0".encode('ascii'))
+        dev.writeByte(0x7f);
         dev.write(txbuf)
+        dev.writeByte(0x17);
         loop_counter+=1
     elif (loop_counter == 2):
         txbuf=bytearray("MOISTURE\0".encode('ascii'))
+        dev.writeByte(0x7f);
         dev.write(txbuf)
+        dev.writeByte(0x17);
         loop_counter+=1
     elif (loop_counter == 3):
         txbuf=bytearray("SOIL\0".encode('ascii'))
+        dev.writeByte(0x7f);
         dev.write(txbuf)
+        dev.writeByte(0x17);
         loop_counter=0
 
-    time.sleep(0.5)
+    time.sleep(1)
 
     # Read 0x7f
     c=transferAndWait(0xff)
     # Read payload Length
     c=transferAndWait(0xff)
     msg_len=int(c)
-    print "msg length is: {}".format(msg_len)
+    if (msg_len<255):
+        print "msg length is: {}".format(msg_len)
+    else:
+        print "Wrong msg length"
+        time.sleep(2)
+        continue
     raw_read=0
     for i in range(0,msg_len):
         c=transferAndWait(0xff);
