@@ -35,6 +35,7 @@ volatile SPI_command_t SPI_command=NO;
 volatile SPI_status_t SPI_status=SPI_RECEIVING;
 volatile int8_t tx_length=0;
 volatile unsigned long last_time;
+volatile uint8_t rx_end_flag = 0;
 
 void mystrcpy(char* tx, volatile char* rx, int count){
   int i=0;
@@ -72,7 +73,17 @@ void tx_data_serialize(int16_t data, volatile char* tx, volatile int8_t* len){
 }
 
 void read_command(){
+  if(rx_index>0 && rx_buffer[rx_index-1] ==0x17 && SPI_status == SPI_RECEIVING){
+  Serial.println("Possible command recieved");
+  rx_buffer[rx_index-1]='\0';
+  int i=0;
+  for (i=0;i<rx_index;i++){
+    Serial.print(rx_buffer[i],HEX);
+    Serial.print(" ");
+  }
+ 
   if(SPI_status==SPI_SENDING){
+    Serial.println("Sending!");
      digitalWrite(7,LOW);
       //send over. Dont do sending complete check now.
       SPI_status=SPI_RECEIVING;
@@ -85,6 +96,7 @@ void read_command(){
     }
   digitalWrite(7,HIGH);
   //read command after reading
+   Serial.println("Reading!");
   if(strcmp(rx_buffer, "STATUS")==0){
     Serial.println("Read Command: STATUS");
     SPI_command=STATUS;
@@ -94,6 +106,7 @@ void read_command(){
     SPDR=tx_buffer[0];
     tx_index=1;
     rx_index=0;
+    rx_end_flag=0;
     return;
   }
 
@@ -107,6 +120,7 @@ void read_command(){
     SPDR=tx_buffer[0];
     tx_index=1;
     rx_index=0;
+    rx_end_flag = 0;
     return;
   }
 
@@ -119,6 +133,7 @@ void read_command(){
     SPDR=tx_buffer[0];
     tx_index=1;
     rx_index=0;
+    rx_end_flag = 0;
     return;
   }
 
@@ -131,14 +146,17 @@ void read_command(){
     SPDR=tx_buffer[0];
     tx_index=1;
     rx_index=0;
+    rx_end_flag = 0;
     return;
   }
 
-  //no command, and reading is ending
-  Serial.println("NO Command");
+  //no command, and reading is ended
+  //Serial.println("Not a Command");
   SPI_status = SPI_RECEIVING;
   memset(rx_buffer, 0, sizeof(rx_buffer)/sizeof(rx_buffer[0]));
   rx_index=0;
+  rx_end_flag = 0;
+  }
 }
 
 //For XBEE
@@ -170,6 +188,7 @@ void setup() {
   // have to send on master in, *slave out*
   pinMode(MISO, OUTPUT);
   pinMode(7,OUTPUT);
+  //pinMode(2,INPUT);
   // turn on SPI in slave mode
   SPCR |= _BV(SPE);
 
@@ -182,15 +201,26 @@ void setup() {
 
   Serial.begin(9600);
   mySerial.begin(9600);
-  last_time = = millis();
+  last_time = millis();
 }
 
 ISR(SPI_STC_vect){
   byte rx = SPDR;
-
+//  Serial.print((char)rx);
+  //Serial.print(rx, HEX);
+  //Serial.print(" ");
+  //SPDR=rx;
+ 
+  if (rx == 0x7F){
+    SPI_status = SPI_RECEIVING;
+    rx_index=0;
+    return;
+  }
 
   if (SPI_status == SPI_RECEIVING){
-    //Serial.print((char)rx);
+    if (rx_index>=19){
+      return;
+    }
     rx_buffer[rx_index]=rx;
     rx_index+=1;
   }else if (SPI_status==SPI_SENDING){
@@ -204,17 +234,14 @@ ISR(SPI_STC_vect){
       tx_index++;
       return;
     }
+    
   }
+
   
 }
 
 void loop() {
-  if ((millis-last_time)>1000){
-    // clear rx_buffer
-    memset(rx_buffer, 0, sizeof(rx_buffer)/sizeof(rx_buffer[0]));
-    rx_index=0;
-  }
-  Serial.println("Reading: ");
+  //Serial.println("Reading: ");
   // put your main code here, to run repeatedly:
   //every 5s it pull data
   send_command("TEMPERATURE");
@@ -227,6 +254,7 @@ void loop() {
   delay(2000);
   get_value(&soil);
 
+/*
   Serial.print("TEMP IS: ");
   Serial.print(temp);
   Serial.print('\t');
@@ -239,6 +267,8 @@ void loop() {
   Serial.print(soil);
   Serial.print('\t');
   Serial.print('\n');
+
+ */
   delay(2000);
   
 }
