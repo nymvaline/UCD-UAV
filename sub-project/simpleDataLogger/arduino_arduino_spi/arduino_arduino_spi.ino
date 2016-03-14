@@ -27,6 +27,8 @@ double temp=24.5;
 double humi=30.2;
 double soil=2.3;
 char rx_buffer[20];
+char dummy_tx[20]="UAV-UCD!";
+uint8_t dummy_counter =0;
 volatile int8_t rx_index=0;
 volatile char tx_buffer[20];
 volatile int8_t tx_index=0;
@@ -48,37 +50,42 @@ void tx_str_serialize(char* str, volatile char* tx, volatile int8_t* len){
   int8_t payload_len = ((String)str).length();
   int8_t temp_len = payload_len+3;
   int8_t i=0;
+  uint8_t checksum=0;
   tx[0]=0x7F;   //start char
   tx[1]=payload_len;
   for(i=0;i<payload_len;i++){
     tx[i+2]=str[i];
+    checksum+=(uint8_t)(str[i]&0xFF);
   }
   *len = temp_len;
   //checksum as 0xff first
-  tx[temp_len-1]=0xff;
+  tx[temp_len-1]=(uint8_t)(checksum&0xFF);
 }
 
 void tx_data_serialize(int16_t data, volatile char* tx, volatile int8_t* len){
   int8_t payload_len = 2;
   int8_t temp_len = payload_len+3;
   int8_t i=0;
+  uint8_t checksum=0;
   tx[0]=0x7F;   //start char
   tx[1]=2;
   tx[2]=(data>>8)&0xff;
   tx[3]=(data&0xff);
   *len = temp_len;
   //checksum as 0xff first
-  tx[temp_len-1]=0xff;
+  tx[temp_len-1]=(uint8_t)((tx[2]+tx[3])&0xFF);
+  Serial.print("data Checksum is: ");
+  Serial.println(tx[temp_len-1], HEX);
   
 }
 
 void read_command(){
   if(rx_index>0 && rx_buffer[rx_index-1] ==0x17 && SPI_status == SPI_RECEIVING){
-  Serial.println("Possible command recieved");
+  //Serial.println("Possible command recieved");
   rx_buffer[rx_index-1]='\0';
   int i=0;
   for (i=0;i<rx_index;i++){
-    Serial.print(rx_buffer[i],HEX);
+    Serial.print(rx_buffer[i]);
     Serial.print(" ");
   }
  
@@ -125,6 +132,7 @@ void read_command(){
   }
 
   if(strcmp(rx_buffer, "HUMIDITY")==0){
+    Serial.println("Read Command: HUMIDITY");
     SPI_command=HUMIDITY;
     int16_t humi16=(int16_t)(humi*10);
     tx_data_serialize(humi16, tx_buffer, &tx_length);
@@ -138,6 +146,7 @@ void read_command(){
   }
 
   if(strcmp(rx_buffer, "SOIL")==0){
+    Serial.println("Read Command: SOIL");
     SPI_command=SOIL;
     int16_t soil16=(int16_t)(soil*10);
     tx_data_serialize(soil16, tx_buffer, &tx_length);
@@ -187,6 +196,10 @@ void get_value(double* data){
 void setup() {
   // have to send on master in, *slave out*
   pinMode(MISO, OUTPUT);
+  pinMode(MOSI, INPUT);
+  pinMode(2, INPUT);
+  pinMode(10,INPUT);
+  pinMode(13,INPUT);
   pinMode(7,OUTPUT);
   //pinMode(2,INPUT);
   // turn on SPI in slave mode
@@ -209,7 +222,14 @@ ISR(SPI_STC_vect){
 //  Serial.print((char)rx);
   //Serial.print(rx, HEX);
   //Serial.print(" ");
-  //SPDR=rx;
+  /*
+  if (rx == 'H'){
+    dummy_counter=0;
+  }
+  SPDR=dummy_tx[dummy_counter];
+  dummy_counter+=1;
+*/
+
  
   if (rx == 0x7F){
     SPI_status = SPI_RECEIVING;
@@ -224,7 +244,7 @@ ISR(SPI_STC_vect){
     rx_buffer[rx_index]=rx;
     rx_index+=1;
   }else if (SPI_status==SPI_SENDING){
-    if(tx_index>=(tx_length-1)){
+    if(tx_index>(tx_length-1)){
       //sending end
       SPDR=0x0;
     }else{
@@ -236,6 +256,7 @@ ISR(SPI_STC_vect){
     }
     
   }
+  
 
   
 }
@@ -253,6 +274,7 @@ void loop() {
   send_command("SOIL");
   delay(2000);
   get_value(&soil);
+ 
 
 /*
   Serial.print("TEMP IS: ");
@@ -262,13 +284,13 @@ void loop() {
   Serial.print("HUMI IS: ");
   Serial.print(humi);
   Serial.print('\t');
-
+*/
   Serial.print("SOIL IS: ");
   Serial.print(soil);
   Serial.print('\t');
   Serial.print('\n');
 
- */
+
   delay(2000);
   
 }
