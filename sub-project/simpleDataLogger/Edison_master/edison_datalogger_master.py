@@ -14,6 +14,7 @@ import mraa as m
 dev = m.Spi(1)
 print "SPI mode is: {}".format(dev.mode(0))
 dev.frequency(100000)
+TIME_FORMAT='%m-%d %H:%M:%S'
 
 
 def transferAndWait(c):
@@ -91,18 +92,21 @@ while(True):
         continue
 
     if (loop_counter == 1):
-        print "Now STATUS is: %c%c"%(raw_read[0],raw_read[1])
+        with open('datalog.log', 'a') as outfile:
+            outfile.write("%s STATUS: %c%c\n"%(datetime.now().strftime(TIME_FORMAT), raw_read[0],raw_read[1]))
 
     if (loop_counter == 2):
-        print "Now TEMPERATURE is: {}".format(float(raw_value/10.0))
+        with open('datalog.log', 'a') as outfile:
+            outfile.write("%s TEMPERATURE: %.2f\n"%(datetime.now().strftime(TIME_FORMAT), float(raw_value/10.0)))
         
     if (loop_counter == 3):
-        print"Now HUMIDITY is: {}".format(float(raw_value/10.0))
+        with open('datalog.log', 'a') as outfile:
+            outfile.write("%s HUMIDITY: %.2f\n"%(datetime.now().strftime(TIME_FORMAT), float(raw_value/10.0)))
     
     if (loop_counter == 0):
-        print"Now SOIL is: {}".format(float(raw_value/10.0))
+        with open('datalog.log', 'a') as outfile:
+            outfile.write("%s SOIL: %.2f\n"%(datetime.now().strftime(TIME_FORMAT), float(raw_value/10.0)))
 
-    print "\n"
 
     time.sleep(2)  
 
