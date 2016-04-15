@@ -29,6 +29,7 @@ class vector3(object):
         self.x = 0.0
         self.y = 0.0
         self.z = 0.0
+        self.is_init=False
 
 
 class update_setpoint(object):
@@ -107,6 +108,8 @@ class Task_manager(object):
         for eachline in self.tasklog:
             line = eachline.strip('\n').split(' ')
             # python TASK.py [args] [timeout in second]
+            if (eachline[0]=='#'):
+                continue
             self.tasklist.append(['python', str(line[0])+'.py', ' '.join(line[1:-1])])
             self.task_amount+=1
         self.tasklog.close()
