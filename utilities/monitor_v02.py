@@ -6,6 +6,7 @@ import mavros
 from mavros.utils import *
 from mavros import setpoint as SP
 import mavros_msgs.msg
+import geometry_msgs.msg 
 import time
 from datetime import datetime
 
@@ -26,6 +27,8 @@ class UAV_class:
 	def __init__(self):
 		self.current_pose = _vector3()
 		self.setpoint_pose = _vector3()
+		self.vel_linear = _vector3()
+		self.vel_angular = _vector3()
 		self.mode = "None"
 		self.arm = "None"
 		self.guided = "None"
@@ -38,6 +41,8 @@ class UAV_class:
                                     SP.PoseStamped, self._local_position_callback)
 		self.setpoint_local_sub = rospy.Subscriber(mavros.get_topic('setpoint_raw', 'target_local'),
                                     mavros_msgs.msg.PositionTarget, self._setpoint_position_callback)
+		self.velocity_sub = rospy.Subscriber(mavros.get_topic('local_position','velocity'),
+									geometry_msgs.msg.TwistStamped, self._velocity_callback)
 		self.state_sub = rospy.Subscriber(mavros.get_topic('state'),
 					mavros_msgs.msg.State, self._state_callback)
 		pass
@@ -52,6 +57,15 @@ class UAV_class:
 		self.setpoint_pose.x = topic.position.x
 		self.setpoint_pose.y = topic.position.y
 		self.setpoint_pose.z = topic.position.z
+
+	def _velocity_callback(self, topic):
+		self.vel_linear.x = topic.twist.linear.x
+		self.vel_linear.y = topic.twist.linear.y
+		self.vel_linear.z = topic.twist.linear.z
+		self.vel_angular.x = topic.twist.angular.x
+		self.vel_angular.y = topic.twist.angular.y
+		self.vel_angular.z = topic.twist.angular.z
+
 
 	def _state_callback(self, topic):
 		self._calc_delay()
@@ -79,6 +93,9 @@ class UAV_class:
 
 	def get_setpoint_pose(self):
 		return self.setpoint_pose
+
+	def get_velocity(self):
+		return (self.vel_linear, self.vel_angular)
 
 	def get_guided(self):
 		return self.guided
@@ -122,6 +139,20 @@ def _UAV_setpoint_pose(screen):
 	screen.addstr(7, 2+1*H_SPACE, "z: "+str(format(temp.z, '.4f')))
 	pass
 
+def _UAV_velocity(screen):
+	screen.addstr(9, 2+0*H_SPACE, "Linear velocity:")
+	screen.addstr(9, 2+1*H_SPACE, "Angular velocity:")
+	(temp_linear, temp_angular) = UAV.get_velocity()
+	screen.addstr(10, 2+0*H_SPACE, "Lin X: "+str(format(temp_linear.x, '.4f')))
+	screen.addstr(11, 2+0*H_SPACE, "Lin y: "+str(format(temp_linear.y, '.4f')))
+	screen.addstr(12, 2+0*H_SPACE, "Lin z: "+str(format(temp_linear.z, '.4f')))
+
+	screen.addstr(10, 2+1*H_SPACE, "Ang X: "+str(format(temp_angular.x, '.4f')))
+	screen.addstr(11, 2+1*H_SPACE, "Ang y: "+str(format(temp_angular.y, '.4f')))
+	screen.addstr(12, 2+1*H_SPACE, "Ang z: "+str(format(temp_angular.z, '.4f')))
+
+	pass
+
 def _UAV_delay(screen):
 	screen.addstr(2, 2+0*H_SPACE, "Connection delay: "+str(format(UAV.get_delay(), '.4f'))+" s")
 
@@ -140,6 +171,7 @@ def main(argc):
 		_UAV_status(screen)
 		_UAV_current_pose(screen)
 		_UAV_setpoint_pose(screen)
+		_UAV_velocity(screen)
 		_UAV_delay(screen)
 		screen.refresh()
 		time.sleep(0.1)

@@ -46,6 +46,7 @@ current_position = TCS_util.vector3()
 setpoint_msg = 0
 # setpoint position
 setpoint_position = TCS_util.vector3()
+raw_setpoint_position = TCS_util.vector3()
 # precision setup. normally set it to 0.5m
 precision = 0.5
 # setup frame_id
@@ -66,16 +67,20 @@ def set_target(pose, x, y, z):
 def local_position_cb(topic):
     """local position subscriber callback function
     """
+    current_position.is_init = True
     current_position.x = topic.pose.position.x
     current_position.y = topic.pose.position.y
     current_position.z = topic.pose.position.z
 
-def is_reached():
+def is_reached(setpoint):
     """Check if the UAV reached the destination
     """
-    if (abs(current_position.x-setpoint_position.x) < precision and
-            abs(current_position.y-setpoint_position.y) < precision and
-            abs(current_position.z-setpoint_position.z) < precision):
+    x = setpoint.pose.position.x
+    y = setpoint.pose.position.y
+    z = setpoint.pose.position.z
+    if (abs(current_position.x-x) < precision and
+            abs(current_position.y-y) < precision and
+            abs(current_position.z-z) < precision):
         print "Point reached!"
         return True
     else:
@@ -108,28 +113,77 @@ def main():
 
     # interprete the input position
     setpoint_arg = sys.argv[1].split(' ')
-    setpoint_position.x=float(setpoint_arg[0])
-    setpoint_position.y=float(setpoint_arg[1])
-    setpoint_position.z=float(setpoint_arg[2])
-    print "X: {}, Y: {}, Z: {}".format(setpoint_position.x,
-    	setpoint_position.y, setpoint_position.z)
+    raw_setpoint_position.x=float(setpoint_arg[0])
+    raw_setpoint_position.y=float(setpoint_arg[1])
+    raw_setpoint_position.z=float(setpoint_arg[2])
+    print "X: {}, Y: {}, Z: {}".format(raw_setpoint_position.x,
+    	raw_setpoint_position.y, raw_setpoint_position.z)
 
     # setup setpoint poisiton and prepare to publish the position
-    set_target(setpoint_msg,
-    	setpoint_position.x,
-    	setpoint_position.y,
-    	setpoint_position.z)
+    # set_target(setpoint_msg,
+    # 	setpoint_position.x,
+    # 	setpoint_position.y,
+    # 	setpoint_position.z)
+
+    pre_flight = 'neutral'
 
     # In this while loop, do the job.
-    while(not is_reached()):
-        # When the UAV reached the position, 
-        # publish the task finished signal and exit
-    	setpoint_local_pub.publish(setpoint_msg)
-        # TODO: publish the task status as conducting
-        task_watchdog.report_running()
+    # Waiting for receive the first current position
+    while(current_position.is_init is False):
+        continue
+    if (raw_setpoint_position.z - current_position.z >2):
+        pre_flight = 'ascending'
+        # ascending
+        set_target(setpoint_msg,
+            current_position.x,
+            current_position.y,
+            raw_setpoint_position.z)
+        while(not is_reached(setpoint_msg)):
+            setpoint_local_pub.publish(setpoint_msg)
+            task_watchdog.report_running()
+            rate.sleep()
+        # flight to the target
+        set_target(setpoint_msg,
+            raw_setpoint_position.x,
+            raw_setpoint_position.y,
+            raw_setpoint_position.z)
+        while(not is_reached(setpoint_msg)):
+            setpoint_local_pub.publish(setpoint_msg)
+            task_watchdog.report_running()
+            rate.sleep()
 
-        rate.sleep()
+    elif (current_position.z - raw_setpoint_position.z >2):
+        pre_flight = 'descending'
+        # flight to the target first
+        set_target(setpoint_msg,
+            raw_setpoint_position.x,
+            raw_setpoint_position.y,
+            current_position.z)
+        while(not is_reached(setpoint_msg)):
+            setpoint_local_pub.publish(setpoint_msg)
+            task_watchdog.report_running()
+            rate.sleep()
+        # descending
+        set_target(setpoint_msg,
+            setpoint_position.x,
+            setpoint_position.y,
+            setpoint_position.z)
+        while(not is_reached(setpoint_msg)):
+            setpoint_local_pub.publish(setpoint_msg)
+            task_watchdog.report_running()
+            rate.sleep()
 
+
+    else:
+        set_target(setpoint_msg,
+            setpoint_position.x,
+            setpoint_position.y,
+            setpoint_position.z)
+        while(not is_reached(setpoint_msg)):
+            setpoint_local_pub.publish(setpoint_msg)
+            task_watchdog.report_running()
+            rate.sleep()
+    
     # TODO: publish the task status as FINISHING
     task_watchdog.report_finish()
 
