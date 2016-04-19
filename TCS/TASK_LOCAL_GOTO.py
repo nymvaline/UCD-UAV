@@ -64,6 +64,11 @@ def set_target(pose, x, y, z):
         frame_id="local_pose",
         stamp=rospy.Time.now())
 
+def update_msg(msg):
+    msg.header = mavros.setpoint.Header(
+                    frame_id=msg.header.frame_id,
+                    stamp=rospy.Time.now())
+
 def local_position_cb(topic):
     """local position subscriber callback function
     """
@@ -86,6 +91,12 @@ def is_reached(setpoint):
     else:
         return False
 
+def is_overtime(timestamp, overtime):
+    if ((rospy.Time.now() - timestamp) > rospy.Duration(overtime)):
+        print "Flight attempt over time!"
+        return True
+    else:
+        return False
    
 
 def main():
@@ -116,6 +127,7 @@ def main():
     raw_setpoint_position.x=float(setpoint_arg[0])
     raw_setpoint_position.y=float(setpoint_arg[1])
     raw_setpoint_position.z=float(setpoint_arg[2])
+    over_time = float(setpoint_arg[3])
     print "X: {}, Y: {}, Z: {}".format(raw_setpoint_position.x,
     	raw_setpoint_position.y, raw_setpoint_position.z)
 
@@ -126,7 +138,7 @@ def main():
     # 	setpoint_position.z)
 
     pre_flight = 'neutral'
-
+    init_time = rospy.Time.now()
     # In this while loop, do the job.
     # Waiting for receive the first current position
     while(current_position.is_init is False):
@@ -139,8 +151,11 @@ def main():
             current_position.y,
             raw_setpoint_position.z)
         while(not is_reached(setpoint_msg)):
+            update_msg(setpoint_msg)
             setpoint_local_pub.publish(setpoint_msg)
             task_watchdog.report_running()
+            if (is_overtime(init_time, over_time)):
+                break
             rate.sleep()
         # flight to the target
         set_target(setpoint_msg,
@@ -148,8 +163,11 @@ def main():
             raw_setpoint_position.y,
             raw_setpoint_position.z)
         while(not is_reached(setpoint_msg)):
+            update_msg(setpoint_msg)
             setpoint_local_pub.publish(setpoint_msg)
             task_watchdog.report_running()
+            if (is_overtime(init_time, over_time)):
+                break
             rate.sleep()
 
     elif (current_position.z - raw_setpoint_position.z >2):
@@ -160,28 +178,36 @@ def main():
             raw_setpoint_position.y,
             current_position.z)
         while(not is_reached(setpoint_msg)):
+            update_msg(setpoint_msg)
             setpoint_local_pub.publish(setpoint_msg)
             task_watchdog.report_running()
+            if (is_overtime(init_time, over_time)):
+                break
             rate.sleep()
         # descending
         set_target(setpoint_msg,
-            setpoint_position.x,
-            setpoint_position.y,
-            setpoint_position.z)
+            raw_setpoint_position.x,
+            raw_setpoint_position.y,
+            raw_setpoint_position.z)
         while(not is_reached(setpoint_msg)):
+            update_msg(setpoint_msg)
             setpoint_local_pub.publish(setpoint_msg)
             task_watchdog.report_running()
+            if (is_overtime(init_time, over_time)):
+                break
             rate.sleep()
 
 
     else:
         set_target(setpoint_msg,
-            setpoint_position.x,
-            setpoint_position.y,
-            setpoint_position.z)
+            raw_setpoint_position.x,
+            raw_setpoint_position.y,
+            raw_setpoint_position.z)
         while(not is_reached(setpoint_msg)):
             setpoint_local_pub.publish(setpoint_msg)
             task_watchdog.report_running()
+            if (is_overtime(init_time, over_time)):
+                break
             rate.sleep()
     
     # TODO: publish the task status as FINISHING

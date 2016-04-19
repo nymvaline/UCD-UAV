@@ -99,10 +99,12 @@ class update_setpoint(object):
         if (self.update_flag=='LOCAL' and self.local_last_pos.is_init):
             self._set_pose(self.local_msg, self.local_last_pos)
             self.local_pub.publish(self.local_msg)
+            print "Setpoint kepper executed! x=%.2f y=%.2f z=%.2f"%(self.local_last_pos.x,
+                self.local_last_pos.y, self.local_last_pos.z)
         # if (update_flag=='GPS'):
         #     self._set_pose(self.GPS_msg, self.GPS_last_pos)
         #     self.GPS_pub.publish(self.GPS_msg)
-        pass
+        return
 
 class Task_manager(object):
     def __init__(self, fname):
@@ -119,7 +121,7 @@ class Task_manager(object):
             # python TASK.py [args] [timeout in second]
             if (eachline[0]=='#'):
                 continue
-            self.tasklist.append(['python', str(line[0])+'.py', ' '.join(line[1:-1])])
+            self.tasklist.append(['python', str(line[0])+'.py', ' '.join(line[1:])])
             self.task_amount+=1
         self.tasklog.close()
 

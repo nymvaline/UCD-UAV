@@ -39,8 +39,8 @@ class UAV_class:
 		# setup local_position sub
 		self.local_position_sub = rospy.Subscriber(mavros.get_topic('local_position', 'pose'),
                                     SP.PoseStamped, self._local_position_callback)
-		self.setpoint_local_sub = rospy.Subscriber(mavros.get_topic('setpoint_raw', 'target_local'),
-                                    mavros_msgs.msg.PositionTarget, self._setpoint_position_callback)
+		self.setpoint_local_sub = rospy.Subscriber(mavros.get_topic('setpoint_position', 'local'),
+                                    SP.PoseStamped, self._setpoint_position_callback)
 		self.velocity_sub = rospy.Subscriber(mavros.get_topic('local_position','velocity'),
 									geometry_msgs.msg.TwistStamped, self._velocity_callback)
 		self.state_sub = rospy.Subscriber(mavros.get_topic('state'),
@@ -54,9 +54,9 @@ class UAV_class:
 
 
 	def _setpoint_position_callback(self, topic):
-		self.setpoint_pose.x = topic.position.x
-		self.setpoint_pose.y = topic.position.y
-		self.setpoint_pose.z = topic.position.z
+		self.setpoint_pose.x = topic.pose.position.x
+		self.setpoint_pose.y = topic.pose.position.y
+		self.setpoint_pose.z = topic.pose.position.z
 
 	def _velocity_callback(self, topic):
 		self.vel_linear.x = topic.twist.linear.x
