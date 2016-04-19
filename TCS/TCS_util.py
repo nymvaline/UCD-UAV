@@ -40,8 +40,14 @@ class update_setpoint(object):
 
         #setup local position 
         self.local_pub = mavros.setpoint.get_pub_position_local(queue_size=10)
+        # setup setpoint sub
         self.local_sub = rospy.Subscriber(mavros.get_topic('setpoint_position', 'local'),
+        geometry_msgs.msg.PoseStamped, self._local_setpoint_cb)
+        # setup local sub
+        position_local_sub = rospy.Subscriber(mavros.get_topic('local_position', 'pose'),
         geometry_msgs.msg.PoseStamped, self._local_cb)
+
+
         self.local_last_pos=vector3()
         self.local_msg=mavros.setpoint.PoseStamped(
             header=mavros.setpoint.Header(
@@ -58,17 +64,20 @@ class update_setpoint(object):
         # self.GPS_msg=0
 
     def _local_cb(self, topic):
+        # rospy.loginfo("setpoint_raw target_local get: x=%s, y=%s, z=%s,", 
+            # topic.pose.position.x, topic.pose.position.y, topic.pose.position.z)
+        self.local_last_pos.x=topic.pose.position.x;
+        self.local_last_pos.y=topic.pose.position.y;
+        self.local_last_pos.z=topic.pose.position.z;
+        self.local_last_pos.is_init=True;
+
+    def _local_setpoint_cb(self, topic):
         if (topic.header.frame_id == self.frame_id):
             # ignore the msgs sent by myselfs
             return
 
         self.update_flag='LOCAL'
         self.timestamp=rospy.Time.now()
-        # rospy.loginfo("setpoint_raw target_local get: x=%s, y=%s, z=%s,", 
-            # topic.pose.position.x, topic.pose.position.y, topic.pose.position.z)
-        self.local_last_pos.x=topic.pose.position.x;
-        self.local_last_pos.y=topic.pose.position.y;
-        self.local_last_pos.z=topic.pose.position.z;
 
     # def _GPS_cb(self, topic):
     #     self.update_flag='GPS'
@@ -87,7 +96,7 @@ class update_setpoint(object):
             # if setpoint was publishing on time, dont bother to send again
             return
         # rospy.loginfo("Setpoint_keeper sending the setpoint!")
-        if (self.update_flag=='LOCAL'):
+        if (self.update_flag=='LOCAL' and self.local_last_pos.is_init):
             self._set_pose(self.local_msg, self.local_last_pos)
             self.local_pub.publish(self.local_msg)
         # if (update_flag=='GPS'):
