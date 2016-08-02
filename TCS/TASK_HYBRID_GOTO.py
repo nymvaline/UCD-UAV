@@ -59,7 +59,7 @@ current_GPS_position = TCS_util.vector3()
 raw_setpoint_position = TCS_util.vector3()
 # precision setup. normally set it to 0.5m
 precision = 0.5
-GPS_precision = 0.000005
+GPS_precision = 0.0000005
 # setup frame_id
 frame_id='HYBRID_GOTO'
 
@@ -97,8 +97,8 @@ def GPS_position_cb(topic):
 
 def convert_GPS_to_local(GPS_target, GPS_current, local_current, pose, altitude):
     latMid = (GPS_target.x-GPS_current.x)/2
-    #m_per_deg_lat = 111132.954 - 559.822 * cos( 2.0 * latMid ) + 1.175 * cos( 4.0 * latMid);
-    #m_per_deg_lon = (3.14159265359/180 ) * 6367449 * cos ( latMid );
+    m_per_deg_lat = 111132.954 - 559.822 * cos( 2.0 * latMid ) + 1.175 * cos( 4.0 * latMid);
+    m_per_deg_lon = (3.14159265359/180 ) * 6367449 * cos ( latMid );
     pose.pose.position.x = local_current.x+m_per_deg_lat*(GPS_target.x-GPS_current.x)
     pose.pose.position.y = local_current.y+m_per_deg_lon*(GPS_target.x-GPS_current.x)
     pose.pose.position.z = altitude
