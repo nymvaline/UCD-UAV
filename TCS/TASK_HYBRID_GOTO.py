@@ -105,7 +105,7 @@ def convert_GPS_to_local(GPS_target, GPS_current, local_current, pose, altitude)
     pose.header=mavros.setpoint.Header(
         frame_id="hybrid_pose",
         stamp=rospy.Time.now())
-    print "Target GPS.x: {}, current GPS.x: {}, difference: {}\n".format(GPS_target.x, GPS_current.x, GPS_target.x-GPS_current.x)
+    # print "Target GPS.x: {}, current GPS.x: {}, difference: {}\n".format(GPS_target.x, GPS_current.x, GPS_target.x-GPS_current.x)
 
 
 def is_reached(setpoint):
@@ -132,6 +132,7 @@ def is_GPS_reached(setpoint):
         print "GPS Point reached!"
         return True
     else:
+        print 'current_GPS_position.x: {}, setpoint.x: {} , difference: {}'.format(current_GPS_position.x, x, abs(current_GPS_position.x-x))
         return False
 
 def is_overtime(timestamp, overtime):
@@ -210,7 +211,7 @@ def main():
         # flight to the target
         convert_GPS_to_local(setpoint_GPS_target, current_GPS_position, current_position,
         setpoint_msg,raw_setpoint_position.z)
-        while(not is_GPS_reached(setpoint_GPS_target)):
+        while(not is_reached(setpoint_msg)):
             setpoint_local_pub.publish(setpoint_msg)
             task_watchdog.report_running()
             if (is_overtime(init_time, over_time)):
@@ -225,7 +226,7 @@ def main():
         # flight to the target first
         convert_GPS_to_local(setpoint_GPS_target, current_GPS_position, current_position,
         setpoint_msg,raw_setpoint_position.z)
-        while(not is_GPS_reached(setpoint_GPS_target)):
+        while(not is_reached(setpoint_msg)):
             setpoint_local_pub.publish(setpoint_msg)
             task_watchdog.report_running()
             if (is_overtime(init_time, over_time)):
@@ -251,7 +252,7 @@ def main():
         print "Need to fly to the target"
         convert_GPS_to_local(setpoint_GPS_target, current_GPS_position, current_position,
         setpoint_msg,raw_setpoint_position.z)
-        while(not is_GPS_reached(setpoint_GPS_target)):
+        while(not is_reached(setpoint_msg)):
             setpoint_local_pub.publish(setpoint_msg)
             task_watchdog.report_running()
             if (is_overtime(init_time, over_time)):
