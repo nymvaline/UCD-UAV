@@ -87,7 +87,8 @@ def main():
     # setup publisher
     # /mavros/setpoint/position/local
     setpoint_local_pub =  mavros.setpoint.get_pub_position_local(queue_size=10)
-
+    setpoint_global_pub = rospy.Publisher(mavros.get_topic('setpoint_raw', 'global'),
+        mavros_msgs.msg.GlobalPositionTarget, queue_size=10)
     # setup service
     # /mavros/cmd/arming
     set_arming = rospy.ServiceProxy('/mavros/cmd/arming', mavros_msgs.srv.CommandBool) 
@@ -99,6 +100,13 @@ def main():
                 frame_id="att_pose",
                 stamp=rospy.Time.now()),
             )
+
+    setpoint_global_msg = mavros_msgs.msg.GlobalPositionTarget(
+            header=mavros.setpoint.Header(
+                frame_id="global_pose",
+                stamp=rospy.Time.now()),
+            )
+
 
     #read task list
     Task_mgr = TCS_util.Task_manager('task_list.log')
@@ -114,15 +122,25 @@ def main():
     setpoint_msg.pose.position.x = 0
     setpoint_msg.pose.position.y = 0
     setpoint_msg.pose.position.z = 3
-    	
+
+    setpoint_global_msg.coordinate_frame = 11
+    setpoint_global_msg.type_mask = 8+16+32+128+256
+    setpoint_global_msg.latitude = 47.3978800
+    setpoint_global_msg.longitude = 8.5455920
+    setpoint_global_msg.altitude = 10
+    setpoint_global_msg.yaw = 90
+    setpoint_global_msg.yaw_rate =10
+
     mavros.command.arming(True)
 
     # send 100 setpoints before starting
     for i in range(0,50):
-        setpoint_local_pub.publish(setpoint_msg)
+        # setpoint_local_pub.publish(setpoint_msg)
+        setpoint_global_pub.publish(setpoint_global_msg)
         rate.sleep()
 
     set_mode(0,'OFFBOARD')
+    print("Pre start finished!")
 
     last_request = rospy.Time.now()
 
