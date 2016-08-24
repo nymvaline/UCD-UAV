@@ -9,7 +9,9 @@ import mavros.setpoint
 import mavros.command
 import mavros_msgs.msg
 import mavros_msgs.srv
+import sensor_msgs.msg
 import geometry_msgs
+
 import time
 from datetime import datetime
 from dart.msg import task as Task_msg
@@ -38,13 +40,13 @@ class update_setpoint(object):
         self.frame_id='UPDATE_SETPOINT'
         self.timestamp=rospy.Time.now()
 
-        #setup local position 
+        #setup local position publisher
         self.local_pub = mavros.setpoint.get_pub_position_local(queue_size=10)
-        # setup setpoint sub
+        # setup setpoint sub trigger
         self.local_sub = rospy.Subscriber(mavros.get_topic('setpoint_position', 'local'),
         geometry_msgs.msg.PoseStamped, self._local_setpoint_cb)
-        # setup local sub
-        position_local_sub = rospy.Subscriber(mavros.get_topic('local_position', 'pose'),
+        # setup local position sub
+        self.position_local_sub = rospy.Subscriber(mavros.get_topic('local_position', 'pose'),
         geometry_msgs.msg.PoseStamped, self._local_cb)
 
 
@@ -56,15 +58,21 @@ class update_setpoint(object):
             )
 
         #setup GPS position
-        self.global_last_pos=vector3();
+
+        # setup global position publisher
         self.GPS_pub =  rospy.Publisher(mavros.get_topic('setpoint_raw', 'global'),
          mavros_msgs.msg.GlobalPositionTarget, queue_size=10)
-        self.GPS_last_pos=vector3()
-        self.GPS_sub = rospy.Subscriber(mavros.get_topic('setpoint_raw', 'target_global'),
+        # setup global position sub trigger
+        self.GPS_sub = rospy.Subscriber(mavros.get_topic('setpoint_raw', 'global'),
         mavros_msgs.msg.GlobalPositionTarget, self._global_setpoint_cb)
+        # setup global position sub
+        self.position_global_sub = rospy.Subscriber(mavros.get_topic('global_position', 'global'),
+        sensor_msgs.msg.NavSatFix, self._global_cb)
+
+        self.global_last_pos=vector3();
         self.GPS_msg=mavros_msgs.msg.GlobalPositionTarget(
             header=mavros.setpoint.Header(
-                frame_id="global_gps",
+                frame_id=self.frame_id,
                 stamp=rospy.Time.now()),
             )
 
@@ -112,18 +120,15 @@ class update_setpoint(object):
         to the pose. pose usually is type of 
         mavros.setpoint.PoseStamped
         """
-        pose.latitude = pos.latitude
-        pose.longitude = pos.longitude
-        pose.altitude = pos.altitude
+        pose.latitude = pos.x
+        pose.longitude = pos.y
+        pose.altitude = pos.z
         pose.header=mavros.setpoint.Header(
-            frame_id="global_GPS",
+            frame_id=self.frame_id,
             stamp=rospy.Time.now())
-        pose.velocity.x=10
-        pose.velocity.y=10
-        pose.velocity.z=10
-        pose.acceleration_or_force.x=2
-        pose.acceleration_or_force.y=2
-        pose.acceleration_or_force.z=2
+        pose.coordinate_frame = pose.FRAME_GLOBAL_TERRAIN_ALT
+        pose.type_mask = pose.IGNORE_VX +pose.IGNORE_VY +pose.IGNORE_VZ +pose.IGNORE_AFX+pose.IGNORE_AFY+pose.IGNORE_AFZ+pose.IGNORE_YAW+pose.IGNORE_YAW_RATE
+    
 
     def update(self):
         if(rospy.Time.now()-self.timestamp < (rospy.Duration(0.05))):
@@ -133,11 +138,13 @@ class update_setpoint(object):
         if (self.update_flag=='LOCAL' and self.local_last_pos.is_init):
             self._set_pose_local(self.local_msg, self.local_last_pos)
             self.local_pub.publish(self.local_msg)
-            print "Setpoint kepper executed! x=%.2f y=%.2f z=%.2f"%(self.local_last_pos.x,
+            print "local kepper executed! x=%.2f y=%.2f z=%.2f"%(self.local_last_pos.x,
                 self.local_last_pos.y, self.local_last_pos.z)
         if (self.update_flag=='GPS' and self.global_last_pos.is_init):
             self._set_pose_global(self.GPS_msg, self.global_last_pos)
             self.GPS_pub.publish(self.GPS_msg)
+            print "global kepper executed! x=%.2f y=%.2f z=%.2f"%(self.global_last_pos.x,
+                self.global_last_pos.y, self.global_last_pos.z)
         return
 
 class Task_manager(object):

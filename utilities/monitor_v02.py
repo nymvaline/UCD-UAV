@@ -7,6 +7,7 @@ from mavros.utils import *
 from mavros import setpoint as SP
 import mavros_msgs.msg
 import geometry_msgs.msg 
+import sensor_msgs.msg
 import time
 from datetime import datetime
 
@@ -27,6 +28,8 @@ class UAV_class:
 	def __init__(self):
 		self.current_pose = _vector3()
 		self.setpoint_pose = _vector3()
+		self.current_pose_global = _vector3()
+		self.setpoint_pose_global = _vector3()
 		self.vel_linear = _vector3()
 		self.vel_angular = _vector3()
 		self.mode = "None"
@@ -38,13 +41,17 @@ class UAV_class:
 		mavros.set_namespace("/mavros")
 		# setup local_position sub
 		self.local_position_sub = rospy.Subscriber(mavros.get_topic('local_position', 'pose'),
-                                    SP.PoseStamped, self._local_position_callback)
+			SP.PoseStamped, self._local_position_callback)
 		self.setpoint_local_sub = rospy.Subscriber(mavros.get_topic('setpoint_position', 'local'),
-                                    SP.PoseStamped, self._setpoint_position_callback)
+			SP.PoseStamped, self._setpoint_position_callback)
+		self.position_global_sub = rospy.Subscriber(mavros.get_topic('global_position', 'global'),
+			sensor_msgs.msg.NavSatFix, self._global_position_callback)
+		self.setpoint_global_sub = rospy.Subscriber(mavros.get_topic('setpoint_raw', 'global'),
+			mavros_msgs.msg.GlobalPositionTarget, self._globa_setpoint_position_callback)
 		self.velocity_sub = rospy.Subscriber(mavros.get_topic('local_position','velocity'),
-									geometry_msgs.msg.TwistStamped, self._velocity_callback)
+			geometry_msgs.msg.TwistStamped, self._velocity_callback)
 		self.state_sub = rospy.Subscriber(mavros.get_topic('state'),
-					mavros_msgs.msg.State, self._state_callback)
+			mavros_msgs.msg.State, self._state_callback)
 		pass
 
 	def _local_position_callback(self, topic):
@@ -58,6 +65,17 @@ class UAV_class:
 		self.setpoint_pose.y = topic.pose.position.y
 		self.setpoint_pose.z = topic.pose.position.z
 
+	def _global_position_callback(self, topic):
+		self.current_pose_global.x = topic.latitude
+		self.current_pose_global.y = topic.longitude
+		self.current_pose_global.z = topic.altitude
+
+
+	def _globa_setpoint_position_callback(self, topic):
+		self.setpoint_pose_global.x = topic.latitude
+		self.setpoint_pose_global.y = topic.longitude
+		self.setpoint_pose_global.z = topic.altitude
+
 	def _velocity_callback(self, topic):
 		self.vel_linear.x = topic.twist.linear.x
 		self.vel_linear.y = topic.twist.linear.y
@@ -69,7 +87,7 @@ class UAV_class:
 
 	def _state_callback(self, topic):
 		self._calc_delay()
-		self.mode = topic.mode
+		self.mode = topic.mode   
 		self.guided = topic.guided
 		self.arm = topic.armed
 
@@ -94,6 +112,12 @@ class UAV_class:
 	def get_setpoint_pose(self):
 		return self.setpoint_pose
 
+	def get_current_pose_global(self):
+		return self.current_pose_global
+
+	def get_setpoint_pose_global(self):
+		return self.setpoint_pose_global
+
 	def get_velocity(self):
 		return (self.vel_linear, self.vel_angular)
 
@@ -112,11 +136,11 @@ UAV = UAV_class()
 
 def _UAV_status(screen):
 	# mode
-	screen.addstr(1,2+0*H_SPACE, "UAV_MODE: " + str(UAV.get_mode()))
+	screen.addstr(1,2+0*H_SPACE, "UAV_MODE: " + str(UAV.get_mode())+'    ')
 	# arm
-	screen.addstr(1,2+1*H_SPACE, "UAV_ARM: " + str(UAV.get_arm()))
+	screen.addstr(1,2+1*H_SPACE, "UAV_ARM: " + str(UAV.get_arm())+'    ')
 	# Guided
-	screen.addstr(1,3+2*H_SPACE, "UAV_GUIDED: " + str(UAV.get_guided()))
+	screen.addstr(1,3+2*H_SPACE, "UAV_GUIDED: " + str(UAV.get_guided())+'    ')
 
 	size = screen.getmaxyx()
 	screen.hline(3, 2, '-', size[1]-4)
@@ -137,6 +161,22 @@ def _UAV_setpoint_pose(screen):
 	screen.addstr(5, 2+1*H_SPACE, "X: "+str(format(temp.x, '.4f')))
 	screen.addstr(6, 2+1*H_SPACE, "y: "+str(format(temp.y, '.4f')))
 	screen.addstr(7, 2+1*H_SPACE, "z: "+str(format(temp.z, '.4f')))
+	pass
+
+def _UAV_current_pose_global(screen):
+	screen.addstr(4, 2+2*H_SPACE, "GPS Position:")
+	temp = UAV.get_current_pose_global()
+	screen.addstr(5, 2+2*H_SPACE, "X: "+str(format(temp.x, '.4f')))
+	screen.addstr(6, 2+2*H_SPACE, "y: "+str(format(temp.y, '.4f')))
+	screen.addstr(7, 2+2*H_SPACE, "z: "+str(format(temp.z, '.4f')))
+	pass
+
+def _UAV_setpoint_pose_global(screen):
+	screen.addstr(4, 2+3*H_SPACE, "GPS Setpoint:")
+	temp = UAV.get_setpoint_pose_global()
+	screen.addstr(5, 2+3*H_SPACE, "X: "+str(format(temp.x, '.4f')))
+	screen.addstr(6, 2+3*H_SPACE, "y: "+str(format(temp.y, '.4f')))
+	screen.addstr(7, 2+3*H_SPACE, "z: "+str(format(temp.z, '.4f')))
 	pass
 
 def _UAV_velocity(screen):
@@ -168,12 +208,15 @@ def main(argc):
 
 
 	while(key != ord('q')):
+		screen.refresh()
 		_UAV_status(screen)
 		_UAV_current_pose(screen)
 		_UAV_setpoint_pose(screen)
+		_UAV_current_pose_global(screen)
+		_UAV_setpoint_pose_global(screen)
 		_UAV_velocity(screen)
 		_UAV_delay(screen)
-		screen.refresh()
+
 		time.sleep(0.1)
 		key = screen.getch()
 

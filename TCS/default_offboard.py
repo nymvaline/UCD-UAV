@@ -9,6 +9,8 @@ import mavros.setpoint
 import mavros.command
 import mavros_msgs.msg
 import mavros_msgs.srv
+from mavros_msgs.msg import CommandCode
+from mavros_msgs.srv import SetMode
 import time
 from datetime import datetime
 from UAV_Task import *
@@ -91,8 +93,19 @@ def main():
     # setup service
     # /mavros/cmd/arming
     set_arming = rospy.ServiceProxy('/mavros/cmd/arming', mavros_msgs.srv.CommandBool) 
+    # /mavros/cmd/takeoff
+    cmd_takeoff = rospy.ServiceProxy('/mavros/cmd/takeoff', mavros_msgs.srv.CommandTOL) 
+    # /mavros/cmd/command
+    cmd_long = rospy.ServiceProxy('/mavros/cmd/command', mavros_msgs.srv.CommandLong) 
     # /mavros/set_mode
     set_mode = rospy.ServiceProxy('/mavros/set_mode', mavros_msgs.srv.SetMode)  
+    # /mavros/mission/pull
+    waypoint_pull = rospy.ServiceProxy('/mavros/mission/pull', mavros_msgs.srv.WaypointPull) 
+    # /mavros/mission/push
+    waypoint_push = rospy.ServiceProxy('/mavros/mission/push', mavros_msgs.srv.WaypointPush) 
+    # /mavros/mission/clear
+    waypoint_clear = rospy.ServiceProxy('/mavros/mission/clear', mavros_msgs.srv.WaypointClear) 
+
 
     setpoint_msg = mavros.setpoint.PoseStamped(
             header=mavros.setpoint.Header(
@@ -110,20 +123,60 @@ def main():
     while(not UAV_state.connected):
         rate.sleep()
 
+    #set manual
+    # set_mode(SetMode.MAV_MODE_MANUAL_DISARMED,'')
+
+    #set home
+    result=cmd_long(broadcast=True, command=CommandCode.CMD_DO_SET_HOME, confirmation=0, param1=1)
+    if(result.success):
+        print("Home as been set up")
+
+
+    #set waypoint
+    waypoint_clear()
+    new_waypoint_list = []
+    new_waypoint = mavros_msgs.msg.Waypoint(frame=3, is_current=True, command=22,autocontinue=True, param1=5, param4=0, x_lat=47.3978800,y_long=8.5455920,z_alt=10)
+    new_waypoint_list.append(new_waypoint)
+    new_waypoint = mavros_msgs.msg.Waypoint(frame=3, command=16,autocontinue=True, param1=5, param2=0.5,param3=0, param4=0, x_lat=47.3978800,y_long=8.5456,z_alt=10)
+    new_waypoint_list.append(new_waypoint)
+    new_waypoint = mavros_msgs.msg.Waypoint(frame=3, command=21,autocontinue=True, param1=0, param4=0, x_lat=47.3978800,y_long=8.5457,z_alt=0)
+    new_waypoint_list.append(new_waypoint)
+    result = waypoint_push(new_waypoint_list)
+    # result = waypoint_pull()
+    # while(result.wp_received!=len(new_waypoint_list)):
+    #     result = waypoint_pull()
+    # print("There are {} waypoints".format(result.wp_received))
+
+
     # initialize the setpoint
     setpoint_msg.pose.position.x = 0
     setpoint_msg.pose.position.y = 0
     setpoint_msg.pose.position.z = 3
     	
-    mavros.command.arming(True)
+
 
     # send 100 setpoints before starting
-    for i in range(0,50):
-        setpoint_local_pub.publish(setpoint_msg)
+    # for i in range(0,50):
+    #     setpoint_local_pub.publish(setpoint_msg)
+    #     rate.sleep()
+
+    # result = set_mode(0,'OFFBOARD')
+    # cmd_takeoff(min_pitch=15, yaw=0, latitude=47.3978800, longitude=8.5455920, altitude=10)
+    for i in range(0,10):
+        set_mode(0,'AUTO.TAKEOFF')
         rate.sleep()
+    mavros.command.arming(True)
+    for i in range(0,10):
+        set_mode(0,'AUTO.MISSION')
+        rate.sleep()
+    # cmd_long(broadcast=True, command=CommandCode.CMD_MISSION_START, confirmation=0,param1=1, param2=3)
+    while(True):
+        # cmd_long(broadcast=True, command=92, confirmation=0,param1=1)
+        # cmd_long(broadcast=True, command=22, confirmation=0,param1=5, param2=1, param3=1, param4=0, param5=47.3978800,param6=8.5455920,param7=10)
 
-    set_mode(0,'OFFBOARD')
-
+        if(UAV_state.armed!=True):
+            return
+        rate.sleep()
     last_request = rospy.Time.now()
 
 
@@ -160,7 +213,6 @@ def main():
                     set_mode(0,'AUTO.LAND')
                     rate.sleep()
                 return 0
-
 
         rate.sleep()
     return 0

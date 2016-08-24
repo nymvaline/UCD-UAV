@@ -71,12 +71,14 @@ def set_target(pose, x, y, z):
     pose.header=mavros.setpoint.Header(
         frame_id="global_GPS",
         stamp=rospy.Time.now())
-    pose.velocity.x=10
-    pose.velocity.y=10
-    pose.velocity.z=10
-    pose.acceleration_or_force.x=2
-    pose.acceleration_or_force.y=2
-    pose.acceleration_or_force.z=2
+    pose.coordinate_frame = pose.FRAME_GLOBAL_TERRAIN_ALT
+    pose.type_mask = pose.IGNORE_VX +pose.IGNORE_VY +pose.IGNORE_VZ +pose.IGNORE_AFX+pose.IGNORE_AFY+pose.IGNORE_AFZ+pose.IGNORE_YAW+pose.IGNORE_YAW_RATE
+    # pose.velocity.x=10
+    # pose.velocity.y=10
+    # pose.velocity.z=10
+    # pose.acceleration_or_force.x=2
+    # pose.acceleration_or_force.y=2
+    # pose.acceleration_or_force.z=2
 
 def update_msg(msg):
     msg.header = mavros.setpoint.Header(
@@ -119,7 +121,7 @@ def main():
     rospy.init_node('TCS_task', anonymous=True)
     rate = rospy.Rate(20)
     mavros.set_namespace('/mavros')
-    # setup local pub
+    # setup global pub
     setpoint_local_pub = rospy.Publisher(mavros.get_topic('setpoint_raw', 'global'),mavros_msgs.msg.GlobalPositionTarget ,queue_size=10 )
 
     # setup setpoint_msg
@@ -129,7 +131,7 @@ def main():
                 stamp=rospy.Time.now()),
             )
 
-    # setup local sub
+    # setup global sub
     position_local_sub = rospy.Subscriber(mavros.get_topic('global_position', 'global'),
     	sensor_msgs.msg.NavSatFix, local_position_cb)
 
