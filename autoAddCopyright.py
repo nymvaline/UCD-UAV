@@ -25,10 +25,11 @@ def add_license(x, dir_name, files):
             content = f.read()
             f.seek(0, 0)
             for line in declaration:
-                f.write(comment[file.split('.')[1]]+line+ '\n')
+                if (file.split('.')[1] in comment.keys()):
+                    f.write(comment[file.split('.')[1]]+line+ '\n')
             f.write(content)
 
         #add declaration
 
-#os.path.walk('./', add_license, 0)
-add_license(0,'.',['sample.py'])
+os.path.walk('./', add_license, 0)
+# add_license(0,'.',['sample.py'])
