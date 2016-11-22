@@ -32,4 +32,5 @@ def add_license(x, dir_name, files):
         #add declaration
 
 os.path.walk('./', add_license, 0)
+# To add a license to ./sample.py, use the following line.
 # add_license(0,'.',['sample.py'])
