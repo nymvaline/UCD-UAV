@@ -1,7 +1,0 @@
-set(_CATKIN_CURRENT_PACKAGE "dart")
-set(dart_MAINTAINER "parallels <parallels@todo.todo>")
-set(dart_DEPRECATED "")
-set(dart_VERSION "0.0.0")
-set(dart_BUILD_DEPENDS "roscpp" "std_msgs" "sensor_msgs" "mavros")
-set(dart_RUN_DEPENDS "roscpp" "std_msgs" "sensor_msgs" "message_runtimes" "mavros")
-set(dart_BUILDTOOL_DEPENDS "catkin")
