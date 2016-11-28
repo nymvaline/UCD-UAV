@@ -135,10 +135,6 @@ include_directories(
 ## Declare a C++ executable
 # add_executable(beginner_tutorials_node src/beginner_tutorials_node.cpp)
 
-add_executable(robot_cleaner_node src/robot_cleaner.cpp)
-target_link_libraries(robot_cleaner_node ${catkin_LIBRARIES})
-add_dependencies(robot_cleaner_node dart)
-
 add_executable(temp_listener_node src/temp_listener.cpp)
 target_link_libraries(temp_listener_node ${catkin_LIBRARIES})
 add_dependencies(temp_listener_node dart)
