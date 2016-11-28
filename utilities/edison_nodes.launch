@@ -1,0 +1,8 @@
+<launch>
+  <node pkg="dart" name="pose" type="node_pose_node"/>
+  <node pkg="dart" name="offboard" type="offboard_node"/>
+  <node pkg="dart" name="sonar" type="sonar_node"/>
+  <node pkg="dart" name="offboard_1m" type="offboard_1m_node"/>
+  <node pkg="dart" name="robot_cleaner" type="robot_cleaner_node"/>
+  <node pkg="dart" name="temp_listener" type="temp_listener_node"/>
+</launch>
