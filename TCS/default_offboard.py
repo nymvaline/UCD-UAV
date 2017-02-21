@@ -18,6 +18,8 @@ import mavros.setpoint
 import mavros.command
 import mavros_msgs.msg
 import mavros_msgs.srv
+import sensor_msgs.msg
+import sensor_msgs.srv
 import time
 from datetime import datetime
 from UAV_Task import *
@@ -53,6 +55,18 @@ def _state_callback(topic):
 def _setpoint_position_callback(topic):
     pass
 
+found_home = False
+home_pos = sensor_msgs.msg.NavSatFix()
+
+def _home_pos_callback(topic):
+    global found_home # TODO (jasmine): do this without global variables
+    if not found_home:
+        home_pos.latitude = topic.latitude
+        home_pos.longitude = topic.longitude
+        home_pos.altitude = topic.altitude
+        print "Found home!"
+        found_home = True
+
 def _set_pose(pose, x, y, z):
     pose.pose.position.x = x
     pose.pose.position.y = y
@@ -87,11 +101,18 @@ def main():
     state_sub = rospy.Subscriber(mavros.get_topic('state'),
         mavros_msgs.msg.State, _state_callback)
     # /mavros/local_position/pose
-    # local_position_sub = rospy.Subscriber(mavros.get_topic('local_position', 'pose'),
-    #     SP.PoseStamped, _local_position_callback)
-    # /mavros/setpoint_raw/target_local
     setpoint_local_sub = rospy.Subscriber(mavros.get_topic('setpoint_raw', 'target_local'),
         mavros_msgs.msg.PositionTarget, _setpoint_position_callback)
+
+    # Initial global position publisher. Assuming there isn't already one?
+    position_local_sub = rospy.Subscriber(mavros.get_topic('global_position', 'raw', 'fix'),
+    	sensor_msgs.msg.NavSatFix, _home_pos_callback)
+    startpoint_global_pub = rospy.Publisher('home_point', sensor_msgs.msg.NavSatFix, queue_size=10, latch=True) # Latch it because we only really need it once
+    print "Waiting for home!"
+    while(not found_home):
+        rate.sleep()
+    startpoint_global_pub.publish(home_pos);
+    print "Sent startpoint! {} {} {}".format(home_pos.latitude, home_pos.longitude, home_pos.altitude)
 
     # setup publisher
     # /mavros/setpoint/position/local
@@ -118,6 +139,7 @@ def main():
 
 
     #read task list
+
     Task_mgr = TCS_util.Task_manager('task_list.log')
 
     # start setpoint_update instance
@@ -133,7 +155,8 @@ def main():
     setpoint_msg.pose.position.z = 3
 
     setpoint_global_msg.coordinate_frame = 11
-    setpoint_global_msg.type_mask = 8+16+32+128+256
+    # Ignore velocity x y z, acceleration x y z, and yaw
+    setpoint_global_msg.type_mask = 8+16+32+64+128+256+1024+2048
     setpoint_global_msg.latitude = 47.3978800
     setpoint_global_msg.longitude = 8.5455920
     setpoint_global_msg.altitude = 10
@@ -144,8 +167,7 @@ def main():
 
     # send 100 setpoints before starting
     for i in range(0,50):
-        # setpoint_local_pub.publish(setpoint_msg)
-        setpoint_global_pub.publish(setpoint_global_msg)
+        setpoint_local_pub.publish(setpoint_msg)
         rate.sleep()
 
     set_mode(0,'OFFBOARD')
@@ -156,7 +178,7 @@ def main():
 
     # enter the main loop
     while(True):
-        # print "Entered whiled loop"
+        # print "Entered while loop"
         if( UAV_state.mode != "OFFBOARD" and
             (rospy.Time.now() - last_request > rospy.Duration(5.0))):
             if( set_mode(0,'OFFBOARD').success):

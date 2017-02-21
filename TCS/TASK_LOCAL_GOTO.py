@@ -49,11 +49,8 @@ from datetime import datetime
 import TCS_util
 
 # Declare some global variables.
-# current position
 current_position = TCS_util.vector3()
-# setpoint message. The type will be changed later in main()
 setpoint_msg = 0
-# setpoint position
 setpoint_position = TCS_util.vector3()
 raw_setpoint_position = TCS_util.vector3()
 # precision setup. normally set it to 0.5m
@@ -66,12 +63,14 @@ def set_target(pose, x, y, z):
     to the pose. pose usually is type of 
     mavros.setpoint.PoseStamped
     """
-    pose.pose.position.x = x
-    pose.pose.position.y = y
-    pose.pose.position.z = z
+    pose.position.x = x
+    pose.position.y = y
+    pose.position.z = z
     pose.header=mavros.setpoint.Header(
         frame_id="local_pose",
         stamp=rospy.Time.now())
+    pose.coordinate_frame = 0
+    pose.type_mask = 8+16+32+64+128+256+1024+2048
 
 def update_msg(msg):
     msg.header = mavros.setpoint.Header(
@@ -89,9 +88,9 @@ def local_position_cb(topic):
 def is_reached(setpoint):
     """Check if the UAV reached the destination
     """
-    x = setpoint.pose.position.x
-    y = setpoint.pose.position.y
-    z = setpoint.pose.position.z
+    x = setpoint.position.x
+    y = setpoint.position.y
+    z = setpoint.position.z
     if (abs(current_position.x-x) < precision and
             abs(current_position.y-y) < precision and
             abs(current_position.z-z) < precision):
@@ -106,45 +105,20 @@ def is_overtime(timestamp, overtime):
         return True
     else:
         return False
-   
 
-def main():
-    # print "TASK: "+str(sys.argv)
-    # setup rospy env
-    rospy.init_node('TCS_task', anonymous=True)
-    rate = rospy.Rate(20)
-    mavros.set_namespace('/mavros')
-    # setup local pub
-    setpoint_local_pub = mavros.setpoint.get_pub_position_local(queue_size=10)
+def fly_to_setpoint(raw_setpoint_position, task_watchdog, over_time, rate):
+    setpoint_local_pub = rospy.Publisher(mavros.get_topic('setpoint_raw', 'local'),mavros_msgs.msg.PositionTarget ,queue_size=10 )
 
-    # setup setpoint_msg
-    setpoint_msg = mavros.setpoint.PoseStamped(
+    setpoint_msg = mavros_msgs.msg.PositionTarget(
             header=mavros.setpoint.Header(
                 frame_id="local_pose",
                 stamp=rospy.Time.now()),
             )
 
+
     # setup local sub
     position_local_sub = rospy.Subscriber(mavros.get_topic('local_position', 'pose'),
     	SP.PoseStamped, local_position_cb)
-
-    # setup task pub
-    task_watchdog = TCS_util.Task_watchdog('TASK_LOCAL_GOTO')
-
-    # interprete the input position
-    setpoint_arg = sys.argv[1].split(' ')
-    raw_setpoint_position.x=float(setpoint_arg[0])
-    raw_setpoint_position.y=float(setpoint_arg[1])
-    raw_setpoint_position.z=float(setpoint_arg[2])
-    over_time = float(setpoint_arg[3])
-    print "X: {}, Y: {}, Z: {}".format(raw_setpoint_position.x,
-    	raw_setpoint_position.y, raw_setpoint_position.z)
-
-    # setup setpoint poisiton and prepare to publish the position
-    # set_target(setpoint_msg,
-    # 	setpoint_position.x,
-    # 	setpoint_position.y,
-    # 	setpoint_position.z)
 
     pre_flight = 'neutral'
     init_time = rospy.Time.now()
@@ -218,7 +192,28 @@ def main():
             if (is_overtime(init_time, over_time)):
                 break
             rate.sleep()
-    
+
+def main():
+    # print "TASK: "+str(sys.argv)
+    # setup rospy env
+    rospy.init_node('TCS_task', anonymous=True)
+    rate = rospy.Rate(20)
+    mavros.set_namespace('/mavros')
+
+    # setup task pub
+    task_watchdog = TCS_util.Task_watchdog('TASK_LOCAL_GOTO')
+
+    # interpret the input position
+    setpoint_arg = sys.argv[1].split(' ')
+    raw_setpoint_position.x=float(setpoint_arg[0])
+    raw_setpoint_position.y=float(setpoint_arg[1])
+    raw_setpoint_position.z=float(setpoint_arg[2])
+    over_time = float(setpoint_arg[3])
+    print "X: {}, Y: {}, Z: {}".format(raw_setpoint_position.x,
+    	raw_setpoint_position.y, raw_setpoint_position.z)
+
+    fly_to_setpoint(raw_setpoint_position, task_watchdog, over_time, rate)
+
     # TODO: publish the task status as FINISHING
     task_watchdog.report_finish()
 
