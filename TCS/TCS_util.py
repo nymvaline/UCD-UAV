@@ -135,19 +135,23 @@ class update_setpoint(object):
         pose.acceleration_or_force.z=2
 
     def update(self):
-        if(rospy.Time.now()-self.timestamp < (rospy.Duration(0.05))):
+        #if(rospy.Time.now()-self.timestamp < (rospy.Duration(0.05))):
             # if setpoint was publishing on time, dont bother to send again
-            return
+        #    return
         # rospy.loginfo("Setpoint_keeper sending the setpoint!")
-        if (self.update_flag=='LOCAL' and self.local_last_pos.is_init):
-            self._set_pose_local(self.local_msg, self.local_last_pos)
-            self.local_pub.publish(self.local_msg)
-            print "Setpoint kepper executed! x=%.2f y=%.2f z=%.2f"%(self.local_last_pos.x,
+        #if (self.update_flag=='LOCAL' and self.local_last_pos.is_init):
+        #    self._set_pose_local(self.local_msg, self.local_last_pos)
+        #    self.local_pub.publish(self.local_msg)
+        #    print "Setpoint keeper executed! x=%.2f y=%.2f z=%.2f"%(self.local_last_pos.x,
+        #        self.local_last_pos.y, self.local_last_pos.z)
+        #if (self.update_flag=='GPS' and self.global_last_pos.is_init):
+        #    self._set_pose_global(self.GPS_msg, self.global_last_pos)
+        #    self.GPS_pub.publish(self.GPS_msg)
+        #return
+        self._set_pose_local(self.local_msg, self.local_last_pos)
+        self.local_pub.publish(self.local_msg)
+        #print "Setpoint keeper executed! x=%.2f y=%.2f z=%.2f"%(self.local_last_pos.x,
                 self.local_last_pos.y, self.local_last_pos.z)
-        if (self.update_flag=='GPS' and self.global_last_pos.is_init):
-            self._set_pose_global(self.GPS_msg, self.global_last_pos)
-            self.GPS_pub.publish(self.GPS_msg)
-        return
 
 class Task_manager(object):
     def __init__(self, fname):

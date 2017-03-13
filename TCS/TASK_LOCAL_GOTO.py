@@ -69,8 +69,8 @@ def set_target(pose, x, y, z):
     pose.header=mavros.setpoint.Header(
         frame_id="local_pose",
         stamp=rospy.Time.now())
-    pose.coordinate_frame = 0
-    pose.type_mask = 8+16+32+64+128+256+1024+2048
+    #pose.coordinate_frame = 0
+    #pose.type_mask = 8+16+32+64+128+256+1024+2048
 
 def update_msg(msg):
     msg.header = mavros.setpoint.Header(
@@ -107,7 +107,8 @@ def is_overtime(timestamp, overtime):
         return False
 
 def fly_to_setpoint(raw_setpoint_position, task_watchdog, over_time, rate):
-    setpoint_local_pub = rospy.Publisher(mavros.get_topic('setpoint_raw', 'local'),mavros_msgs.msg.PositionTarget ,queue_size=10 )
+    setpoint_local_pub = mavros.setpoint.get_pub_position_local(queue_size=10)
+    #rospy.Publisher(mavros.get_topic('setpoint_raw', 'local'),mavros_msgs.msg.PositionTarget ,queue_size=10 )
 
     setpoint_msg = mavros_msgs.msg.PositionTarget(
             header=mavros.setpoint.Header(
@@ -197,7 +198,7 @@ def main():
     # print "TASK: "+str(sys.argv)
     # setup rospy env
     rospy.init_node('TCS_task', anonymous=True)
-    rate = rospy.Rate(20)
+    rate = rospy.Rate(25) # Increased from 20, maybe failsafe mode is not?
     mavros.set_namespace('/mavros')
 
     # setup task pub

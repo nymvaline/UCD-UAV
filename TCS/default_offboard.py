@@ -91,8 +91,9 @@ def update_setpoint():
 
 
 def main():
+    print "Starting TCS"
     rospy.init_node('default_offboard', anonymous=True)
-    rate = rospy.Rate(20)
+    rate = rospy.Rate(25) # increased from 20, maybe failsafe mode is not?
     mavros.set_namespace('/mavros')
 
 
@@ -117,8 +118,8 @@ def main():
     # setup publisher
     # /mavros/setpoint/position/local
     setpoint_local_pub =  mavros.setpoint.get_pub_position_local(queue_size=10)
-    setpoint_global_pub = rospy.Publisher(mavros.get_topic('setpoint_raw', 'global'),
-        mavros_msgs.msg.GlobalPositionTarget, queue_size=10)
+    #setpoint_global_pub = rospy.Publisher(mavros.get_topic('setpoint_raw', 'global'),
+    #    mavros_msgs.msg.GlobalPositionTarget, queue_size=10)
     # setup service
     # /mavros/cmd/arming
     set_arming = rospy.ServiceProxy('/mavros/cmd/arming', mavros_msgs.srv.CommandBool) 
@@ -156,21 +157,22 @@ def main():
 
     setpoint_global_msg.coordinate_frame = 11
     # Ignore velocity x y z, acceleration x y z, and yaw
-    setpoint_global_msg.type_mask = 8+16+32+64+128+256+1024+2048
+    setpoint_global_msg.type_mask = 8+16+32+128+256#8+16+32+64+128+256+1024+2048
     setpoint_global_msg.latitude = 47.3978800
     setpoint_global_msg.longitude = 8.5455920
     setpoint_global_msg.altitude = 10
     setpoint_global_msg.yaw = 90
     setpoint_global_msg.yaw_rate =10
 
-    mavros.command.arming(True)
+    #mavros.command.arming(True)
 
     # send 100 setpoints before starting
-    for i in range(0,50):
+    for i in range(0,100):
         setpoint_local_pub.publish(setpoint_msg)
+        #setpoint_global_pub.publish(setpoint_msg)
         rate.sleep()
 
-    set_mode(0,'OFFBOARD')
+    #set_mode(0,'OFFBOARD')
     print("Pre start finished!")
 
     last_request = rospy.Time.now()
@@ -179,20 +181,35 @@ def main():
     # enter the main loop
     while(True):
         # print "Entered while loop"
-        if( UAV_state.mode != "OFFBOARD" and
-            (rospy.Time.now() - last_request > rospy.Duration(5.0))):
-            if( set_mode(0,'OFFBOARD').success):
-                print "Offboard enabled"
-            last_request = rospy.Time.now()
-        else:
-            if(not UAV_state.armed and
-                (rospy.Time.now() - last_request > rospy.Duration(5.0))):
-                if( mavros.command.arming(True)):
-                    print "Vehicle armed"
+        # Spin while we're saiting for offboard instead of making it try to go to offboard mode
+        if( UAV_state.mode != "OFFBOARD" ): # and
+            if (rospy.Time.now() - last_request > rospy.Duration(5.0)):
+                #print "Not in OFFBOARD"
                 last_request = rospy.Time.now()
+            #if( set_mode(0,'OFFBOARD').success):
+            #    print "Offboard enabled"
+            # Send setpoints so that we can go in.
+            #setpoint_local_pub.publish(setpoint_msg)
+            setpoint_keeper.update()
+            setpoint_local_pub.publish(setpoint_msg)
+            #setpoint_global_pub.publish(setpoint_msg)
+            continue
+        else:
+            if(not UAV_state.armed): # and
+                if (rospy.Time.now() - last_request > rospy.Duration(5.0)):
+                    last_request = rospy.Time.now()
+                    print "Not armed"
+                # Spin while we're waiting to manually arm
+                #if( mavros.command.arming(True)):
+                #    print "Vehicle armed"
+                setpoint_local_pub.publish(setpoint_msg)
+                #setpoint_global_pub.publish(setpoint_msg)
+                setpoint_keeper.update() # TODO (jasmine) check that this isn't redundant
+                continue
 
         # update setpoint to stay in offboard mode
-        setpoint_keeper.update()
+        #setpoint_local_pub.publish(setpoint_msg)
+        setpoint_keeper.update() # TODO (jasmine) check that this isn't redundant # this isn't running as I expect right now
         
 
         if(Task_mgr.task_finished()):
