@@ -1,0 +1,54 @@
+#!/bin/sh
+# TODO (jasmine) edit init info
+### BEGIN INIT INFO
+# Provides:          mavros-tcs
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Should-Start:      $portmap
+# Should-Stop:       $portmap
+# X-Start-Before:    nis
+# X-Stop-After:      nis
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Run mavros and TCS for offboard control # unknown before here after provides
+# Description:       Run mavros and TCS for offboard control
+#                    
+### END INIT INFO
+
+case "$1" in
+  start)
+    echo "Starting ROS/TCS"
+    (
+    date
+    . /opt/ros/kinetic/setup.sh
+    cd /home/pi/catkin_ws/
+    . ./devel/setup.sh
+    cd src/UCD-UAV/TCS/
+    roslaunch px4Real.launch
+    ) >> /home/pi/rc_ros.log 2>&1 &
+
+    (
+    date
+    . /opt/ros/kinetic/setup.sh
+    cd /home/pi/catkin_ws/
+    . ./devel/setup.sh
+    cd src/UCD-UAV/TCS/
+    python ./default_offboard.py task_list.log
+    ) >> /home/pi/rc_TCS.log 2>&1 &
+    exit 0
+    ;;
+  stop)
+    echo "Stopping ROS/TCS"
+    rosnode kill -a
+    pkill -2 -f "python ./default_offboard.py task_list.log" # TODO (jasmine) make this actually reasonable
+    exit 0
+    ;;
+  restart)
+    $0 stop
+    $0 start
+    exit 0
+    ;;
+
+esac
+
+exit 0

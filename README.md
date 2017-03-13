@@ -15,3 +15,7 @@ To use this package,
 + http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment  
 + Place this file underneath src in your newly-created catkin environment.  
 + catkin_make  
+
+utilities/mavros-tcs is a startup script to run on Raspberry Pi. Place it in init.d and set it up as normal.
+TCS/px4Real.launch, as referenced in the startup script, is set up to run on the appropriate interface at the appropriate baud rate for the Raspberry Pi, if you set its connections up as listed in <http://ardupilot.org/dev/docs/raspberry-pi-via-mavlink.html>.
+
