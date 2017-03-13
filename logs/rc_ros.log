@@ -1,0 +1,1926 @@
+Mon 13 Mar 22:17:42 UTC 2017
+... logging to /root/.ros/log/eda286ea-083a-11e7-9420-c9c928bbc6ae/roslaunch-raspberrypi-1497.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;px4Real.launch
+[1mstarted roslaunch server http://raspberrypi:44906/[0m
+
+SUMMARY
+========
+
+CLEAR PARAMETERS
+ * /mavros/
+
+PARAMETERS
+ * /mavros/cmd/use_comp_id_system_control: False
+ * /mavros/conn/heartbeat_rate: 1.0
+ * /mavros/conn/system_time_rate: 1.0
+ * /mavros/conn/timeout: 10.0
+ * /mavros/conn/timesync_rate: 10.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/frame_id: hrlv_ez4_sonar
+ * /mavros/distance_sensor/hrlv_ez4_pub/id: 0
+ * /mavros/distance_sensor/hrlv_ez4_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/hrlv_ez4_pub/send_tf: True
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/laser_1_sub/id: 3
+ * /mavros/distance_sensor/laser_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/laser_1_sub/subscriber: True
+ * /mavros/distance_sensor/lidarlite_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/frame_id: lidarlite_laser
+ * /mavros/distance_sensor/lidarlite_pub/id: 1
+ * /mavros/distance_sensor/lidarlite_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/lidarlite_pub/send_tf: True
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/sonar_1_sub/id: 2
+ * /mavros/distance_sensor/sonar_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/sonar_1_sub/subscriber: True
+ * /mavros/fcu_url: /dev/ttyAMA0:57600
+ * /mavros/gcs_url: 
+ * /mavros/global_position/frame_id: fcu
+ * /mavros/global_position/rot_covariance: 99999.0
+ * /mavros/global_position/tf/child_frame_id: fcu_utm
+ * /mavros/global_position/tf/frame_id: local_origin
+ * /mavros/global_position/tf/send: False
+ * /mavros/image/frame_id: px4flow
+ * /mavros/imu/angular_velocity_stdev: 0.000349065850399
+ * /mavros/imu/frame_id: fcu
+ * /mavros/imu/linear_acceleration_stdev: 0.0003
+ * /mavros/imu/magnetic_stdev: 0.0
+ * /mavros/imu/orientation_stdev: 1.0
+ * /mavros/local_position/frame_id: fcu
+ * /mavros/local_position/tf/child_frame_id: fcu
+ * /mavros/local_position/tf/frame_id: local_origin
+ * /mavros/local_position/tf/send: False
+ * /mavros/local_position/tf/send_fcu: False
+ * /mavros/mission/pull_after_gcs: True
+ * /mavros/mocap/use_pose: True
+ * /mavros/mocap/use_tf: False
+ * /mavros/plugin_blacklist: ['safety_area', '...
+ * /mavros/plugin_whitelist: []
+ * /mavros/px4flow/frame_id: px4flow
+ * /mavros/px4flow/ranger_fov: 0.0
+ * /mavros/px4flow/ranger_max_range: 5.0
+ * /mavros/px4flow/ranger_min_range: 0.3
+ * /mavros/safety_area/p1/x: 1.0
+ * /mavros/safety_area/p1/y: 1.0
+ * /mavros/safety_area/p1/z: 1.0
+ * /mavros/safety_area/p2/x: -1.0
+ * /mavros/safety_area/p2/y: -1.0
+ * /mavros/safety_area/p2/z: -1.0
+ * /mavros/setpoint_accel/send_force: False
+ * /mavros/setpoint_attitude/reverse_throttle: False
+ * /mavros/setpoint_attitude/tf/child_frame_id: attitude
+ * /mavros/setpoint_attitude/tf/frame_id: local_origin
+ * /mavros/setpoint_attitude/tf/listen: False
+ * /mavros/setpoint_attitude/tf/rate_limit: 10.0
+ * /mavros/setpoint_position/tf/child_frame_id: setpoint
+ * /mavros/setpoint_position/tf/frame_id: local_origin
+ * /mavros/setpoint_position/tf/listen: False
+ * /mavros/setpoint_position/tf/rate_limit: 50.0
+ * /mavros/startup_px4_usb_quirk: True
+ * /mavros/sys/disable_diag: False
+ * /mavros/sys/min_voltage: 10.0
+ * /mavros/target_component_id: 1
+ * /mavros/target_system_id: 1
+ * /mavros/tdr_radio/low_rssi: 40
+ * /mavros/time/time_ref_source: fcu
+ * /mavros/time/timesync_avg_alpha: 0.6
+ * /mavros/vibration/frame_id: vibration
+ * /mavros/vision_pose/tf/child_frame_id: vision
+ * /mavros/vision_pose/tf/frame_id: local_origin
+ * /[0m[ INFO] [1489443509.021407428]: FCU URL: /dev/ttyAMA0:57600[0m
+[33m[ WARN] [1489443509.063047933]: init: message from ASLUAV, MSG-ID 201 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.079220353]: init: message from autoquad, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.099033641]: init: message from autoquad, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.106657367]: init: message from matrixpilot, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.116718006]: init: message from matrixpilot, MSG-ID 151 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.119537905]: init: message from matrixpilot, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.124798716]: init: message from matrixpilot, MSG-ID 153 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.127871606]: init: message from matrixpilot, MSG-ID 155 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.136686289]: init: message from matrixpilot, MSG-ID 156 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.139576185]: init: message from matrixpilot, MSG-ID 157 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.142252089]: init: message from matrixpilot, MSG-ID 158 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.148847853]: init: message from matrixpilot, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.151903743]: init: message from matrixpilot, MSG-ID 171 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.157578539]: init: message from matrixpilot, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.164377295]: init: message from matrixpilot, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.171327045]: init: message from matrixpilot, MSG-ID 174 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.174604928]: init: message from matrixpilot, MSG-ID 175 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.184814561]: init: message from matrixpilot, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.187846452]: init: message from matrixpilot, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.190637352]: init: message from matrixpilot, MSG-ID 178 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.193455251]: init: message from matrixpilot, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.199319040]: init: message from matrixpilot, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.209492675]: init: message from matrixpilot, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.212333573]: init: message from matrixpilot, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.215105474]: init: message from matrixpilot, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.219630311]: init: message from matrixpilot, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.224999118]: init: message from matrixpilot, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.229803946]: init: message from matrixpilot, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.244937402]: init: message from paparazzi, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.251748158]: init: message from paparazzi, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.257848939]: init: message from paparazzi, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.260866830]: init: message from paparazzi, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.271631444]: init: message from paparazzi, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.279441163]: init: message from slugs, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.288854825]: init: message from slugs, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.296802540]: init: message from slugs, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.299835431]: init: message from slugs, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.302650330]: init: message from slugs, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.309942068]: init: message from slugs, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.312930961]: init: message from slugs, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.320090704]: init: message from slugs, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.325612506]: init: message from slugs, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.328741393]: init: message from slugs, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.333773213]: init: message from slugs, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.343850851]: init: message from slugs, MSG-ID 188 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.346851743]: init: message from slugs, MSG-ID 191 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.350465613]: init: message from slugs, MSG-ID 192 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.353508504]: init: message from slugs, MSG-ID 193 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443509.359761279]: init: message from slugs, MSG-ID 194 ignored! Table has different entry.[0m
+[0m[ INFO] [1489443509.388237257]: serial0: device: /dev/ttyAMA0 @ 57600 bps[0m
+[0m[ INFO] [1489443509.400930801]: GCS bridge disabled[0m
+[0m[ INFO] [1489443511.576056701]: Plugin 3dr_radio loaded[0m
+[0m[ INFO] [1489443511.689840615]: Plugin 3dr_radio initialized[0m
+[0m[ INFO] [1489443511.693486484]: Plugin actuator_control loaded[0m
+[0m[ INFO] [1489443511.904930892]: Plugin actuator_control initialized[0m
+[0m[ INFO] [1489443511.917383445]: Plugin altitude loaded[0m
+[0m[ INFO] [1489443511.991359789]: Plugin altitude initialized[0m
+[0m[ INFO] [1489443511.995298647]: Plugin command loaded[0m
+[0m[ INFO] [1489443512.374915017]: Plugin command initialized[0m
+[0m[ INFO] [1489443512.381205791]: Plugin ftp loaded[0m
+[0m[ INFO] [1489443512.902115087]: Plugin ftp initialized[0m
+[0m[ INFO] [1489443512.906215940]: Plugin global_position loaded[0m
+[0m[ INFO] [1489443513.670734489]: Plugin global_position initialized[0m
+[0m[ INFO] [1489443513.674620349]: Plugin hil_actuator_controls loaded[0m
+[0m[ INFO] [1489443513.721941650]: Plugin hil_actuator_controls initialized[0m
+[0m[ INFO] [1489443513.728411418]: Plugin hil_controls loaded[0m
+[0m[ INFO] [1489443513.780630543]: Plugin hil_controls initialized[0m
+[0m[ INFO] [1489443513.789552223]: Plugin imu_pub loaded[0m
+[0m[ INFO] [1489443514.360628717]: Plugin imu_pub initialized[0m
+[0m[ INFO] [1489443514.376115161]: Plugin local_position loaded[0m
+[0m[ INFO] [1489443514.831447812]: Plugin local_position initialized[0m
+[0m[ INFO] [1489443514.835402670]: Plugin manual_control loaded[0m
+[0m[ INFO] [1489443514.881350020]: Plugin manual_control initialized[0m
+[0m[ INFO] [1489443514.887443802]: Plugin param loaded[0m
+[0m[ INFO] [1489443515.069694258]: Plugin param initialized[0m
+[0m[ INFO] [1489443515.084727718]: Plugin rc_io loaded[0m
+[0m[ INFO] [1489443515.378860157]: Plugin rc_io initialized[0m
+[0m[ INFO] [1489443515.381954046]: Plugin safety_area blacklisted[0m
+[0m[ INFO] [1489443515.387829835]: Plugin setpoint_accel loaded[0m
+[0m[ INFO] [1489443515.679506362]: Plugin setpoint_accel initialized[0m
+[0m[ INFO] [1489443515.688853026]: Plugin setpoint_attitude loaded[0m
+[0m[ INFO] [1489443516.731392592]: Plugin setpoint_attitude initialized[0m
+[0m[ INFO] [1489443516.735288453]: Plugin setpoint_position loaded[0m
+[0m[ INFO] [1489[31m[ERROR] [1489443522.261422030]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443551.647382893]: FCU: NOT ARMING: Switch to a manual mode first.[0m
+[31m[ERROR] [1489443559.086266791]: FCU: NOT ARMING: Switch to a manual mode first.[0m
+[31m[ERROR] [1489443564.532237247]: FCU: NOT ARMING: Press safety switch first![0m
+[31m[ERROR] [1489443564.779377373]: FCU: NOT ARMING: Preflight checks failed[0m
+[31m[ERROR] [1489443565.028379432]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489443573.155311625]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489443578.697616622]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443580.063922564]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443581.695061996]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443581.939883205]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443583.742845468]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443583.997569321]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443585.347884837]: FCU: MANUAL KILL SWITCH OFF[0m
+[31m[ERROR] [1489443585.853650677]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443586.106863585]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443587.730443288]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443587.986854081]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443589.360475760]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489443589.858206888]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443590.111913779]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443591.477609742]: FCU: MANUAL KILL SWITCH OFF[0m
+[31m[ERROR] [1489443591.979308728]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443592.235056545]: FCU: failsafe mode off[0m
+443517.231638630]: Plugin setpoint_position initialized[0m
+[0m[ INFO] [1489443517.244328175]: Plugin setpoint_raw loaded[0m
+[0m[ INFO] [1489443518.122115657]: Plugin setpoint_raw initialized[0m
+[0m[ INFO] [1489443518.128535426]: Plugin setpoint_velocity loaded[0m
+[0m[ INFO] [1489443518.367642841]: Plugin setpoint_velocity initialized[0m
+[0m[ INFO] [1489443518.371925687]: Plugin sys_status loaded[0m
+[0m[ INFO] [1489443518.953418808]: Plugin sys_status initialized[0m
+[0m[ INFO] [1489443518.960622549]: Plugin sys_time loaded[0m
+[0m[ INFO] [1489443519.211270549]: Plugin sys_time initialized[0m
+[0m[ INFO] [1489443519.219061270]: Plugin vfr_hud loaded[0m
+[0m[ INFO] [1489443519.304180213]: Plugin vfr_hud initialized[0m
+[0m[ INFO] [1489443519.308724050]: Plugin waypoint loaded[0m
+[0m[ INFO] [1489443519.606128372]: Plugin waypoint initialized[0m
+[0m[ INFO] [1489443519.609498251]: Autostarting mavlink via USB on PX4[0m
+[0m[ INFO] [1489443519.621769810]: Built-in SIMD instructions: None[0m
+[0m[ INFO] [1489443519.625064692]: Built-in MAVLink package version: 2017.2.7[0m
+[0m[ INFO] [1489443519.630749488]: Known MAVLink dialects: common ardupilotmega ASLUAV autoquad matrixpilot paparazzi slugs standard uAvionix ualberta[0m
+[0m[ INFO] [1489443519.641223112]: MAVROS started. MY ID 1.240, TARGET ID 1.1[0m
+[33m[ WARN] [1489443519.667763159]: TM: Clock skew detected (-1489442580.748083353 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489443519.755478009]: CON: Got HEARTBEAT, connected. FCU: PX4 Autopilot[0m
+[0m[ INFO] [1489443520.161371435]: RC_CHANNELS message detected![0m
+[0m[ INFO] [1489443520.520397544]: FCU: data link #0 lost[0m
+[0m[ INFO] [1489443520.867678074]: VER: 1.1: Capabilities         0x00000000000024ef[0m
+[0m[ INFO] [1489443520.869165021]: VER: 1.1: Flight software:     010505ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489443520.876258766]: VER: 1.1: Middleware software: 010505ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489443520.884531469]: VER: 1.1: OS software:         060207ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489443520.890907240]: VER: 1.1: Board hardware:      00000011[0m
+[0m[ INFO] [1489443520.899622927]: VER: 1.1: VID/PID:             26ac:0011[0m
+[0m[ INFO] [1489443520.902464825]: VER: 1.1: UID:                 3435510137373730[0m
+[33m[ WARN] [1489443520.995194496]: GP: No GPS fix[0m
+[33m[ WARN] [1489443532.524313529]: TM: Clock skew detected (-0.016374291 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489443534.788355236]: WP: mission received[0m
+[33m[ WARN] [1489443549.506963747]: PR: request param #258 timeout, retries left 2, and 2 params still missing[0m
+[33m[ WARN] [1489443549.901318587]: TM: Clock skew detected (-0.017029645 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489443550.522513283]: PR: request param #359 timeout, retries left 2, and 1 params still missing[0m
+[33m[ WARN] [1489443553.473877310]: GP: No GPS fix[0m
+[0m[ INFO] [1489443558.081787858]: FCU: data link #0 regained[0m
+[33m[ WARN] [1489443560.707127592]: TM: Clock skew detected (-0.020495803 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489443572.905046611]: FCU: ARMED by RC[0m
+[33m[ WARN] [1489443573.029571140]: TM: Clock skew detected (0.023211429 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489443573.402175761]: FCU: [blackbox] /fs/microsd/log/2017-03-16[0m
+[0m[ INFO] [1489443573.650311852]: FCU: [blackbox] recording: 02_00_26.px4log[0m
+[0m[ INFO] [1489443577.433380016]: FCU: Takeoff detected[0m
+[0m[ INFO] [1489443578.449116545]: FCU: no rc[0m
+[0m[ INFO] [1489443581.434968335]: FCU: no rc[0m
+[0m[ INFO] [1489443583.491962476]: FCU: no rc[0m
+[0m[ INFO] [1489443585.597886860]: FCU: no rc[0m
+[33m[ WARN] [1489443586.141554339]: GP: No GPS fix[0m
+[33m[ WARN] [1489443586.488586878]: TM: Clock skew detected (-0.010741524 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489443587.477315377]: FCU: no rc[0m
+[0m[ INFO] [1489443589.606486927]: FCU: no rc[0m
+[0m[ INFO] [1489443591.731701618]: FCU: no rc[0m
+[0m[ INFO] [1489443595.298017566]: FCU: Landing detected[0m
+[33m[ WARN] [1489443597.689[31m[ERROR] [1489443603.664308164]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443603.917082088]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443605.724837178]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443605.982216937]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443607.779970386]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443608.026076550]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443609.647276339]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443609.832718680]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443611.643925647]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443611.892254730]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443613.687178281]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443613.934893387]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443615.748528266]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443616.548693535]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489443616.982338965]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443618.776447545]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443619.021246755]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443620.106566785]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489443658.366993000]: FCU: failsafe mode on[0m
+713689]: TM: Clock skew detected (-0.012229575 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489443602.039844492]: FCU: Takeoff detected[0m
+[0m[ INFO] [1489443603.409224323]: FCU: no rc[0m
+[0m[ INFO] [1489443605.471647269]: FCU: no rc[0m
+[0m[ INFO] [1489443607.529343385]: FCU: no rc[0m
+[33m[ WARN] [1489443608.203584176]: TM: Clock skew detected (-0.014399158 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489443609.401201174]: FCU: no rc[0m
+[0m[ INFO] [1489443611.392959658]: FCU: no rc[0m
+[0m[ INFO] [1489443613.436542281]: FCU: no rc[0m
+[0m[ INFO] [1489443615.494863374]: FCU: no rc[0m
+[0m[ INFO] [1489443618.527520483]: FCU: no rc[0m
+[33m[ WARN] [1489443619.384844700]: GP: No GPS fix[0m
+[33m[ WARN] [1489443619.416809552]: TM: Clock skew detected (-0.018346773 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489443619.858463694]: FCU: DISARMED by safety switch[0m
+[0m[ INFO] [1489443620.906072078]: FCU: [blackbox] stopped (7339 drops)[0m
+[0m[ INFO] [1489443621.889810756]: FCU: Landing detected[0m
+[33m[ WARN] [1489443633.900630493]: TM: Clock skew detected (-0.020257583 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489443640.940741710]: FCU: data link #0 lost[0m
+[33m[ WARN] [1489443644.696237864]: TM: Clock skew detected (-0.012544035 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489443651.869282308]: GP: No GPS fix[0m
+[0m[ INFO] [1489443658.112484138]: FCU: no rc[0m
+[33m[ WARN] [1489443658.407183557]: Shutdown request received.[0m
+[33m[ WARN] [1489443658.411152414]: Reason given for shutdown: [user request][0m
+[31m================================================================================REQUIRED process [mavros-2] has died!
+process has finished cleanly
+log file: /root/.ros/log/eda286ea-083a-11e7-9420-c9c928bbc6ae/mavros-2*.log
+Initiating shutdown!
+================================================================================[0m
+Unhandled exception in thread started by 
+sys.excepthook is missing
+lost sys.stderr
+Unhandled exception in thread started by 
+sys.excepthook is missing
+lost sys.stderr
+mavros/vision_pose/tf/listen: False
+ * /mavros/vision_pose/tf/rate_limit: 10.0
+ * /mavros/vision_speed/listen_twist: False
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.7
+
+NODES
+  /
+    mavros (mavros/mavros_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [1562][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;px4Real.launch http://localhost:11311
+[1msetting /run_id to eda286ea-083a-11e7-9420-c9c928bbc6ae[0m
+[1mprocess[rosout-1]: started with pid [1587][0m
+started core service [/rosout]
+[1mprocess[mavros-2]: started with pid [1611][0m
+[1m[rosout-1] process has finished cleanly
+log file: /root/.ros/log/eda286ea-083a-11e7-9420-c9c928bbc6ae/rosout-1*.log[0m
+[rosout-1] restarting process
+[1mprocess[rosout-1]: started with pid [1937][0m
+[mavros-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
+Mon 13 Mar 22:23:12 UTC 2017
+... logging to /root/.ros/log/b208f6c2-083b-11e7-a97d-21da8e30fed1/roslaunch-raspberrypi-2072.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;px4Real.launch
+[1mstarted roslaunch server http://raspberrypi:39463/[0m
+
+SUMMARY
+========
+
+CLEAR PARAMETERS
+ * /mavros/
+
+PARAMETERS
+ * /mavros/cmd/use_comp_id_system_control: False
+ * /mavros/conn/heartbeat_rate: 1.0
+ * /mavros/conn/system_time_rate: 1.0
+ * /mavros/conn/timeout: 10.0
+ * /mavros/conn/timesync_rate: 10.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/frame_id: hrlv_ez4_sonar
+ * /mavros/distance_sensor/hrlv_ez4_pub/id: 0
+ * /mavros/distance_sensor/hrlv_ez4_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/hrlv_ez4_pub/send_tf: True
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/laser_1_sub/id: 3
+ * /mavros/distance_sensor/laser_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/laser_1_sub/subscriber: True
+ * /mavros/distance_sensor/lidarlite_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/frame_id: lidarlite_laser
+ * /mavros/distance_sensor/lidarlite_pub/id: 1
+ * /mavros/distance_sensor/lidarlite_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/lidarlite_pub/send_tf: True
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/sonar_1_sub/id: 2
+ * /mavros/distance_sensor/sonar_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/sonar_1_sub/subscriber: True
+ * /mavros/fcu_url: /dev/ttyAMA0:57600
+ * /mavros/gcs_url: 
+ * /mavros/global_position/frame_id: fcu
+ * /mavros/global_position/rot_covariance: 99999.0
+ * /mavros/global_position/tf/child_frame_id: fcu_utm
+ * /mavros/global_position/tf/frame_id: local_origin
+ * /mavros/global_position/tf/send: False
+ * /mavros/image/frame_id: px4flow
+ * /mavros/imu/angular_velocity_stdev: 0.000349065850399
+ * /mavros/imu/frame_id: fcu
+ * /mavros/imu/linear_acceleration_stdev: 0.0003
+ * /mavros/imu/magnetic_stdev: 0.0
+ * /mavros/imu/orientation_stdev: 1.0
+ * /mavros/local_position/frame_id: fcu
+ * /mavros/local_position/tf/child_frame_id: fcu
+ * /mavros/local_position/tf/frame_id: local_origin
+ * /mavros/local_position/tf/send: False
+ * /mavros/local_position/tf/send_fcu: False
+ * /mavros/mission/pull_after_gcs: True
+ * /mavros/mocap/use_pose: True
+ * /mavros/mocap/use_tf: False
+ * /mavros/plugin_blacklist: ['safety_area', '...
+ * /mavros/plugin_whitelist: []
+ * /mavros/px4flow/frame_id: px4flow
+ * /mavros/px4flow/ranger_fov: 0.0
+ * /mavros/px4flow/ranger_max_range: 5.0
+ * /mavros/px4flow/ranger_min_range: 0.3
+ * /mavros/safety_area/p1/x: 1.0
+ * /mavros/safety_area/p1/y: 1.0
+ * /mavros/safety_area/p1/z: 1.0
+ * /mavros/safety_area/p2/x: -1.0
+ * /mavros/safety_area/p2/y: -1.0
+ * /mavros/safety_area/p2/z: -1.0
+ * /mavros/setpoint_accel/send_force: False
+ * /mavros/setpoint_attitude/reverse_throttle: False
+ * /mavros/setpoint_attitude/tf/child_frame_id: attitude
+ * /mavros/setpoint_attitude/tf/frame_id: local_origin
+ * /mavros/setpoint_attitude/tf/listen: False
+ * /mavros/setpoint_attitude/tf/rate_limit: 10.0
+ * /mavros/setpoint_position/tf/child_frame_id: setpoint
+ * /mavros/setpoint_position/tf/frame_id: local_origin
+ * /mavros/setpoint_position/tf/listen: False
+ * /mavros/setpoint_position/tf/rate_limit: 50.0
+ * /mavros/startup_px4_usb_quirk: True
+ * /mavros/sys/disable_diag: False
+ * /mavros/sys/min_voltage: 10.0
+ * /mavros/target_component_id: 1
+ * /mavros/target_system_id: 1
+ * /mavros/tdr_radio/low_rssi: 40
+ * /mavros/time/time_ref_source: fcu
+ * /mavros/time/timesync_avg_alpha: 0.6
+ * /mavros/vibration/frame_id: vibration
+ * /mavros/vision_pose/tf/child_frame_id: vision
+ * /mavros/vision_pose/tf/frame_id: local_origin
+ * /[0m[ INFO] [1489443838.222022094]: FCU URL: /dev/ttyAMA0:57600[0m
+[33m[ WARN] [1489443838.273783236]: init: message from ASLUAV, MSG-ID 201 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.290135648]: init: message from autoquad, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.298681342]: init: message from autoquad, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.318083645]: init: message from matrixpilot, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.325658373]: init: message from matrixpilot, MSG-ID 151 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.328592268]: init: message from matrixpilot, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.331552161]: init: message from matrixpilot, MSG-ID 153 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.341925789]: init: message from matrixpilot, MSG-ID 155 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.344892682]: init: message from matrixpilot, MSG-ID 156 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.347999571]: init: message from matrixpilot, MSG-ID 157 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.350691474]: init: message from matrixpilot, MSG-ID 158 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.357761220]: init: message from matrixpilot, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.366663901]: init: message from matrixpilot, MSG-ID 171 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.370687756]: init: message from matrixpilot, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.373720647]: init: message from matrixpilot, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.378096490]: init: message from matrixpilot, MSG-ID 174 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.386555186]: init: message from matrixpilot, MSG-ID 175 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.389508080]: init: message from matrixpilot, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.392404976]: init: message from matrixpilot, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.399827710]: init: message from matrixpilot, MSG-ID 178 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.403788568]: init: message from matrixpilot, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.411703283]: init: message from matrixpilot, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.414380187]: init: message from matrixpilot, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.420033984]: init: message from matrixpilot, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.424339830]: init: message from matrixpilot, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.430192619]: init: message from matrixpilot, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.432978519]: init: message from matrixpilot, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.445477071]: init: message from matrixpilot, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.453040799]: init: message from paparazzi, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.468542242]: init: message from paparazzi, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.472189112]: init: message from paparazzi, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.477842909]: init: message from paparazzi, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.480662807]: init: message from paparazzi, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.497430205]: init: message from slugs, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.504040968]: init: message from slugs, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.507989826]: init: message from slugs, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.517524484]: init: message from slugs, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.520356382]: init: message from slugs, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.525362202]: init: message from slugs, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.536659797]: init: message from slugs, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.539664689]: init: message from slugs, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.542357592]: init: message from slugs, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.546180455]: init: message from slugs, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.548935356]: init: message from slugs, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.557576046]: init: message from slugs, MSG-ID 188 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.560454942]: init: message from slugs, MSG-ID 191 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.566705718]: init: message from slugs, MSG-ID 192 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.569823606]: init: message from slugs, MSG-ID 193 ignored! Table has different entry.[0m
+[33m[ WARN] [1489443838.575722394]: init: message from slugs, MSG-ID 194 ignored! Table has different entry.[0m
+[0m[ INFO] [1489443838.608033234]: serial0: device: /dev/ttyAMA0 @ 57600 bps[0m
+[0m[ INFO] [1489443838.616621925]: GCS bridge disabled[0m
+[0m[ INFO] [1489443840.784901071]: Plugin 3dr_radio loaded[0m
+[0m[ INFO] [1489443840.903192823]: Plugin 3dr_radio initialized[0m
+[0m[ INFO] [1489443840.907091683]: Plugin actuator_control loaded[0m
+[0m[ INFO] [1489443841.176193021]: Plugin actuator_control initialized[0m
+[0m[ INFO] [1489443841.180013884]: Plugin altitude loaded[0m
+[0m[ INFO] [1489443841.266741770]: Plugin altitude initialized[0m
+[0m[ INFO] [1489443841.270431637]: Plugin command loaded[0m
+[0m[ INFO] [1489443841.652307926]: Plugin command initialized[0m
+[0m[ INFO] [1489443841.656108789]: Plugin ftp loaded[0m
+[0m[ INFO] [1489443842.165185510]: Plugin ftp initialized[0m
+[0m[ INFO] [1489443842.169218365]: Plugin global_position loaded[0m
+[0m[ INFO] [1489443842.932372963]: Plugin global_position initialized[0m
+[0m[ INFO] [1489443842.936260824]: Plugin hil_actuator_controls loaded[0m
+[0m[ INFO] [1489443842.981959183]: Plugin hil_actuator_controls initialized[0m
+[0m[ INFO] [1489443842.989898898]: Plugin hil_controls loaded[0m
+[0m[ INFO] [1489443843.042617005]: Plugin hil_controls initialized[0m
+[0m[ INFO] [1489443843.046556863]: Plugin imu_pub loaded[0m
+[0m[ INFO] [1489443843.614241480]: Plugin imu_pub initialized[0m
+[0m[ INFO] [1489443843.618710320]: Plugin local_position loaded[0m
+[0m[ INFO] [1489443844.097951112]: Plugin local_position initialized[0m
+[0m[ INFO] [1489443844.101963968]: Plugin manual_control loaded[0m
+[0m[ INFO] [1489443844.145018422]: Plugin manual_control initialized[0m
+[0m[ INFO] [1489443844.149294268]: Plugin param loaded[0m
+[0m[ INFO] [1489443844.333194665]: Plugin param initialized[0m
+[0m[ INFO] [1489443844.341180378]: Plugin rc_io loaded[0m
+[0m[ INFO] [1489443844.631792944]: Plugin rc_io initialized[0m
+[0m[ INFO] [1489443844.642240569]: Plugin safety_area blacklisted[0m
+[0m[ INFO] [1489443844.649692301]: Plugin setpoint_accel loaded[0m
+[0m[ INFO] [1489443844.932295154]: Plugin setpoint_accel initialized[0m
+[0m[ INFO] [1489443844.940686853]: Plugin setpoint_attitude loaded[0m
+[0m[ INFO] [1489443845.910060046]: Plugin setpoint_attitude initialized[0m
+[0m[ INFO] [1489443845.919000725]: Plugin setpoint_position loaded[0m
+[0m[ INFO] [1489[31m[ERROR] [1489443851.698841193]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443856.358917868]: FCU: failsafe mode on[0m
+[31m[ERROR] [1489443906.296812789]: FCU: failsafe mode off[0m
+[31m[ERROR] [1489443915.523669488]: FCU: NOT ARMING: Press safety switch first![0m
+[31m[ERROR] [1489443915.777948358]: FCU: NOT ARMING: Preflight checks failed[0m
+[31m[ERROR] [1489443916.025313476]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489443925.098663686]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489443930.723295727]: FCU: main state transition denied[0m
+[31m[ERROR] [1489443948.733210060]: FCU: MANUAL KILL SWITCH OFF[0m
+[31m[ERROR] [1489443950.838519467]: FCU: main state transition denied[0m
+[31m[ERROR] [1489443953.445436862]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489443958.937238673]: FCU: main state transition denied[0m
+443846.411821030]: Plugin setpoint_position initialized[0m
+[0m[ INFO] [1489443846.422822635]: Plugin setpoint_raw loaded[0m
+[0m[ INFO] [1489443847.233611522]: Plugin setpoint_raw initialized[0m
+[0m[ INFO] [1489443847.237740374]: Plugin setpoint_velocity loaded[0m
+[0m[ INFO] [1489443847.538288583]: Plugin setpoint_velocity initialized[0m
+[0m[ INFO] [1489443847.548682209]: Plugin sys_status loaded[0m
+[0m[ INFO] [1489443848.112743956]: Plugin sys_status initialized[0m
+[0m[ INFO] [1489443848.121965625]: Plugin sys_time loaded[0m
+[0m[ INFO] [1489443848.367922794]: Plugin sys_time initialized[0m
+[0m[ INFO] [1489443848.378069429]: Plugin vfr_hud loaded[0m
+[0m[ INFO] [1489443848.464557324]: Plugin vfr_hud initialized[0m
+[0m[ INFO] [1489443848.469188158]: Plugin waypoint loaded[0m
+[0m[ INFO] [1489443848.751589018]: Plugin waypoint initialized[0m
+[0m[ INFO] [1489443848.760175709]: Autostarting mavlink via USB on PX4[0m
+[0m[ INFO] [1489443848.766709475]: CON: Got HEARTBEAT, connected. FCU: PX4 Autopilot[0m
+[0m[ INFO] [1489443848.784521835]: Built-in SIMD instructions: None[0m
+[0m[ INFO] [1489443848.797717361]: Built-in MAVLink package version: 2017.2.7[0m
+[0m[ INFO] [1489443848.801005243]: Known MAVLink dialects: common ardupilotmega ASLUAV autoquad matrixpilot paparazzi slugs standard uAvionix ualberta[0m
+[0m[ INFO] [1489443848.804192129]: MAVROS started. MY ID 1.240, TARGET ID 1.1[0m
+[33m[ WARN] [1489443848.829869207]: TM: Clock skew detected (-1489442580.742847443 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489443849.001434047]: RC_CHANNELS message detected![0m
+[0m[ INFO] [1489443849.884798328]: VER: 1.1: Capabilities         0x00000000000024ef[0m
+[0m[ INFO] [1489443849.886041284]: VER: 1.1: Flight software:     010505ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489443849.891709080]: VER: 1.1: Middleware software: 010505ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489443849.896976891]: VER: 1.1: OS software:         060207ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489443849.907231523]: VER: 1.1: Board hardware:      00000011[0m
+[0m[ INFO] [1489443849.910768396]: VER: 1.1: VID/PID:             26ac:0011[0m
+[0m[ INFO] [1489443849.918004136]: VER: 1.1: UID:                 3435510137373730[0m
+[33m[ WARN] [1489443850.353109513]: GP: No GPS fix[0m
+[0m[ INFO] [1489443853.999519584]: FCU: data link #0 regained[0m
+[0m[ INFO] [1489443856.108262868]: FCU: no rc[0m
+[33m[ WARN] [1489443861.268821572]: TM: Clock skew detected (-0.019968248 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489443863.799096719]: WP: mission received[0m
+[33m[ WARN] [1489443874.570800948]: TM: Clock skew detected (-0.013456738 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489443878.246202979]: PR: request param #377 timeout, retries left 2, and 1 params still missing[0m
+[33m[ WARN] [1489443882.909142551]: GP: No GPS fix[0m
+[33m[ WARN] [1489443892.756525969]: TM: Clock skew detected (-0.013762081 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489443915.430250842]: GP: No GPS fix[0m
+[33m[ WARN] [1489443916.080677488]: TM: Clock skew detected (-0.017347773 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489443924.849815621]: FCU: ARMED by RC[0m
+[0m[ INFO] [1489443925.347797741]: FCU: [blackbox] /fs/microsd/log/2017-03-16[0m
+[0m[ INFO] [1489443925.597522774]: FCU: [blackbox] recording: 02_06_18.px4log[0m
+[33m[ WARN] [1489443939.464973847]: TM: Clock skew detected (-0.011431187 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489443947.923195145]: GP: No GPS fix[0m
+[33m[ WARN] [1489443952.557807733]: TM: Clock skew detected (-0.010527420 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489443963.451178594]: TM: Clock skew detected (-0.010001264 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489443980.164279491]: TM: Clock skew detected (-0.014689000 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489443980.602728748]: GP: No GPS fix[0m
+[33m[ WARN] [1489443990.020516591]: Shutdown request received.[0m
+[33m[ WARN] [1489443990.022344525]: Reason given for shutdown: [user request][0m
+terminate called after throwing an instance of 'std::system_error'
+  what():  Resource deadlock avoided
+[31m================================================================================REQUIRED process [mavros-2] has died!
+process has died [pid 2182, exit code -6, cmd /opt/ros/kinetic/lib/mavros/mavros_node __name:=mavros __log:=/root/.ros/log/b208f6c2-083b-11e7-a97d-21da8e30fed1/mavros-2.log].
+log file: /root/.ros/log/b208f6c2-083b-11e7-a97d-21da8e30fed1/mavros-2*.log
+Initiating shutdown!
+================================================================================[0m
+Unhandled exception in thread started by 
+sys.excepthook is missing
+lost sys.stderr
+mavros/vision_pose/tf/listen: False
+ * /mavros/vision_pose/tf/rate_limit: 10.0
+ * /mavros/vision_speed/listen_twist: False
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.7
+
+NODES
+  /
+    mavros (mavros/mavros_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [2137][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;px4Real.launch http://localhost:11311
+[1msetting /run_id to b208f6c2-083b-11e7-a97d-21da8e30fed1[0m
+[1mprocess[rosout-1]: started with pid [2162][0m
+started core service [/rosout]
+[1mprocess[mavros-2]: started with pid [2182][0m
+[1m[rosout-1] process has finished cleanly
+log file: /root/.ros/log/b208f6c2-083b-11e7-a97d-21da8e30fed1/rosout-1*.log[0m
+[rosout-1] restarting process
+[1mprocess[rosout-1]: started with pid [2509][0m
+[mavros-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
+Mon 13 Mar 22:27:35 UTC 2017
+... logging to /root/.ros/log/4f698f8a-083c-11e7-99b7-7d48dce33264/roslaunch-raspberrypi-2636.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;px4Real.launch
+[1mstarted roslaunch server http://raspberrypi:46645/[0m
+
+SUMMARY
+========
+
+CLEAR PARAMETERS
+ * /mavros/
+
+PARAMETERS
+ * /mavros/cmd/use_comp_id_system_control: False
+ * /mavros/conn/heartbeat_rate: 1.0
+ * /mavros/conn/system_time_rate: 1.0
+ * /mavros/conn/timeout: 10.0
+ * /mavros/conn/timesync_rate: 10.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/frame_id: hrlv_ez4_sonar
+ * /mavros/distance_sensor/hrlv_ez4_pub/id: 0
+ * /mavros/distance_sensor/hrlv_ez4_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/hrlv_ez4_pub/send_tf: True
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/laser_1_sub/id: 3
+ * /mavros/distance_sensor/laser_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/laser_1_sub/subscriber: True
+ * /mavros/distance_sensor/lidarlite_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/frame_id: lidarlite_laser
+ * /mavros/distance_sensor/lidarlite_pub/id: 1
+ * /mavros/distance_sensor/lidarlite_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/lidarlite_pub/send_tf: True
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/sonar_1_sub/id: 2
+ * /mavros/distance_sensor/sonar_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/sonar_1_sub/subscriber: True
+ * /mavros/fcu_url: /dev/ttyAMA0:57600
+ * /mavros/gcs_url: 
+ * /mavros/global_position/frame_id: fcu
+ * /mavros/global_position/rot_covariance: 99999.0
+ * /mavros/global_position/tf/child_frame_id: fcu_utm
+ * /mavros/global_position/tf/frame_id: local_origin
+ * /mavros/global_position/tf/send: False
+ * /mavros/image/frame_id: px4flow
+ * /mavros/imu/angular_velocity_stdev: 0.000349065850399
+ * /mavros/imu/frame_id: fcu
+ * /mavros/imu/linear_acceleration_stdev: 0.0003
+ * /mavros/imu/magnetic_stdev: 0.0
+ * /mavros/imu/orientation_stdev: 1.0
+ * /mavros/local_position/frame_id: fcu
+ * /mavros/local_position/tf/child_frame_id: fcu
+ * /mavros/local_position/tf/frame_id: local_origin
+ * /mavros/local_position/tf/send: False
+ * /mavros/local_position/tf/send_fcu: False
+ * /mavros/mission/pull_after_gcs: True
+ * /mavros/mocap/use_pose: True
+ * /mavros/mocap/use_tf: False
+ * /mavros/plugin_blacklist: ['safety_area', '...
+ * /mavros/plugin_whitelist: []
+ * /mavros/px4flow/frame_id: px4flow
+ * /mavros/px4flow/ranger_fov: 0.0
+ * /mavros/px4flow/ranger_max_range: 5.0
+ * /mavros/px4flow/ranger_min_range: 0.3
+ * /mavros/safety_area/p1/x: 1.0
+ * /mavros/safety_area/p1/y: 1.0
+ * /mavros/safety_area/p1/z: 1.0
+ * /mavros/safety_area/p2/x: -1.0
+ * /mavros/safety_area/p2/y: -1.0
+ * /mavros/safety_area/p2/z: -1.0
+ * /mavros/setpoint_accel/send_force: False
+ * /mavros/setpoint_attitude/reverse_throttle: False
+ * /mavros/setpoint_attitude/tf/child_frame_id: attitude
+ * /mavros/setpoint_attitude/tf/frame_id: local_origin
+ * /mavros/setpoint_attitude/tf/listen: False
+ * /mavros/setpoint_attitude/tf/rate_limit: 10.0
+ * /mavros/setpoint_position/tf/child_frame_id: setpoint
+ * /mavros/setpoint_position/tf/frame_id: local_origin
+ * /mavros/setpoint_position/tf/listen: False
+ * /mavros/setpoint_position/tf/rate_limit: 50.0
+ * /mavros/startup_px4_usb_quirk: True
+ * /mavros/sys/disable_diag: False
+ * /mavros/sys/min_voltage: 10.0
+ * /mavros/target_component_id: 1
+ * /mavros/target_system_id: 1
+ * /mavros/tdr_radio/low_rssi: 40
+ * /mavros/time/time_ref_source: fcu
+ * /mavros/time/timesync_avg_alpha: 0.6
+ * /mavros/vibration/frame_id: vibration
+ * /mavros/vision_pose/tf/child_frame_id: vision
+ * /mavros/vision_pose/tf/frame_id: local_origin
+ * /[0m[ INFO] [1489444102.053458917]: FCU URL: /dev/ttyAMA0:57600[0m
+[33m[ WARN] [1489444102.104759075]: init: message from ASLUAV, MSG-ID 201 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.119914531]: init: message from autoquad, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.128515222]: init: message from autoquad, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.146479577]: init: message from matrixpilot, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.149526467]: init: message from matrixpilot, MSG-ID 151 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.156825205]: init: message from matrixpilot, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.159671103]: init: message from matrixpilot, MSG-ID 153 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.162449003]: init: message from matrixpilot, MSG-ID 155 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.170183726]: init: message from matrixpilot, MSG-ID 156 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.173039623]: init: message from matrixpilot, MSG-ID 157 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.180360360]: init: message from matrixpilot, MSG-ID 158 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.185421178]: init: message from matrixpilot, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.188480069]: init: message from matrixpilot, MSG-ID 171 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.196991763]: init: message from matrixpilot, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.199831661]: init: message from matrixpilot, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.202608561]: init: message from matrixpilot, MSG-ID 174 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.207411389]: init: message from matrixpilot, MSG-ID 175 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.215114112]: init: message from matrixpilot, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.218484991]: init: message from matrixpilot, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.226570701]: init: message from matrixpilot, MSG-ID 178 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.229640591]: init: message from matrixpilot, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.234451418]: init: message from matrixpilot, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.239763227]: init: message from matrixpilot, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.246573983]: init: message from matrixpilot, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.249473879]: init: message from matrixpilot, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.256929611]: init: message from matrixpilot, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.260046499]: init: message from matrixpilot, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.264953323]: init: message from matrixpilot, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.281214739]: init: message from paparazzi, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.284421624]: init: message from paparazzi, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.297103168]: init: message from paparazzi, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.300043063]: init: message from paparazzi, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.304631898]: init: message from paparazzi, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.312873602]: init: message from slugs, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.328627036]: init: message from slugs, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.331469934]: init: message from slugs, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.334625821]: init: message from slugs, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.337700711]: init: message from slugs, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.342724530]: init: message from slugs, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.347936343]: init: message from slugs, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.357030017]: init: message from slugs, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.360093907]: init: message from slugs, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.362906806]: init: message from slugs, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.366043693]: init: message from slugs, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.373012443]: init: message from slugs, MSG-ID 188 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.378986228]: init: message from slugs, MSG-ID 191 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.385746986]: init: message from slugs, MSG-ID 192 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.396008617]: init: message from slugs, MSG-ID 193 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444102.399235501]: init: message from slugs, MSG-ID 194 ignored! Table has different entry.[0m
+[0m[ INFO] [1489444102.427534485]: serial0: device: /dev/ttyAMA0 @ 57600 bps[0m
+[0m[ INFO] [1489444102.439123069]: GCS bridge disabled[0m
+[0m[ INFO] [1489444104.636716162]: Plugin 3dr_radio loaded[0m
+[0m[ INFO] [1489444104.750030093]: Plugin 3dr_radio initialized[0m
+[0m[ INFO] [1489444104.753717961]: Plugin actuator_control loaded[0m
+[0m[ INFO] [1489444104.962451466]: Plugin actuator_control initialized[0m
+[0m[ INFO] [1489444104.966440323]: Plugin altitude loaded[0m
+[0m[ INFO] [1489444105.049782330]: Plugin altitude initialized[0m
+[0m[ INFO] [1489444105.053789186]: Plugin command loaded[0m
+[0m[ INFO] [1489444105.431251633]: Plugin command initialized[0m
+[0m[ INFO] [1489444105.435076496]: Plugin ftp loaded[0m
+[0m[ INFO] [1489444105.960693623]: Plugin ftp initialized[0m
+[0m[ INFO] [1489444105.966632410]: Plugin global_position loaded[0m
+[0m[ INFO] [1489444106.726929110]: Plugin global_position initialized[0m
+[0m[ INFO] [1489444106.730775972]: Plugin hil_actuator_controls loaded[0m
+[0m[ INFO] [1489444106.779706215]: Plugin hil_actuator_controls initialized[0m
+[0m[ INFO] [1489444106.785652002]: Plugin hil_controls loaded[0m
+[0m[ INFO] [1489444106.829378432]: Plugin hil_controls initialized[0m
+[0m[ INFO] [1489444106.833310291]: Plugin imu_pub loaded[0m
+[0m[ INFO] [1489444107.406287717]: Plugin imu_pub initialized[0m
+[0m[ INFO] [1489444107.410923551]: Plugin local_position loaded[0m
+[0m[ INFO] [1489444107.892780249]: Plugin local_position initialized[0m
+[0m[ INFO] [1489444107.896793105]: Plugin manual_control loaded[0m
+[0m[ INFO] [1489444107.952846092]: Plugin manual_control initialized[0m
+[0m[ INFO] [1489444107.959048870]: Plugin param loaded[0m
+[0m[ INFO] [1489444108.128354790]: Plugin param initialized[0m
+[0m[ INFO] [1489444108.135112548]: Plugin rc_io loaded[0m
+[0m[ INFO] [1489444108.441733538]: Plugin rc_io initialized[0m
+[0m[ INFO] [1489444108.444975422]: Plugin safety_area blacklisted[0m
+[0m[ INFO] [1489444108.459497900]: Plugin setpoint_accel loaded[0m
+[0m[ INFO] [1489444108.737837906]: Plugin setpoint_accel initialized[0m
+[0m[ INFO] [1489444108.747049575]: Plugin setpoint_attitude loaded[0m
+[0m[ INFO] [1489444109.724482480]: Plugin setpoint_attitude initialized[0m
+[0m[ INFO] [1489444109.728618331]: Plugin setpoint_position loaded[0m
+[0m[ INFO] [1489[31m[ERROR] [1489444197.887972866]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489444205.899208213]: FCU: main state transition denied[0m
+[31m[master] process has died [pid 2701, exit code -15, cmd rosmaster --core -p 11311 -w 3 __log:=/root/.ros/log/4f698f8a-083c-11e7-99b7-7d48dce33264/master.log].
+log file: /root/.ros/log/4f698f8a-083c-11e7-99b7-7d48dce33264/master*.log[0m
+[31m[rosout-1] process has died [pid 2726, exit code -15, cmd /opt/ros/kinetic/lib/rosout/rosout __name:=rosout __log:=/root/.ros/log/4f698f8a-083c-11e7-99b7-7d48dce33264/rosout-1.log].
+log file: /root/.ros/log/4f698f8a-083c-11e7-99b7-7d48dce33264/rosout-1*.log[0m
+mavros/vision_pose/tf/listen: False
+ * /mavros/vision_pose/tf/rate_limit: 10.0
+ * /mavros/vision_speed/listen_twist: False
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.7
+
+NODES
+  /
+    mavros (mavros/mavros_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [2701][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;px4Real.launch http://localhost:11311
+[1msetting /run_id to 4f698f8a-083c-11e7-99b7-7d48dce33264[0m
+[1mprocess[rosout-1]: started with pid [2726][0m
+started core service [/rosout]
+[1mprocess[mavros-2]: started with pid [2746][0m
+[mavros-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
+Mon 13 Mar 22:30:52 UTC 2017
+... logging to /root/.ros/log/ce0e0500-083c-11e7-8d26-5ff7eae9a31f/roslaunch-raspberrypi-370.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;px4Real.launch
+[1mstarted roslaunch server http://raspberrypi:37833/[0m
+
+SUMMARY
+========
+
+CLEAR PARAMETERS
+ * /mavros/
+
+PARAMETERS
+ * /mavros/cmd/use_comp_id_system_control: False
+ * /mavros/conn/heartbeat_rate: 1.0
+ * /mavros/conn/system_time_rate: 1.0
+ * /mavros/conn/timeout: 10.0
+ * /mavros/conn/timesync_rate: 10.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/frame_id: hrlv_ez4_sonar
+ * /mavros/distance_sensor/hrlv_ez4_pub/id: 0
+ * /mavros/distance_sensor/hrlv_ez4_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/hrlv_ez4_pub/send_tf: True
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/laser_1_sub/id: 3
+ * /mavros/distance_sensor/laser_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/laser_1_sub/subscriber: True
+ * /mavros/distance_sensor/lidarlite_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/frame_id: lidarlite_laser
+ * /mavros/distance_sensor/lidarlite_pub/id: 1
+ * /mavros/distance_sensor/lidarlite_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/lidarlite_pub/send_tf: True
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/sonar_1_sub/id: 2
+ * /mavros/distance_sensor/sonar_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/sonar_1_sub/subscriber: True
+ * /mavros/fcu_url: /dev/ttyAMA0:57600
+ * /mavros/gcs_url: 
+ * /mavros/global_position/frame_id: fcu
+ * /mavros/global_position/rot_covariance: 99999.0
+ * /mavros/global_position/tf/child_frame_id: fcu_utm
+ * /mavros/global_position/tf/frame_id: local_origin
+ * /mavros/global_position/tf/send: False
+ * /mavros/image/frame_id: px4flow
+ * /mavros/imu/angular_velocity_stdev: 0.000349065850399
+ * /mavros/imu/frame_id: fcu
+ * /mavros/imu/linear_acceleration_stdev: 0.0003
+ * /mavros/imu/magnetic_stdev: 0.0
+ * /mavros/imu/orientation_stdev: 1.0
+ * /mavros/local_position/frame_id: fcu
+ * /mavros/local_position/tf/child_frame_id: fcu
+ * /mavros/local_position/tf/frame_id: local_origin
+ * /mavros/local_position/tf/send: False
+ * /mavros/local_position/tf/send_fcu: False
+ * /mavros/mission/pull_after_gcs: True
+ * /mavros/mocap/use_pose: True
+ * /mavros/mocap/use_tf: False
+ * /mavros/plugin_blacklist: ['safety_area', '...
+ * /mavros/plugin_whitelist: []
+ * /mavros/px4flow/frame_id: px4flow
+ * /mavros/px4flow/ranger_fov: 0.0
+ * /mavros/px4flow/ranger_max_range: 5.0
+ * /mavros/px4flow/ranger_min_range: 0.3
+ * /mavros/safety_area/p1/x: 1.0
+ * /mavros/safety_area/p1/y: 1.0
+ * /mavros/safety_area/p1/z: 1.0
+ * /mavros/safety_area/p2/x: -1.0
+ * /mavros/safety_area/p2/y: -1.0
+ * /mavros/safety_area/p2/z: -1.0
+ * /mavros/setpoint_accel/send_force: False
+ * /mavros/setpoint_attitude/reverse_throttle: False
+ * /mavros/setpoint_attitude/tf/child_frame_id: attitude
+ * /mavros/setpoint_attitude/tf/frame_id: local_origin
+ * /mavros/setpoint_attitude/tf/listen: False
+ * /mavros/setpoint_attitude/tf/rate_limit: 10.0
+ * /mavros/setpoint_position/tf/child_frame_id: setpoint
+ * /mavros/setpoint_position/tf/frame_id: local_origin
+ * /mavros/setpoint_position/tf/listen: False
+ * /mavros/setpoint_position/tf/rate_limit: 50.0
+ * /mavros/startup_px4_usb_quirk: True
+ * /mavros/sys/disable_diag: False
+ * /mavros/sys/min_voltage: 10.0
+ * /mavros/target_component_id: 1
+ * /mavros/target_system_id: 1
+ * /mavros/tdr_radio/low_rssi: 40
+ * /mavros/time/time_ref_source: fcu
+ * /mavros/time/timesync_avg_alpha: 0.6
+ * /mavros/vibration/frame_id: vibration
+ * /mavros/vision_pose/tf/child_frame_id: vision
+ * /mavros/vision_pose/tf/frame_id: local_origin
+ * /m[0m[ INFO] [1489444314.833704671]: FCU URL: /dev/ttyAMA0:57600[0m
+[33m[ WARN] [1489444314.869253395]: init: message from ASLUAV, MSG-ID 201 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.878975046]: init: message from autoquad, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.881899941]: init: message from autoquad, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.890028649]: init: message from matrixpilot, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.893187535]: init: message from matrixpilot, MSG-ID 151 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.896099431]: init: message from matrixpilot, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.901223247]: init: message from matrixpilot, MSG-ID 153 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.904695122]: init: message from matrixpilot, MSG-ID 155 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.907727013]: init: message from matrixpilot, MSG-ID 156 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.910598910]: init: message from matrixpilot, MSG-ID 157 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.913554804]: init: message from matrixpilot, MSG-ID 158 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.916671692]: init: message from matrixpilot, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.919565588]: init: message from matrixpilot, MSG-ID 171 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.922396487]: init: message from matrixpilot, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.925562373]: init: message from matrixpilot, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.928625263]: init: message from matrixpilot, MSG-ID 174 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.931614156]: init: message from matrixpilot, MSG-ID 175 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.942248774]: init: message from matrixpilot, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.945906643]: init: message from matrixpilot, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.948780539]: init: message from matrixpilot, MSG-ID 178 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.951876428]: init: message from matrixpilot, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.955251307]: init: message from matrixpilot, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.958699183]: init: message from matrixpilot, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.961561080]: init: message from matrixpilot, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.964755966]: init: message from matrixpilot, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.967637862]: init: message from matrixpilot, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.970717752]: init: message from matrixpilot, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.974295623]: init: message from matrixpilot, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.984825245]: init: message from paparazzi, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.987807138]: init: message from paparazzi, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.990654036]: init: message from paparazzi, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.993585931]: init: message from paparazzi, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444314.996684819]: init: message from paparazzi, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.005189514]: init: message from slugs, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.008512395]: init: message from slugs, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.011571285]: init: message from slugs, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.014785169]: init: message from slugs, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.017668066]: init: message from slugs, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.023456858]: init: message from slugs, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.026565746]: init: message from slugs, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.029647636]: init: message from slugs, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.032560531]: init: message from slugs, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.035841413]: init: message from slugs, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.038962301]: init: message from slugs, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.043120152]: init: message from slugs, MSG-ID 188 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.046353036]: init: message from slugs, MSG-ID 191 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.049233932]: init: message from slugs, MSG-ID 192 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.052156827]: init: message from slugs, MSG-ID 193 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444315.055501707]: init: message from slugs, MSG-ID 194 ignored! Table has different entry.[0m
+[0m[ INFO] [1489444315.073941045]: serial0: device: /dev/ttyAMA0 @ 57600 bps[0m
+[0m[ INFO] [1489444315.079504846]: GCS bridge disabled[0m
+[0m[ INFO] [1489444316.258011530]: Plugin 3dr_radio loaded[0m
+[0m[ INFO] [1489444316.324147155]: Plugin 3dr_radio initialized[0m
+[0m[ INFO] [1489444316.327979018]: Plugin actuator_control loaded[0m
+[0m[ INFO] [1489444316.458138344]: Plugin actuator_control initialized[0m
+[0m[ INFO] [1489444316.468116986]: Plugin altitude loaded[0m
+[0m[ INFO] [1489444316.511979411]: Plugin altitude initialized[0m
+[0m[ INFO] [1489444316.516170260]: Plugin command loaded[0m
+[0m[ INFO] [1489444316.726349714]: Plugin command initialized[0m
+[0m[ INFO] [1489444316.730289572]: Plugin ftp loaded[0m
+[0m[ INFO] [1489444317.028365869]: Plugin ftp initialized[0m
+[0m[ INFO] [1489444317.032250730]: Plugin global_position loaded[0m
+[0m[ INFO] [1489444317.485854443]: Plugin global_position initialized[0m
+[0m[ INFO] [1489444317.489961295]: Plugin hil_actuator_controls loaded[0m
+[0m[ INFO] [1489444317.527876934]: Plugin hil_actuator_controls initialized[0m
+[0m[ INFO] [1489444317.531914789]: Plugin hil_controls loaded[0m
+[0m[ INFO] [1489444317.559797788]: Plugin hil_controls initialized[0m
+[0m[ INFO] [1489444317.564009636]: Plugin imu_pub loaded[0m
+[0m[ INFO] [1489444317.885625088]: Plugin imu_pub initialized[0m
+[0m[ INFO] [1489444317.889832937]: Plugin local_position loaded[0m
+[0m[ INFO] [1489444318.167361972]: Plugin local_position initialized[0m
+[0m[ INFO] [1489444318.172005806]: Plugin manual_control loaded[0m
+[0m[ INFO] [1489444318.201805736]: Plugin manual_control initialized[0m
+[0m[ INFO] [1489444318.206163579]: Plugin param loaded[0m
+[0m[ INFO] [1489444318.308017922]: Plugin param initialized[0m
+[0m[ INFO] [1489444318.314810678]: Plugin rc_io loaded[0m
+[0m[ INFO] [1489444318.485300556]: Plugin rc_io initialized[0m
+[0m[ INFO] [1489444318.488516441]: Plugin safety_area blacklisted[0m
+[0m[ INFO] [1489444318.494937210]: Plugin setpoint_accel loaded[0m
+[0m[ INFO] [1489444318.655887431]: Plugin setpoint_accel initialized[0m
+[0m[ INFO] [1489444318.662103208]: Plugin setpoint_attitude loaded[0m
+[0m[ INFO] [1489444319.216991284]: Plugin setpoint_attitude initialized[0m
+[0m[ INFO] [1489444319.223447052]: Plugin setpoint_position loaded[0m
+[0m[ INFO] [1489444319.507683847]: Plugin setpoint_position initialized[0m
+[0m[ INFO] [1489444319.512319680]: Plugin setpoint_raw loaded[0m
+[0m[ INFO] [1489444319.995737322]: Plugin setpoint_raw initialized[0m
+[0m[ INFO] [1489444319.999863174]: Plugin setpoint_velocity loaded[0m
+[0m[ INFO] [1489444320.160595403]: Plugin setpoint_velocity initialized[0m
+[0m[ INFO] [1489444320.165096241]: Plugin sys_status loaded[0m
+[0m[ INFO] [1489444320.530665115]: Plugin sys_status initialized[0m
+[0m[ INFO] [1489444320.535464943]: Plugin sys_time loaded[0m
+[0m[ INFO] [1489444320.701352986]: Plugin sys_time initialized[0m
+[0m[ INFO] [1489444320.707499766]: Plugin vfr_hud loaded[0m
+[0m[ INFO] [1489444320.758181946]: Plugin vfr_hud initialized[0m
+[0m[ INFO] [1489444320.762726783]: Plugin waypoint loaded[0m
+[0m[ INFO] [1489444320.927540865]: Plugin waypoint initialized[0m
+[0m[ INFO] [1489444320.932942671]: Autostarting mavlink via USB on PX4[0m
+[0m[ INFO] [1489444320.937863494]: Built-in SIMD instructions: None[0m
+[0m[ INFO] [1489444320.943592289]: Built-in MAVLink package version: 2017.2.7[0m
+[0m[ INFO] [1489444320.952240978]: Known MAVLink dialects: common ardupilotmega ASLUAV autoquad matrixpilot paparazzi slugs standard uAvionix ualberta[0m
+[0m[ INFO] [1489444320.957023806]: MAVROS started. MY ID 1.240, TARGET ID 1.1[0m
+[33m[ WARN] [1489444402.874645458]: Shutdown request received.[0m
+[33m[ WARN] [1489444402.875719419]: Reason given for shutdown: [user request][0m
+[31m================================================================================REQUIRED process [mavros-2] has died!
+process has finished cleanly
+log file: /root/.ros/log/ce0e0500-083c-11e7-8d26-5ff7eae9a31f/mavros-2*.log
+Initiating shutdown!
+================================================================================[0m
+Mon 13 Mar 22:33:29 UTC 2017
+Unhandled exception in thread started by 
+sys.excepthook is missing
+lost sys.stderr
+avros/vision_pose/tf/listen: False
+ * /mavros/vision_pose/tf/rate_limit: 10.0
+ * /mavros/vision_speed/listen_twist: False
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.7
+
+NODES
+  /
+    mavros (mavros/mavros_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [768][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;px4Real.launch http://localhost:11311
+[1msetting /run_id to ce0e0500-083c-11e7-8d26-5ff7eae9a31f[0m
+[1mprocess[rosout-1]: started with pid [804][0m
+started core service [/rosout]
+[1mprocess[mavros-2]: started with pid [824][0m
+[1m[rosout-1] process has finished cleanly
+log file: /root/.ros/log/ce0e0500-083c-11e7-8d26-5ff7eae9a31f/rosout-1*.log[0m
+[rosout-1] restarting process
+[1mprocess[rosout-1]: started with pid [1179][0m
+[mavros-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
+... logging to /root/.ros/log/1bd9a69a-083d-11e7-b9e2-1dcab7217c45/roslaunch-raspberrypi-1284.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;px4Real.launch
+[1mstarted roslaunch server http://raspberrypi:34603/[0m
+
+SUMMARY
+========
+
+CLEAR PARAMETERS
+ * /mavros/
+
+PARAMETERS
+ * /mavros/cmd/use_comp_id_system_control: False
+ * /mavros/conn/heartbeat_rate: 1.0
+ * /mavros/conn/system_time_rate: 1.0
+ * /mavros/conn/timeout: 10.0
+ * /mavros/conn/timesync_rate: 10.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/frame_id: hrlv_ez4_sonar
+ * /mavros/distance_sensor/hrlv_ez4_pub/id: 0
+ * /mavros/distance_sensor/hrlv_ez4_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/hrlv_ez4_pub/send_tf: True
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/laser_1_sub/id: 3
+ * /mavros/distance_sensor/laser_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/laser_1_sub/subscriber: True
+ * /mavros/distance_sensor/lidarlite_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/frame_id: lidarlite_laser
+ * /mavros/distance_sensor/lidarlite_pub/id: 1
+ * /mavros/distance_sensor/lidarlite_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/lidarlite_pub/send_tf: True
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/sonar_1_sub/id: 2
+ * /mavros/distance_sensor/sonar_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/sonar_1_sub/subscriber: True
+ * /mavros/fcu_url: /dev/ttyAMA0:57600
+ * /mavros/gcs_url: 
+ * /mavros/global_position/frame_id: fcu
+ * /mavros/global_position/rot_covariance: 99999.0
+ * /mavros/global_position/tf/child_frame_id: fcu_utm
+ * /mavros/global_position/tf/frame_id: local_origin
+ * /mavros/global_position/tf/send: False
+ * /mavros/image/frame_id: px4flow
+ * /mavros/imu/angular_velocity_stdev: 0.000349065850399
+ * /mavros/imu/frame_id: fcu
+ * /mavros/imu/linear_acceleration_stdev: 0.0003
+ * /mavros/imu/magnetic_stdev: 0.0
+ * /mavros/imu/orientation_stdev: 1.0
+ * /mavros/local_position/frame_id: fcu
+ * /mavros/local_position/tf/child_frame_id: fcu
+ * /mavros/local_position/tf/frame_id: local_origin
+ * /mavros/local_position/tf/send: False
+ * /mavros/local_position/tf/send_fcu: False
+ * /mavros/mission/pull_after_gcs: True
+ * /mavros/mocap/use_pose: True
+ * /mavros/mocap/use_tf: False
+ * /mavros/plugin_blacklist: ['safety_area', '...
+ * /mavros/plugin_whitelist: []
+ * /mavros/px4flow/frame_id: px4flow
+ * /mavros/px4flow/ranger_fov: 0.0
+ * /mavros/px4flow/ranger_max_range: 5.0
+ * /mavros/px4flow/ranger_min_range: 0.3
+ * /mavros/safety_area/p1/x: 1.0
+ * /mavros/safety_area/p1/y: 1.0
+ * /mavros/safety_area/p1/z: 1.0
+ * /mavros/safety_area/p2/x: -1.0
+ * /mavros/safety_area/p2/y: -1.0
+ * /mavros/safety_area/p2/z: -1.0
+ * /mavros/setpoint_accel/send_force: False
+ * /mavros/setpoint_attitude/reverse_throttle: False
+ * /mavros/setpoint_attitude/tf/child_frame_id: attitude
+ * /mavros/setpoint_attitude/tf/frame_id: local_origin
+ * /mavros/setpoint_attitude/tf/listen: False
+ * /mavros/setpoint_attitude/tf/rate_limit: 10.0
+ * /mavros/setpoint_position/tf/child_frame_id: setpoint
+ * /mavros/setpoint_position/tf/frame_id: local_origin
+ * /mavros/setpoint_position/tf/listen: False
+ * /mavros/setpoint_position/tf/rate_limit: 50.0
+ * /mavros/startup_px4_usb_quirk: True
+ * /mavros/sys/disable_diag: False
+ * /mavros/sys/min_voltage: 10.0
+ * /mavros/target_component_id: 1
+ * /mavros/target_system_id: 1
+ * /mavros/tdr_radio/low_rssi: 40
+ * /mavros/time/time_ref_source: fcu
+ * /mavros/time/timesync_avg_alpha: 0.6
+ * /mavros/vibration/frame_id: vibration
+ * /mavros/vision_pose/tf/child_frame_id: vision
+ * /mavros/vision_pose/tf/frame_id: local_origin
+ * /[0m[ INFO] [1489444434.084954815]: FCU URL: /dev/ttyAMA0:57600[0m
+[33m[ WARN] [1489444434.114025771]: init: message from ASLUAV, MSG-ID 201 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.122232477]: init: message from autoquad, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.128551250]: init: message from autoquad, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.136642959]: init: message from matrixpilot, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.139560854]: init: message from matrixpilot, MSG-ID 151 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.142578746]: init: message from matrixpilot, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.145597638]: init: message from matrixpilot, MSG-ID 153 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.148501533]: init: message from matrixpilot, MSG-ID 155 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.152202401]: init: message from matrixpilot, MSG-ID 156 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.155212292]: init: message from matrixpilot, MSG-ID 157 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.158520174]: init: message from matrixpilot, MSG-ID 158 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.161859054]: init: message from matrixpilot, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.165083938]: init: message from matrixpilot, MSG-ID 171 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.170116757]: init: message from matrixpilot, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.173212646]: init: message from matrixpilot, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.176133541]: init: message from matrixpilot, MSG-ID 174 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.179041437]: init: message from matrixpilot, MSG-ID 175 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.182395316]: init: message from matrixpilot, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.185787195]: init: message from matrixpilot, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.188984080]: init: message from matrixpilot, MSG-ID 178 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.191873976]: init: message from matrixpilot, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.195142859]: init: message from matrixpilot, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.197947758]: init: message from matrixpilot, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.200759657]: init: message from matrixpilot, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.204073538]: init: message from matrixpilot, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.209105357]: init: message from matrixpilot, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.211949255]: init: message from matrixpilot, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.215176139]: init: message from matrixpilot, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.222474877]: init: message from paparazzi, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.225865756]: init: message from paparazzi, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.229521624]: init: message from paparazzi, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.234461447]: init: message from paparazzi, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.238014319]: init: message from paparazzi, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.248141956]: init: message from slugs, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.251809824]: init: message from slugs, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.254884714]: init: message from slugs, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.258442586]: init: message from slugs, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.261574473]: init: message from slugs, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.264656363]: init: message from slugs, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.267817249]: init: message from slugs, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.270901139]: init: message from slugs, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.273863032]: init: message from slugs, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.276740929]: init: message from slugs, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.279790819]: init: message from slugs, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.283139699]: init: message from slugs, MSG-ID 188 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.288389511]: init: message from slugs, MSG-ID 191 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.291440401]: init: message from slugs, MSG-ID 192 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.294373296]: init: message from slugs, MSG-ID 193 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444434.297244193]: init: message from slugs, MSG-ID 194 ignored! Table has different entry.[0m
+[0m[ INFO] [1489444434.312149657]: serial0: device: /dev/ttyAMA0 @ 57600 bps[0m
+[0m[ INFO] [1489444434.317271474]: GCS bridge disabled[0m
+[0m[ INFO] [1489444435.439394182]: Plugin 3dr_radio loaded[0m
+[0m[ INFO] [1489444435.508349707]: Plugin 3dr_radio initialized[0m
+[0m[ INFO] [1489444435.512550556]: Plugin actuator_control loaded[0m
+[0m[ INFO] [1489444435.644246827]: Plugin actuator_control initialized[0m
+[0m[ INFO] [1489444435.652089545]: Plugin altitude loaded[0m
+[0m[ INFO] [1489444435.698943863]: Plugin altitude initialized[0m
+[0m[ INFO] [1489444435.704795653]: Plugin command loaded[0m
+[0m[ INFO] [1489444435.922699829]: Plugin command initialized[0m
+[0m[ INFO] [1489444435.930691542]: Plugin ftp loaded[0m
+[0m[ INFO] [1489444436.224974975]: Plugin ftp initialized[0m
+[0m[ INFO] [1489444436.228789838]: Plugin global_position loaded[0m
+[0m[ INFO] [1489444436.739738492]: Plugin global_position initialized[0m
+[0m[ INFO] [1489444436.743948341]: Plugin hil_actuator_controls loaded[0m
+[0m[ INFO] [1489444436.773880266]: Plugin hil_actuator_controls initialized[0m
+[0m[ INFO] [1489444436.777766127]: Plugin hil_controls loaded[0m
+[0m[ INFO] [1489444436.803774193]: Plugin hil_controls initialized[0m
+[0m[ INFO] [1489444436.809924972]: Plugin imu_pub loaded[0m
+[0m[ INFO] [1489444437.147907836]: Plugin imu_pub initialized[0m
+[0m[ INFO] [1489444437.155450565]: Plugin local_position loaded[0m
+[0m[ INFO] [1489444437.427526796]: Plugin local_position initialized[0m
+[0m[ INFO] [1489444437.431778644]: Plugin manual_control loaded[0m
+[0m[ INFO] [1489444437.462613536]: Plugin manual_control initialized[0m
+[0m[ INFO] [1489444437.467609357]: Plugin param loaded[0m
+[0m[ INFO] [1489444437.567920755]: Plugin param initialized[0m
+[0m[ INFO] [1489444437.578983358]: Plugin rc_io loaded[0m
+[0m[ INFO] [1489444437.760571838]: Plugin rc_io initialized[0m
+[0m[ INFO] [1489444437.765828649]: Plugin safety_area blacklisted[0m
+[0m[ INFO] [1489444437.775242311]: Plugin setpoint_accel loaded[0m
+[0m[ INFO] [1489444437.939021430]: Plugin setpoint_accel initialized[0m
+[0m[ INFO] [1489444437.943724262]: Plugin setpoint_attitude loaded[0m
+[0m[ INFO] [1489444438.542510761]: Plugin setpoint_attitude initialized[0m
+[0m[ INFO] [1489444438.547314589]: Plugin setpoint_position loaded[0m
+[0m[ INFO] [1489[31m[ERROR] [1489444481.582962343]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489444492.428222932]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489444507.471358790]: FCU: MANUAL KILL SWITCH OFF[0m
+[31m[ERROR] [1489444530.217916048]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+444438.835655236]: Plugin setpoint_position initialized[0m
+[0m[ INFO] [1489444438.840278070]: Plugin setpoint_raw loaded[0m
+[0m[ INFO] [1489444439.304104415]: Plugin setpoint_raw initialized[0m
+[0m[ INFO] [1489444439.308132271]: Plugin setpoint_velocity loaded[0m
+[0m[ INFO] [1489444439.518889703]: Plugin setpoint_velocity initialized[0m
+[0m[ INFO] [1489444439.523407541]: Plugin sys_status loaded[0m
+[0m[ INFO] [1489444439.895028198]: Plugin sys_status initialized[0m
+[0m[ INFO] [1489444439.902929914]: Plugin sys_time loaded[0m
+[0m[ INFO] [1489444440.053416511]: Plugin sys_time initialized[0m
+[0m[ INFO] [1489444440.059487293]: Plugin vfr_hud loaded[0m
+[0m[ INFO] [1489444440.119815126]: Plugin vfr_hud initialized[0m
+[0m[ INFO] [1489444440.124555956]: Plugin waypoint loaded[0m
+[0m[ INFO] [1489444440.305101474]: Plugin waypoint initialized[0m
+[0m[ INFO] [1489444440.310365284]: Autostarting mavlink via USB on PX4[0m
+[0m[ INFO] [1489444440.314888122]: Built-in SIMD instructions: None[0m
+[0m[ INFO] [1489444440.318807981]: Built-in MAVLink package version: 2017.2.7[0m
+[0m[ INFO] [1489444440.322214859]: Known MAVLink dialects: common ardupilotmega ASLUAV autoquad matrixpilot paparazzi slugs standard uAvionix ualberta[0m
+[0m[ INFO] [1489444440.325731733]: MAVROS started. MY ID 1.240, TARGET ID 1.1[0m
+[33m[ WARN] [1489444440.347576948]: TM: Clock skew detected (-1489444224.834870815 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489444440.638777492]: RC_CHANNELS message detected![0m
+[0m[ INFO] [1489444440.852058834]: CON: Got HEARTBEAT, connected. FCU: PX4 Autopilot[0m
+[0m[ INFO] [1489444441.361333548]: RC_CHANNELS message detected![0m
+[0m[ INFO] [1489444441.925717283]: VER: 1.1: Capabilities         0x00000000000024ef[0m
+[0m[ INFO] [1489444441.929038164]: VER: 1.1: Flight software:     010505ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489444441.932269048]: VER: 1.1: Middleware software: 010505ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489444441.935859919]: VER: 1.1: OS software:         060207ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489444441.939804778]: VER: 1.1: Board hardware:      00000011[0m
+[0m[ INFO] [1489444441.943775635]: VER: 1.1: VID/PID:             26ac:0011[0m
+[0m[ INFO] [1489444441.947794491]: VER: 1.1: UID:                 3435510137373730[0m
+[33m[ WARN] [1489444443.675989438]: GP: No GPS fix[0m
+[33m[ WARN] [1489444450.864052342]: TM: Clock skew detected (0.011404085 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489444456.106818094]: WP: mission received[0m
+[33m[ WARN] [1489444461.586145353]: TM: Clock skew detected (-0.015472085 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489444470.773094484]: PR: request param #393 timeout, retries left 2, and 1 params still missing[0m
+[33m[ WARN] [1489444471.730900093]: TM: Clock skew detected (0.010313795 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489444475.854995013]: GP: No GPS fix[0m
+[0m[ INFO] [1489444481.336931178]: FCU: DISARMED by safety switch[0m
+[33m[ WARN] [1489444481.777388362]: TM: Clock skew detected (0.017540167 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489444482.609502484]: FCU: [blackbox] stopped (12840 drops)[0m
+[0m[ INFO] [1489444483.400185094]: FCU: Landing detected[0m
+[0m[ INFO] [1489444492.185346652]: FCU: ARMED by RC[0m
+[33m[ WARN] [1489444492.440231500]: TM: Clock skew detected (0.010815074 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489444492.672498161]: FCU: Takeoff detected[0m
+[0m[ INFO] [1489444492.923073163]: FCU: [blackbox] /fs/microsd/log/2017-03-16[0m
+[0m[ INFO] [1489444493.173656166]: FCU: [blackbox] recording: 02_17_57.px4log[0m
+[33m[ WARN] [1489444504.510452105]: TM: Clock skew detected (-0.018418609 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489444508.058165720]: GP: No GPS fix[0m
+[33m[ WARN] [1489444516.891497549]: TM: Clock skew detected (-0.014473268 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489444531.283817776]: TM: Clock skew detected (-0.012101647 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489444540.255256646]: GP: No GPS fix[0m
+[0m[ INFO] [1489444545.304825335]: FCU: Landing detected[0m
+[33m[ WARN] [1489444549.305229696]: TM: Clock skew detected (-0.011349004 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489444559.391009554]: TM: Clock skew detected (-0.012556656 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489444561.931801324]: Shutdown request received.[0m
+[33m[ WARN] [1489444561.933103277]: Reason given for shutdown: [user request][0m
+[31m================================================================================REQUIRED process [mavros-2] has died!
+process has finished cleanly
+log file: /root/.ros/log/1bd9a69a-083d-11e7-b9e2-1dcab7217c45/mavros-2*.log
+Initiating shutdown!
+================================================================================[0m
+Unhandled exception in thread started by 
+sys.excepthook is missing
+lost sys.stderr
+mavros/vision_pose/tf/listen: False
+ * /mavros/vision_pose/tf/rate_limit: 10.0
+ * /mavros/vision_speed/listen_twist: False
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.7
+
+NODES
+  /
+    mavros (mavros/mavros_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [1350][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;px4Real.launch http://localhost:11311
+[1msetting /run_id to 1bd9a69a-083d-11e7-b9e2-1dcab7217c45[0m
+[1mprocess[rosout-1]: started with pid [1375][0m
+started core service [/rosout]
+[1mprocess[mavros-2]: started with pid [1395][0m
+[1m[rosout-1] process has finished cleanly
+log file: /root/.ros/log/1bd9a69a-083d-11e7-b9e2-1dcab7217c45/rosout-1*.log[0m
+[rosout-1] restarting process
+[1mprocess[rosout-1]: started with pid [1721][0m
+[mavros-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
+Mon 13 Mar 22:40:04 UTC 2017
+... logging to /root/.ros/log/071ee156-083e-11e7-9741-a9f7477f3831/roslaunch-raspberrypi-1897.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;px4Real.launch
+[1mstarted roslaunch server http://raspberrypi:46594/[0m
+
+SUMMARY
+========
+
+CLEAR PARAMETERS
+ * /mavros/
+
+PARAMETERS
+ * /mavros/cmd/use_comp_id_system_control: False
+ * /mavros/conn/heartbeat_rate: 1.0
+ * /mavros/conn/system_time_rate: 1.0
+ * /mavros/conn/timeout: 10.0
+ * /mavros/conn/timesync_rate: 10.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/frame_id: hrlv_ez4_sonar
+ * /mavros/distance_sensor/hrlv_ez4_pub/id: 0
+ * /mavros/distance_sensor/hrlv_ez4_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/hrlv_ez4_pub/send_tf: True
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/laser_1_sub/id: 3
+ * /mavros/distance_sensor/laser_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/laser_1_sub/subscriber: True
+ * /mavros/distance_sensor/lidarlite_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/frame_id: lidarlite_laser
+ * /mavros/distance_sensor/lidarlite_pub/id: 1
+ * /mavros/distance_sensor/lidarlite_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/lidarlite_pub/send_tf: True
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/sonar_1_sub/id: 2
+ * /mavros/distance_sensor/sonar_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/sonar_1_sub/subscriber: True
+ * /mavros/fcu_url: /dev/ttyAMA0:57600
+ * /mavros/gcs_url: 
+ * /mavros/global_position/frame_id: fcu
+ * /mavros/global_position/rot_covariance: 99999.0
+ * /mavros/global_position/tf/child_frame_id: fcu_utm
+ * /mavros/global_position/tf/frame_id: local_origin
+ * /mavros/global_position/tf/send: False
+ * /mavros/image/frame_id: px4flow
+ * /mavros/imu/angular_velocity_stdev: 0.000349065850399
+ * /mavros/imu/frame_id: fcu
+ * /mavros/imu/linear_acceleration_stdev: 0.0003
+ * /mavros/imu/magnetic_stdev: 0.0
+ * /mavros/imu/orientation_stdev: 1.0
+ * /mavros/local_position/frame_id: fcu
+ * /mavros/local_position/tf/child_frame_id: fcu
+ * /mavros/local_position/tf/frame_id: local_origin
+ * /mavros/local_position/tf/send: False
+ * /mavros/local_position/tf/send_fcu: False
+ * /mavros/mission/pull_after_gcs: True
+ * /mavros/mocap/use_pose: True
+ * /mavros/mocap/use_tf: False
+ * /mavros/plugin_blacklist: ['safety_area', '...
+ * /mavros/plugin_whitelist: []
+ * /mavros/px4flow/frame_id: px4flow
+ * /mavros/px4flow/ranger_fov: 0.0
+ * /mavros/px4flow/ranger_max_range: 5.0
+ * /mavros/px4flow/ranger_min_range: 0.3
+ * /mavros/safety_area/p1/x: 1.0
+ * /mavros/safety_area/p1/y: 1.0
+ * /mavros/safety_area/p1/z: 1.0
+ * /mavros/safety_area/p2/x: -1.0
+ * /mavros/safety_area/p2/y: -1.0
+ * /mavros/safety_area/p2/z: -1.0
+ * /mavros/setpoint_accel/send_force: False
+ * /mavros/setpoint_attitude/reverse_throttle: False
+ * /mavros/setpoint_attitude/tf/child_frame_id: attitude
+ * /mavros/setpoint_attitude/tf/frame_id: local_origin
+ * /mavros/setpoint_attitude/tf/listen: False
+ * /mavros/setpoint_attitude/tf/rate_limit: 10.0
+ * /mavros/setpoint_position/tf/child_frame_id: setpoint
+ * /mavros/setpoint_position/tf/frame_id: local_origin
+ * /mavros/setpoint_position/tf/listen: False
+ * /mavros/setpoint_position/tf/rate_limit: 50.0
+ * /mavros/startup_px4_usb_quirk: True
+ * /mavros/sys/disable_diag: False
+ * /mavros/sys/min_voltage: 10.0
+ * /mavros/target_component_id: 1
+ * /mavros/target_system_id: 1
+ * /mavros/tdr_radio/low_rssi: 40
+ * /mavros/time/time_ref_source: fcu
+ * /mavros/time/timesync_avg_alpha: 0.6
+ * /mavros/vibration/frame_id: vibration
+ * /mavros/vision_pose/tf/child_frame_id: vision
+ * /mavros/vision_pose/tf/frame_id: local_origin
+ * /[0m[ INFO] [1489444827.415676814]: FCU URL: /dev/ttyAMA0:57600[0m
+[33m[ WARN] [1489444827.442062867]: init: message from ASLUAV, MSG-ID 201 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.450523563]: init: message from autoquad, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.453751447]: init: message from autoquad, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.462098147]: init: message from matrixpilot, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.465179037]: init: message from matrixpilot, MSG-ID 151 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.468620913]: init: message from matrixpilot, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.471514809]: init: message from matrixpilot, MSG-ID 153 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.474759693]: init: message from matrixpilot, MSG-ID 155 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.477631589]: init: message from matrixpilot, MSG-ID 156 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.480737478]: init: message from matrixpilot, MSG-ID 157 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.484732334]: init: message from matrixpilot, MSG-ID 158 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.488154212]: init: message from matrixpilot, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.491053108]: init: message from matrixpilot, MSG-ID 171 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.494180995]: init: message from matrixpilot, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.497113890]: init: message from matrixpilot, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.500348774]: init: message from matrixpilot, MSG-ID 174 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.503324667]: init: message from matrixpilot, MSG-ID 175 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.506353558]: init: message from matrixpilot, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.509304452]: init: message from matrixpilot, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.512306344]: init: message from matrixpilot, MSG-ID 178 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.515275238]: init: message from matrixpilot, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.518169134]: init: message from matrixpilot, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.521162026]: init: message from matrixpilot, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.524397910]: init: message from matrixpilot, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.527234808]: init: message from matrixpilot, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.530055707]: init: message from matrixpilot, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.533104598]: init: message from matrixpilot, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.536191487]: init: message from matrixpilot, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.544004206]: init: message from paparazzi, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.546907102]: init: message from paparazzi, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.549690002]: init: message from paparazzi, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.552654896]: init: message from paparazzi, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.555616789]: init: message from paparazzi, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.563946490]: init: message from slugs, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.567453364]: init: message from slugs, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.570483255]: init: message from slugs, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.573563145]: init: message from slugs, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.576680033]: init: message from slugs, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.579637927]: init: message from slugs, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.583639783]: init: message from slugs, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.586555678]: init: message from slugs, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.589638568]: init: message from slugs, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.592502465]: init: message from slugs, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.595735349]: init: message from slugs, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.598701242]: init: message from slugs, MSG-ID 188 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.601765132]: init: message from slugs, MSG-ID 191 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.604887020]: init: message from slugs, MSG-ID 192 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.607743918]: init: message from slugs, MSG-ID 193 ignored! Table has different entry.[0m
+[33m[ WARN] [1489444827.610588815]: init: message from slugs, MSG-ID 194 ignored! Table has different entry.[0m
+[0m[ INFO] [1489444827.625634275]: serial0: device: /dev/ttyAMA0 @ 57600 bps[0m
+[0m[ INFO] [1489444827.630649095]: GCS bridge disabled[0m
+[0m[ INFO] [1489444828.694782886]: Plugin 3dr_radio loaded[0m
+[0m[ INFO] [1489444828.753326784]: Plugin 3dr_radio initialized[0m
+[0m[ INFO] [1489444828.757089649]: Plugin actuator_control loaded[0m
+[0m[ INFO] [1489444828.874350439]: Plugin actuator_control initialized[0m
+[0m[ INFO] [1489444828.878358295]: Plugin altitude loaded[0m
+[0m[ INFO] [1489444828.921524745]: Plugin altitude initialized[0m
+[0m[ INFO] [1489444828.925509602]: Plugin command loaded[0m
+[0m[ INFO] [1489444829.125890407]: Plugin command initialized[0m
+[0m[ INFO] [1489444829.130370246]: Plugin ftp loaded[0m
+[0m[ INFO] [1489444829.414645039]: Plugin ftp initialized[0m
+[0m[ INFO] [1489444829.418459902]: Plugin global_position loaded[0m
+[0m[ INFO] [1489444829.737307453]: Plugin global_position initialized[0m
+[0m[ INFO] [1489444829.741265311]: Plugin hil_actuator_controls loaded[0m
+[0m[ INFO] [1489444829.765991423]: Plugin hil_actuator_controls initialized[0m
+[0m[ INFO] [1489444829.773803143]: Plugin hil_controls loaded[0m
+[0m[ INFO] [1489444829.798138269]: Plugin hil_controls initialized[0m
+[0m[ INFO] [1489444829.802237122]: Plugin imu_pub loaded[0m
+[0m[ INFO] [1489444830.126142492]: Plugin imu_pub initialized[0m
+[0m[ INFO] [1489444830.130387339]: Plugin local_position loaded[0m
+[0m[ INFO] [1489444830.385622175]: Plugin local_position initialized[0m
+[0m[ INFO] [1489444830.389640030]: Plugin manual_control loaded[0m
+[0m[ INFO] [1489444830.415998084]: Plugin manual_control initialized[0m
+[0m[ INFO] [1489444830.420506922]: Plugin param loaded[0m
+[0m[ INFO] [1489444830.518764394]: Plugin param initialized[0m
+[0m[ INFO] [1489444830.525426155]: Plugin rc_io loaded[0m
+[0m[ INFO] [1489444830.683526478]: Plugin rc_io initialized[0m
+[0m[ INFO] [1489444830.686875358]: Plugin safety_area blacklisted[0m
+[0m[ INFO] [1489444830.693251129]: Plugin setpoint_accel loaded[0m
+[0m[ INFO] [1489444830.852099425]: Plugin setpoint_accel initialized[0m
+[0m[ INFO] [1489444830.856696260]: Plugin setpoint_attitude loaded[0m
+[0m[ INFO] [1489444831.386754228]: Plugin setpoint_attitude initialized[0m
+[0m[ INFO] [1489444831.390872080]: Plugin setpoint_position loaded[0m
+[0m[ INFO] [1489[31m[ERROR] [1489444873.387748133]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489444879.019728910]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489444882.180370423]: FCU: main state transition denied[0m
+[31m[ERROR] [1489444897.379763671]: FCU: main state transition denied[0m
+[31m[ERROR] [1489444916.791084685]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+444831.678287760]: Plugin setpoint_position initialized[0m
+[0m[ INFO] [1489444831.683412576]: Plugin setpoint_raw loaded[0m
+[0m[ INFO] [1489444832.100306607]: Plugin setpoint_raw initialized[0m
+[0m[ INFO] [1489444832.104821445]: Plugin setpoint_velocity loaded[0m
+[0m[ INFO] [1489444832.221459257]: Plugin setpoint_velocity initialized[0m
+[0m[ INFO] [1489444832.231031913]: Plugin sys_status loaded[0m
+[0m[ INFO] [1489444832.478038044]: Plugin sys_status initialized[0m
+[0m[ INFO] [1489444832.482628879]: Plugin sys_time loaded[0m
+[0m[ INFO] [1489444832.618525000]: Plugin sys_time initialized[0m
+[0m[ INFO] [1489444832.624468786]: Plugin vfr_hud loaded[0m
+[0m[ INFO] [1489444832.671402101]: Plugin vfr_hud initialized[0m
+[0m[ INFO] [1489444832.678692839]: Plugin waypoint loaded[0m
+[0m[ INFO] [1489444832.832063332]: Plugin waypoint initialized[0m
+[0m[ INFO] [1489444832.837213147]: Autostarting mavlink via USB on PX4[0m
+[0m[ INFO] [1489444832.843339927]: CON: Got HEARTBEAT, connected. FCU: PX4 Autopilot[0m
+[0m[ INFO] [1489444832.849974689]: Built-in SIMD instructions: None[0m
+[0m[ INFO] [1489444832.854887513]: Built-in MAVLink package version: 2017.2.7[0m
+[0m[ INFO] [1489444832.859524346]: Known MAVLink dialects: common ardupilotmega ASLUAV autoquad matrixpilot paparazzi slugs standard uAvionix ualberta[0m
+[0m[ INFO] [1489444832.862990222]: MAVROS started. MY ID 1.240, TARGET ID 1.1[0m
+[33m[ WARN] [1489444832.883625481]: TM: Clock skew detected (-1489444224.827513933 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489444832.953894958]: RC_CHANNELS message detected![0m
+[33m[ WARN] [1489444833.563524068]: GP: No GPS fix[0m
+[0m[ INFO] [1489444833.914925451]: VER: 1.1: Capabilities         0x00000000000024ef[0m
+[0m[ INFO] [1489444833.916218404]: VER: 1.1: Flight software:     010505ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489444833.923402146]: VER: 1.1: Middleware software: 010505ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489444833.924930092]: VER: 1.1: OS software:         060207ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489444833.930530891]: VER: 1.1: Board hardware:      00000011[0m
+[0m[ INFO] [1489444833.931879842]: VER: 1.1: VID/PID:             26ac:0011[0m
+[0m[ INFO] [1489444833.936935661]: VER: 1.1: UID:                 3435510137373730[0m
+[33m[ WARN] [1489444843.767827671]: TM: Clock skew detected (-0.016867321 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489444847.891830594]: WP: mission received[0m
+[33m[ WARN] [1489444853.848919697]: TM: Clock skew detected (-0.013013221 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489444865.745550535]: GP: No GPS fix[0m
+[33m[ WARN] [1489444865.769101689]: TM: Clock skew detected (-0.020354721 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489444873.147674753]: FCU: DISARMED by safety switch[0m
+[0m[ INFO] [1489444874.191329279]: FCU: [blackbox] stopped (38346 drops)[0m
+[0m[ INFO] [1489444878.521968783]: FCU: PREFLIGHT ADVICE: GYRO SENSORS INCONSISTENT - CHE[0m
+[0m[ INFO] [1489444878.766813991]: FCU: ARMED by RC[0m
+[0m[ INFO] [1489444879.263217167]: FCU: [blackbox] /fs/microsd/log/2017-03-16[0m
+[0m[ INFO] [1489444879.512578214]: FCU: [blackbox] recording: 02_24_23.px4log[0m
+[33m[ WARN] [1489444880.063221442]: TM: Clock skew detected (-0.019426603 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489444890.776758760]: TM: Clock skew detected (-0.020565927 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489444897.905064810]: GP: No GPS fix[0m
+[33m[ WARN] [1489444902.560316658]: TM: Clock skew detected (-0.011584138 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489444913.353775106]: TM: Clock skew detected (-0.014975514 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489444916.541806636]: FCU: DISARMED by safety switch[0m
+[0m[ INFO] [1489444917.774801364]: FCU: [blackbox] stopped (3233 drops)[0m
+[33m[ WARN] [1489444920.473284471]: Shutdown request received.[0m
+[33m[ WARN] [1489444920.476835344]: Reason given for shutdown: [user request][0m
+[31m================================================================================REQUIRED process [mavros-2] has died!
+process has finished cleanly
+log file: /root/.ros/log/071ee156-083e-11e7-9741-a9f7477f3831/mavros-2*.log
+Initiating shutdown!
+================================================================================[0m
+mavros/vision_pose/tf/listen: False
+ * /mavros/vision_pose/tf/rate_limit: 10.0
+ * /mavros/vision_speed/listen_twist: False
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.7
+
+NODES
+  /
+    mavros (mavros/mavros_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [1960][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;px4Real.launch http://localhost:11311
+[1msetting /run_id to 071ee156-083e-11e7-9741-a9f7477f3831[0m
+[1mprocess[rosout-1]: started with pid [1973][0m
+started core service [/rosout]
+[1mprocess[mavros-2]: started with pid [1991][0m
+[1m[rosout-1] process has finished cleanly
+log file: /root/.ros/log/071ee156-083e-11e7-9741-a9f7477f3831/rosout-1*.log[0m
+[rosout-1] restarting process
+[1mprocess[rosout-1]: started with pid [2278][0m
+[mavros-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m
+Mon 13 Mar 22:44:00 UTC 2017
+... logging to /root/.ros/log/9400e3d0-083e-11e7-9b3a-735d317a387b/roslaunch-raspberrypi-2417.log
+Checking log directory for disk usage. This may take awhile.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;px4Real.launch
+[1mstarted roslaunch server http://raspberrypi:33328/[0m
+
+SUMMARY
+========
+
+CLEAR PARAMETERS
+ * /mavros/
+
+PARAMETERS
+ * /mavros/cmd/use_comp_id_system_control: False
+ * /mavros/conn/heartbeat_rate: 1.0
+ * /mavros/conn/system_time_rate: 1.0
+ * /mavros/conn/timeout: 10.0
+ * /mavros/conn/timesync_rate: 10.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/frame_id: hrlv_ez4_sonar
+ * /mavros/distance_sensor/hrlv_ez4_pub/id: 0
+ * /mavros/distance_sensor/hrlv_ez4_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/hrlv_ez4_pub/send_tf: True
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/hrlv_ez4_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/laser_1_sub/id: 3
+ * /mavros/distance_sensor/laser_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/laser_1_sub/subscriber: True
+ * /mavros/distance_sensor/lidarlite_pub/field_of_view: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/frame_id: lidarlite_laser
+ * /mavros/distance_sensor/lidarlite_pub/id: 1
+ * /mavros/distance_sensor/lidarlite_pub/orientation: ROLL_180
+ * /mavros/distance_sensor/lidarlite_pub/send_tf: True
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/x: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/y: 0.0
+ * /mavros/distance_sensor/lidarlite_pub/sensor_position/z: -0.1
+ * /mavros/distance_sensor/sonar_1_sub/id: 2
+ * /mavros/distance_sensor/sonar_1_sub/orientation: ROLL_180
+ * /mavros/distance_sensor/sonar_1_sub/subscriber: True
+ * /mavros/fcu_url: /dev/ttyAMA0:57600
+ * /mavros/gcs_url: 
+ * /mavros/global_position/frame_id: fcu
+ * /mavros/global_position/rot_covariance: 99999.0
+ * /mavros/global_position/tf/child_frame_id: fcu_utm
+ * /mavros/global_position/tf/frame_id: local_origin
+ * /mavros/global_position/tf/send: False
+ * /mavros/image/frame_id: px4flow
+ * /mavros/imu/angular_velocity_stdev: 0.000349065850399
+ * /mavros/imu/frame_id: fcu
+ * /mavros/imu/linear_acceleration_stdev: 0.0003
+ * /mavros/imu/magnetic_stdev: 0.0
+ * /mavros/imu/orientation_stdev: 1.0
+ * /mavros/local_position/frame_id: fcu
+ * /mavros/local_position/tf/child_frame_id: fcu
+ * /mavros/local_position/tf/frame_id: local_origin
+ * /mavros/local_position/tf/send: False
+ * /mavros/local_position/tf/send_fcu: False
+ * /mavros/mission/pull_after_gcs: True
+ * /mavros/mocap/use_pose: True
+ * /mavros/mocap/use_tf: False
+ * /mavros/plugin_blacklist: ['safety_area', '...
+ * /mavros/plugin_whitelist: []
+ * /mavros/px4flow/frame_id: px4flow
+ * /mavros/px4flow/ranger_fov: 0.0
+ * /mavros/px4flow/ranger_max_range: 5.0
+ * /mavros/px4flow/ranger_min_range: 0.3
+ * /mavros/safety_area/p1/x: 1.0
+ * /mavros/safety_area/p1/y: 1.0
+ * /mavros/safety_area/p1/z: 1.0
+ * /mavros/safety_area/p2/x: -1.0
+ * /mavros/safety_area/p2/y: -1.0
+ * /mavros/safety_area/p2/z: -1.0
+ * /mavros/setpoint_accel/send_force: False
+ * /mavros/setpoint_attitude/reverse_throttle: False
+ * /mavros/setpoint_attitude/tf/child_frame_id: attitude
+ * /mavros/setpoint_attitude/tf/frame_id: local_origin
+ * /mavros/setpoint_attitude/tf/listen: False
+ * /mavros/setpoint_attitude/tf/rate_limit: 10.0
+ * /mavros/setpoint_position/tf/child_frame_id: setpoint
+ * /mavros/setpoint_position/tf/frame_id: local_origin
+ * /mavros/setpoint_position/tf/listen: False
+ * /mavros/setpoint_position/tf/rate_limit: 50.0
+ * /mavros/startup_px4_usb_quirk: True
+ * /mavros/sys/disable_diag: False
+ * /mavros/sys/min_voltage: 10.0
+ * /mavros/target_component_id: 1
+ * /mavros/target_system_id: 1
+ * /mavros/tdr_radio/low_rssi: 40
+ * /mavros/time/time_ref_source: fcu
+ * /mavros/time/timesync_avg_alpha: 0.6
+ * /mavros/vibration/frame_id: vibration
+ * /mavros/vision_pose/tf/child_frame_id: vision
+ * /mavros/vision_pose/tf/frame_id: local_origin
+ * /[0m[ INFO] [1489445065.119752770]: FCU URL: /dev/ttyAMA0:57600[0m
+[33m[ WARN] [1489445065.147960757]: init: message from ASLUAV, MSG-ID 201 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.158969362]: init: message from autoquad, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.161943255]: init: message from autoquad, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.170953932]: init: message from matrixpilot, MSG-ID 150 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.174086819]: init: message from matrixpilot, MSG-ID 151 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.176960716]: init: message from matrixpilot, MSG-ID 152 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.180234599]: init: message from matrixpilot, MSG-ID 153 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.183230491]: init: message from matrixpilot, MSG-ID 155 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.186489374]: init: message from matrixpilot, MSG-ID 156 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.189568263]: init: message from matrixpilot, MSG-ID 157 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.192460160]: init: message from matrixpilot, MSG-ID 158 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.198392947]: init: message from matrixpilot, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.201509835]: init: message from matrixpilot, MSG-ID 171 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.204716719]: init: message from matrixpilot, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.207589616]: init: message from matrixpilot, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.210493512]: init: message from matrixpilot, MSG-ID 174 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.213641399]: init: message from matrixpilot, MSG-ID 175 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.216643291]: init: message from matrixpilot, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.220060169]: init: message from matrixpilot, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.223215055]: init: message from matrixpilot, MSG-ID 178 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.226135950]: init: message from matrixpilot, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.229412833]: init: message from matrixpilot, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.232294729]: init: message from matrixpilot, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.235499614]: init: message from matrixpilot, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.240450436]: init: message from matrixpilot, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.243950311]: init: message from matrixpilot, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.247120197]: init: message from matrixpilot, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.249957095]: init: message from matrixpilot, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.258052804]: init: message from paparazzi, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.260912702]: init: message from paparazzi, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.264008591]: init: message from paparazzi, MSG-ID 182 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.266852488]: init: message from paparazzi, MSG-ID 183 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.270526356]: init: message from paparazzi, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.280693991]: init: message from slugs, MSG-ID 170 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.284620850]: init: message from slugs, MSG-ID 172 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.287563745]: init: message from slugs, MSG-ID 173 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.290408643]: init: message from slugs, MSG-ID 176 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.293338537]: init: message from slugs, MSG-ID 177 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.297472389]: init: message from slugs, MSG-ID 179 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.300305287]: init: message from slugs, MSG-ID 180 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.303265181]: init: message from slugs, MSG-ID 181 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.306423068]: init: message from slugs, MSG-ID 184 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.309251966]: init: message from slugs, MSG-ID 185 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.312099864]: init: message from slugs, MSG-ID 186 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.315099756]: init: message from slugs, MSG-ID 188 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.320582559]: init: message from slugs, MSG-ID 191 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.323549453]: init: message from slugs, MSG-ID 192 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.326550345]: init: message from slugs, MSG-ID 193 ignored! Table has different entry.[0m
+[33m[ WARN] [1489445065.330031220]: init: message from slugs, MSG-ID 194 ignored! Table has different entry.[0m
+[0m[ INFO] [1489445065.345557662]: serial0: device: /dev/ttyAMA0 @ 57600 bps[0m
+[0m[ INFO] [1489445065.351201460]: GCS bridge disabled[0m
+[0m[ INFO] [1489445066.498280273]: Plugin 3dr_radio loaded[0m
+[0m[ INFO] [1489445066.564116909]: Plugin 3dr_radio initialized[0m
+[0m[ INFO] [1489445066.567906773]: Plugin actuator_control loaded[0m
+[0m[ INFO] [1489445066.696026172]: Plugin actuator_control initialized[0m
+[0m[ INFO] [1489445066.700379016]: Plugin altitude loaded[0m
+[0m[ INFO] [1489445066.748711281]: Plugin altitude initialized[0m
+[0m[ INFO] [1489445066.755120050]: Plugin command loaded[0m
+[0m[ INFO] [1489445066.980189969]: Plugin command initialized[0m
+[0m[ INFO] [1489445066.984182826]: Plugin ftp loaded[0m
+[0m[ INFO] [1489445067.293938704]: Plugin ftp initialized[0m
+[0m[ INFO] [1489445067.300148481]: Plugin global_position loaded[0m
+[0m[ INFO] [1489445067.802363448]: Plugin global_position initialized[0m
+[0m[ INFO] [1489445067.806850287]: Plugin hil_actuator_controls loaded[0m
+[0m[ INFO] [1489445067.841148055]: Plugin hil_actuator_controls initialized[0m
+[0m[ INFO] [1489445067.845591896]: Plugin hil_controls loaded[0m
+[0m[ INFO] [1489445067.871016983]: Plugin hil_controls initialized[0m
+[0m[ INFO] [1489445067.875021839]: Plugin imu_pub loaded[0m
+[0m[ INFO] [1489445068.207460902]: Plugin imu_pub initialized[0m
+[0m[ INFO] [1489445068.215826602]: Plugin local_position loaded[0m
+[0m[ INFO] [1489445068.493931616]: Plugin local_position initialized[0m
+[0m[ INFO] [1489445068.498360457]: Plugin manual_control loaded[0m
+[0m[ INFO] [1489445068.530341309]: Plugin manual_control initialized[0m
+[0m[ INFO] [1489445068.535009141]: Plugin param loaded[0m
+[0m[ INFO] [1489445068.634773559]: Plugin param initialized[0m
+[0m[ INFO] [1489445068.643999228]: Plugin rc_io loaded[0m
+[0m[ INFO] [1489445068.830484532]: Plugin rc_io initialized[0m
+[0m[ INFO] [1489445068.839219218]: Plugin safety_area blacklisted[0m
+[0m[ INFO] [1489445068.844992011]: Plugin setpoint_accel loaded[0m
+[0m[ INFO] [1489445069.016311860]: Plugin setpoint_accel initialized[0m
+[0m[ INFO] [1489445069.020725701]: Plugin setpoint_attitude loaded[0m
+[0m[ INFO] [1489445069.604884726]: Plugin setpoint_attitude initialized[0m
+[0m[ INFO] [1489445069.613031434]: Plugin setpoint_position loaded[0m
+[0m[ INFO] [1489445069.916704530]: Plugin setpoint_position initialized[0m
+[0m[ INFO] [1489445069.927560140]: Plugin setpoint_raw loaded[0m
+[0m[ INFO] [1489445070.442322657]: Plugin setpoint_raw initialized[0m
+[0m[ INFO] [1489445070.451560325]: Plugin setpoint_velocity loaded[0m
+[0m[ INFO] [1489445070.612768537]: Plugin setpoint_velocity initialized[0m
+[0m[ INFO] [1489445070.618169343]: Plugin sys_status loaded[0m
+[0m[ INFO] [1489445070.964591904]: Plugin sys_status initialized[0m
+[0m[ INFO] [1489445070.978669399]: Plugin sys_time loaded[0m
+[0m[ INFO] [1489445071.138526659]: Plugin sys_time initialized[0m
+[0m[ INFO] [1489445071.145798398]: Plugin vfr_hud loaded[0m
+[0m[ INFO] [1489445071.198754497]: Plugin vfr_hud initialized[0m
+[0m[ INFO] [1489445071.203374331]: Plugin waypoint loaded[0m
+[0m[ INFO] [1489445071.375681144]: Plugin waypoint initialized[0m
+[0m[ INFO] [1489445071.381436937]: Autostarting mavlink via USB on PX4[0m
+[0m[ INFO] [1489445071.386574753]: Built-in SIMD instructions: None[0m
+[0m[ INFO] [1489445071.389931632]: Built-in MAVLink package version: 2017.2.7[0m
+[0m[ INFO] [1489445071.393728496]: Known MAVLink dialects: common ardupilotmega ASLUAV autoquad matrixpilot paparazzi slugs standard uAvionix ualberta[0m
+[0m[ INFO] [1489445071.401525216]: MAVROS started. MY ID 1.240, TARGET ID 1.1[0m
+[33m[ WARN] [1489445071.420125548]: TM: Clock skew detected (-1489444224.824876308 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489445071.835173645]: RC_CHANNELS message detected![0m
+[0m[ INFO] [1489445071.846176250]: CON: Got HEARTBEAT, connected. FCU: PX4 Autopilot[0m
+[0m[ INFO] [1489445072.550143973]: RC_CHANNELS message detected![0m
+[0m[ INFO] [1489445072.920160687]: VER: 1.1: Capabilities         0x00000000000024ef[0m
+[0m[ INFO] [1489445072.921377644]: VER: 1.1: Flight software:     010505ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489445072.924791521]: VER: 1.1: Middleware software: 010505ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489445072.928424391]: VER: 1.1: OS software:         060207ff (00000000FFFFFFFF)[0m
+[0m[ INFO] [1489445072.931897266]: VER: 1.1: Board hardware:      00000011[0m
+[0m[ INFO] [1489445072.935088151]: VER: 1.1: VID/PID:             26ac:0011[0m
+[0m[ INFO] [1489445072.941994903]: VER: 1.1: UID:                 3435510137373730[0m
+[33m[ WARN] [1489445073.202456551]: GP: No GPS fix[0m
+[33m[ WARN] [1489445081.462293972]: TM: Clock skew detected (0.016748700 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489445082.851992073]: PR: request list timeout, retries left 2[0m
+[33m[ WARN] [1489445087.854110466]: WP: timeout, retries left 2[0m
+[0m[ INFO] [1489445088.776611343]: WP: mission received[0m
+[0m[ INFO] [1489445089.589612151]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445089.590843107]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445089.926376059]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445089.927355024]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445090.873395055]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445090.874432018]: WP: sheduling pull after GCS is done[0m
+[33m[ WARN] [1489445091.668624502]: TM: Clock skew detected (0.011904186 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489445096.877804460]: WP: timeout, retries left 2[0m
+[33m[ WARN] [1489445097.879894479]: WP: timeout, retries left 1[0m
+[33m[ WARN] [1489445098.882159491]: WP: timeout, retries left 0[0m
+[0m[ INFO] [1489445099.281526152]: WP: mission received[0m
+[0m[ INFO] [1489445100.035390083]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445100.036865030]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445100.466624599]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445100.470204471]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445101.291439983]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445101.296031818]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445101.635273638]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445101.636199604]: WP: sheduling pull af[31m[ERROR] [1489445111.804402503]: WP: timed out.[0m
+[31m[ERROR] [1489445112.823716903]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+[31m[ERROR] [1489445119.546117528]: FCU: MANUAL KILL SWITCH OFF[0m
+[31m[ERROR] [1489445122.541539974]: FCU: Operation timeout[0m
+[31m[ERROR] [1489445142.721180400]: FCU: MANUAL KILL SWITCH ENGAGED[0m
+ter GCS is done[0m
+[33m[ WARN] [1489445101.824239853]: TM: Clock skew detected (0.017250750 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489445102.515293039]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445102.518502924]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445102.789433196]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445102.790400161]: WP: sheduling pull after GCS is done[0m
+[33m[ WARN] [1489445105.886028009]: GP: No GPS fix[0m
+[33m[ WARN] [1489445108.795657536]: WP: timeout, retries left 2[0m
+[33m[ WARN] [1489445109.796857586]: WP: timeout, retries left 1[0m
+[33m[ WARN] [1489445110.799898571]: WP: timeout, retries left 0[0m
+[33m[ WARN] [1489445111.942336550]: TM: Clock skew detected (0.020648147 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489445112.582519564]: FCU: ARMED by RC[0m
+[0m[ INFO] [1489445113.069129092]: FCU: [blackbox] /fs/microsd/log/2017-03-16[0m
+[0m[ INFO] [1489445113.314081296]: FCU: [blackbox] recording: 02_28_17.px4log[0m
+[0m[ INFO] [1489445113.527004651]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445113.527577630]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445114.140781613]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445114.143650510]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445114.779924663]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445114.780475644]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445115.390105754]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445115.391523703]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445116.017408230]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445116.018375195]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445116.530639802]: FCU: Takeoff detected[0m
+[0m[ INFO] [1489445116.630115230]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445116.631243190]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445117.281492842]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445117.285248707]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445117.877945425]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445117.882475263]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445118.707594636]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445118.711295503]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445119.550741362]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445119.554643222]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445120.378221650]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445120.383501460]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445121.200761116]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445121.205121959]: WP: sheduling pull after GCS is done[0m
+[33m[ WARN] [1489445122.022305617]: TM: Clock skew detected (0.011266956 s). Hard syncing clocks.[0m
+[0m[ INFO] [1489445122.035351149]: WP: seems GCS requesting mission[0m
+[0m[ INFO] [1489445122.040493964]: WP: sheduling pull after GCS is done[0m
+[0m[ INFO] [1489445127.941945066]: WP: mission received[0m
+[33m[ WARN] [1489445139.378407426]: GP: No GPS fix[0m
+[33m[ WARN] [1489445139.402005579]: TM: Clock skew detected (-0.015859234 s). Hard syncing clocks.[0m
+[33m[ WARN] [1489445152.058679126]: Shutdown request received.[0m
+[33m[ WARN] [1489445152.063981936]: Reason given for shutdown: [user request][0m
+[31m================================================================================REQUIRED process [mavros-2] has died!
+process has finished cleanly
+log file: /root/.ros/log/9400e3d0-083e-11e7-9b3a-735d317a387b/mavros-2*.log
+Initiating shutdown!
+================================================================================[0m
+Unhandled exception in thread started by 
+sys.excepthook is missing
+lost sys.stderr
+mavros/vision_pose/tf/listen: False
+ * /mavros/vision_pose/tf/rate_limit: 10.0
+ * /mavros/vision_speed/listen_twist: False
+ * /rosdistro: kinetic
+ * /rosversion: 1.12.7
+
+NODES
+  /
+    mavros (mavros/mavros_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [2482][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;px4Real.launch http://localhost:11311
+[1msetting /run_id to 9400e3d0-083e-11e7-9b3a-735d317a387b[0m
+[1mprocess[rosout-1]: started with pid [2507][0m
+started core service [/rosout]
+[1mprocess[mavros-2]: started with pid [2527][0m
+[1m[rosout-1] process has finished cleanly
+log file: /root/.ros/log/9400e3d0-083e-11e7-9b3a-735d317a387b/rosout-1*.log[0m
+[rosout-1] restarting process
+[1mprocess[rosout-1]: started with pid [2856][0m
+[mavros-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

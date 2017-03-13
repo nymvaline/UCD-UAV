@@ -39,6 +39,7 @@ case "$1" in
     ;;
   stop)
     echo "Stopping ROS/TCS"
+    . /opt/ros/kinetic/setup.sh
     rosnode kill -a
     pkill -2 -f "python ./default_offboard.py task_list.log" # TODO (jasmine) make this actually reasonable
     exit 0

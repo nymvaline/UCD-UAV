@@ -1,0 +1,166 @@
+Mon 13 Mar 21:46:16 UTC 2017
+Mon 13 Mar 21:50:08 UTC 2017
+Starting TCS
+Unable to register with master node [http://localhost:11311]: master may not be running yet. Will keep trying.
+Waiting for home!
+Found home!
+Sent startpoint! 0.0 0.0 -17.0
+Pre start finished!
+shutdown request: user request
+Traceback (most recent call last):
+  File "./default_offboard.py", line 237, in <module>
+    main()
+  File "./default_offboard.py", line 194, in main
+    setpoint_local_pub.publish(setpoint_msg)
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/topics.py", line 882, in publish
+    self.impl.publish(data)
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/topics.py", line 1041, in publish
+    raise ROSException("publish() to a closed topic")
+rospy.exceptions.ROSException: publish() to a closed topic
+Unhandled exception in thread started by 
+sys.excepthook is missing
+lost sys.stderr
+Exception in thread /mavros/global_position/raw/fix (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+  File "/usr/lib/python2.7/threading.py", line 763, in run
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_pubsub.py", line 185, in robust_connect_subscriber
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 823, in receive_loop
+<type 'exceptions.TypeError'>: 'NoneType' object is not callable
+Exception in thread /mavros/setpoint_raw/target_global (most likely raised during interpreter shutdown):
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+  File "/usr/lib/python2.7/threading.py", line 763, in run
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_pubsub.py", line 185, in robust_connect_subscriber
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/impl/tcpros_base.py", line 823, in receive_loop
+<type 'exceptions.TypeError'>: 'NoneType' object is not callable
+Mon 13 Mar 21:56:08 UTC 2017
+Starting TCS
+Unable to register with master node [http://localhost:11311]: master may not be running yet. Will keep trying.
+Waiting for home!
+Found home!
+Sent startpoint! 0.0 0.0 -17.0
+Pre start finished!
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+[INFO] [1489442432.709533]: Current task is finished!
+[INFO] [1489442432.728041]: New task will execute: ['python', 'TASK_LOCAL_GOTO.py', '0 0 10 50']
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+shutdown request: user request
+Traceback (most recent call last):
+  File "./default_offboard.py", line 237, in <module>
+    main()
+  File "./default_offboard.py", line 194, in main
+    setpoint_local_pub.publish(setpoint_msg)
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/topics.py", line 882, in publish
+    self.impl.publish(data)
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/topics.py", line 1041, in publish
+    raise ROSException("publish() to a closed topic")
+rospy.exceptions.ROSException: publish() to a closed topic
+Mon 13 Mar 22:03:28 UTC 2017
+Starting TCS
+Unable to register with master node [http://localhost:11311]: master may not be running yet. Will keep trying.
+Waiting for home!
+Found home!
+Sent startpoint! 38.5374665 -121.7547679 20.748
+Pre start finished!
+[INFO] [1489442817.783029]: Current task is finished!
+[INFO] [1489442817.792763]: New task will execute: ['python', 'TASK_LOCAL_GOTO.py', '0 0 10 50']
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+Not armed
+shutdown request: user request
+Traceback (most recent call last):
+  File "./default_offboard.py", line 237, in <module>
+    main()
+  File "./default_offboard.py", line 205, in main
+    setpoint_local_pub.publish(setpoint_msg)
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/topics.py", line 882, in publish
+    self.impl.publish(data)
+  File "/opt/ros/kinetic/lib/python2.7/dist-packages/rospy/topics.py", line 1041, in publish
+    raise ROSException("publish() to a closed topic")
+rospy.exceptions.ROSException: publish() to a closed topic
